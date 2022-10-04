@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Features from './components/Features/Features';
+import MyPlaylists from './components/MyPlaylists/MyPlaylists';
+import Recommended from './components/Recommended/Recommended';
+import SearchBar from './components/SearchBar/SearchBar';
+import Settings from './components/Settings/Settings';
+import SideMenu from './components/SideMenu/SideMenu';
+import Top from './components/Top/Top';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <SideMenu />
+      <SearchBar />
+      <MyPlaylists />
+      <Settings />
+      <Features />
+      <Recommended />
+      <Top />
     </div>
   );
 }

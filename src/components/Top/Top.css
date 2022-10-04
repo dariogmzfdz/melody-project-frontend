@@ -1,0 +1,19 @@
+.top-container {
+    position: absolute;
+    color: white;
+    width: 315.96px;
+    height: 254px;
+    right: 30px;
+    top: 120px;
+}
+
+.top-song {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 5px;
+    color: black;
+    background: #FFFFFF;
+    border-radius: 10px 0px 10px 0px;
+}

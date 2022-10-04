@@ -1,0 +1,10 @@
+.search-container {
+    position: absolute;
+    width: 436px;
+    height: 50px;
+    left: 700px;
+    top: 12px;
+    background: #FFFFFF;
+    border-radius: 9px;
+    text-align: center;
+}
