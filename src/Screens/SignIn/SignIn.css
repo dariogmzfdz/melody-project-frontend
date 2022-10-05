@@ -1,15 +1,18 @@
 html{
-    background-image: url("../../../public/images/gif pagina.gif");
+    background-image: url("../../../public/images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: ;
     height: 100%;
+}
+a{
+    text-decoration: none;
+    ;
 }
 form{
     width:40%;
     /* height: 90%; */
-    background: rgba(255, 248, 248, 0.5);
-    border-radius: 8px;
+    background: rgba(255, 248, 248, 1);
+    border-radius: 10px;
     margin: 0 auto;
     padding-top: 20px;
     padding-bottom: 30px;
@@ -29,7 +32,7 @@ h3{
     text-align: right;
     padding-bottom: 15px;
     padding-right: 15%;
-    border-bottom: 5px solid rgba(255, 255, 255, 1);
+    border-bottom: 5px solid rgba(255, 255, 255, 0.323);
     margin-bottom: 25px;
 
     margin: 15px 5%;
@@ -83,6 +86,8 @@ h3{
     font-size: 18px;
     line-height: 17px;   
     cursor: pointer;
+    margin-bottom: 40px
+
 }
 label {    
     font-family: 'Arial';
