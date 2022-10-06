@@ -1,0 +1,74 @@
+{
+  "users": [
+      {
+          "_id": "6339b0529ef0c40353ad0a5a",
+          "name": "Walber",
+          "lastName": "Melo",
+          "email": "walber.melo@gmail.com",
+          "password": "$2a$10$yN59J6hS9LHCMT5hrE6Zh.OE1nSMbWVk/uglEAMuQkJitLcj2m9Ma",
+          "gender": "Male",
+          "month": "12",
+          "date": "15",
+          "year": "1984",
+          "likedSongs": [],
+          "playlists": [],
+          "isAdmin": false
+      },
+      {
+          "_id": "6339db926bb412cb20f34513",
+          "name": "Marcelo",
+          "lastName": "Vidal",
+          "email": "marcelo.vidal@hotmail.com",
+          "password": "$2a$10$uqsUn7oqAkBvjpqqUJrWTO08VevbS8f3e7Xtpq7NM7WtzGsuALHBe",
+          "gender": "male",
+          "month": "06",
+          "date": "01",
+          "year": "1988",
+          "likedSongs": [],
+          "playlists": [],
+          "isAdmin": false
+      },
+      {
+          "_id": "6339e49229acc56f0590ceb3",
+          "name": "Suzana",
+          "lastName": "Castro",
+          "email": "suzana.castro@msn.com",
+          "password": "$2a$10$/3.UKxELcva4uWAABcSfJui/tcfvgjXnQR6JUlpvV4NNLfL86UjqO",
+          "gender": "female",
+          "month": "04",
+          "date": "20",
+          "year": "1999",
+          "likedSongs": [],
+          "playlists": [],
+          "isAdmin": false
+      },
+      {
+          "_id": "633af89aa629cada7c3fd9c4",
+          "name": "Joan",
+          "lastName": "Gaucho",
+          "email": "Joan.g@msn.com",
+          "password": "$2a$10$VuL7B1VCJdLaiuSKgGPkKOHHWzQ1NwN/vRzUAc8SYrnCLnRndBh4e",
+          "gender": "female",
+          "month": "09",
+          "date": "25",
+          "year": "2002",
+          "likedSongs": [],
+          "playlists": [],
+          "isAdmin": false
+      },
+      {
+          "_id": "633b00e108bc1546504b1496",
+          "name": "Master",
+          "lastName": "Gaucho",
+          "email": "master.melody@msn.com",
+          "password": "$2a$10$3dlKuahvc83Qjmjt0iSEi.McU6UobZFMvZX9C2V8f.VTI0O/QiC4y",
+          "gender": "female",
+          "month": "09",
+          "date": "25",
+          "year": "2002",
+          "likedSongs": [],
+          "playlists": [],
+          "isAdmin": true
+      }
+  ]
+}
