@@ -1,27 +1,27 @@
 import { Button } from '@mui/material'
-import { logout, selectUser } from '../feautures/userSlice';
-import {useDispatch,useSelector} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useFirebase';
 
-const Logout = () => { 
+export default function Logout() { 
 
-    const user= useSelector(selectUser);
+const {user} = useAuth();
 
-    const dispatch = useDispatch();
+const {logout } = useAuth();
+    
    
-const handleLogout = (e) => {
-    e.preventDefault();
- dispatch(logout(
- 
-    ))
-  
-}
+    const handleLogout = async () => {
+      try {
+        await logout();
+       
+      } catch (error) {
+        console.error(error.message);
+      }  }
   return (
     <>
-    <h3> WELCOME {user.name || user.email}</h3>
+    <h3> WELCOME {user.displayName || user.email}</h3>
 
-    <Button onClick={(e) => handleLogout(e)}>LOGOUT</Button>
- </> 
+    <Link to="/"><Button onClick={handleLogout}>{logout ? "Sign Out" : "Login"}</Button>
+</Link> </> 
  )
 }
 
-export default Logout

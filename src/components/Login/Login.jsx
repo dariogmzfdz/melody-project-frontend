@@ -4,7 +4,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -15,7 +14,11 @@ import './login.css'
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import GoogleIcon from '@mui/icons-material/Google';
 import { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+// import { useAuth } from '../../hooks/useFirebase';
+ import { Link  } from 'react-router-dom';
+// import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
+// import { auth } from '../../config/firebase';
 
 
 function Copyright(props) {
@@ -52,11 +55,12 @@ const handleSubmit = async(e) =>{
   if(!e.target.checkValidity()){
     console.log('Login failed');
   }else{
-    const res= await axios.post("https://httpbin.org/post", datos)
+    const res= await axios.get("https://melody-music-stream-ten.vercel.app/login", datos)
     .then(response => setToken(response.data.json))
   }
 }
 console.log(token);
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -83,17 +87,17 @@ console.log(token);
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-           <div className='facebook'><button
-					className='contained_btn'
-					
+           <div className='facebook'>
+            <button
+					className='contained_btn' 
 				>
 					<FacebookRoundedIcon /> continue with facebook
 				</button></div> 
-        <div className='google'>  <button className='outline_btn'>
+        <div className='google'>  <button  className='outline_btn'>
 					<GoogleIcon /> continue with google
 				</button></div>
         <h4>O</h4>
-            <Box component="form" sx={{ mt: 1 }} onSubmit={(e) => handleSubmit(e)}>
+            <Box component="form" sx={{ mt: 1 }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -103,8 +107,8 @@ console.log(token);
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={handleInputChange} 
-                value={datos.email}
+                onChange={(e) => handleInputChange} 
+                // value={datos.email}
               />
               <TextField
                 margin="normal"
@@ -115,8 +119,8 @@ console.log(token);
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={handleInputChange}
-                value={datos.password}
+                onChange={(e) => handleInputChange}
+                // value={datos.password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -132,14 +136,15 @@ console.log(token);
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link >
-                    Forgot password?
+                  <Link to="/forgot" >
+                   <Button> Forgot password?</Button>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                <Link to="/signup" >
+                  <Button >
                     {"Don't have an account? Sign Up"}
-                  </Link>
+                  </Button></Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

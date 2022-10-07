@@ -1,18 +1,25 @@
 import './App.css';
 import SignInSide from './components/Login/Login';
-import  {useSelector} from 'react-redux';
-import {selectUser} from './feautures/userSlice';
 import Logout from './components/Logout';
+import { AuthProvider } from './hooks/useFirebase';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ForgotPassword from './components/Login/ForgotPassword';
 
 
 function App() {
-const user = useSelector(selectUser)
 
   return (
     <>
-
-  {user ? <Logout/> : <SignInSide/>}
+    <Router>
+<AuthProvider> 
   
+  <Routes>
+    <Route path='/' element={ <SignInSide/>} />
+  <Route path="/forgot" element={<ForgotPassword/>} />
+  <Route path='/logout' element={ <Logout/> }/>
+  </Routes>
+  </AuthProvider>
+  </Router>
   </>
   );
 }
