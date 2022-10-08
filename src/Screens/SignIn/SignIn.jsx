@@ -1,8 +1,8 @@
-import Axios from "axios";
+import axios from "axios";
 import React from "react";
 import "./SignIn.css";
-import { useContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import {  useState } from "react";
+// import { toast } from "react-toastify";
 
 const SignIn = () => {
   let newYear = new Date().getFullYear();
@@ -27,19 +27,18 @@ const SignIn = () => {
     }
 
     try {
-      const data = await Axios.post("https://httpbin.org/post", {
-        name,
-        email,
-        password,
-        date,
-        month,
-        year,
-        gender,
+      const data = await axios.post("https://melody-music-stream-ten.vercel.app/register",
+      {
+        name:name,
+        lastName: lastName,
+        email: email,
+        password: password,
+        date: date,
+        month: month,
+        year: year,
+        gender: gender,
       })
-        .then((response) => setUserData(response.data.json))
-        .catch(function (error) {
-          console.log(error);
-        });
+    console.log(data);
     } catch (error) {
       console.log(error);
     }

@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import WelcomeScreen from "./Screens/WelcomeScreen/WelcomeScreen.jsx";
 import SignIn from "./Screens/SignIn/SignIn.jsx";
