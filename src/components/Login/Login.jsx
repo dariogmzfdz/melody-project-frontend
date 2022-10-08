@@ -42,7 +42,7 @@ export default function SignInSide() {
   password: "",
  });
 
- const [token,setToken] = useState("");
+//  const [token,setToken] = useState("");
  
 
 const handleInputChange= (e) =>{
@@ -52,14 +52,19 @@ const handleInputChange= (e) =>{
 }
 const handleSubmit = async(e) =>{
   e.preventDefault();
-  if(!e.target.checkValidity()){
-    console.log('Login failed');
-  }else{
-    const res= await axios.get("https://melody-music-stream-ten.vercel.app/login", datos)
-    .then(response => setToken(response.data.json))
+  try {
+     const result = await axios.post('https://melody-music-stream-ten.vercel.app/login', {
+         email: datos.email,
+         password: datos.password
+     })
+     console.log(result);
+   
+  } catch (error) {
+      if (error.response) {
+        console.log("error", error.response);
+      }
   }
 }
-console.log(token);
 
   return (
     <ThemeProvider theme={theme}>
@@ -107,8 +112,8 @@ console.log(token);
                 name="email"
                 autoComplete="email"
                 autoFocus
-                onChange={(e) => handleInputChange} 
-                // value={datos.email}
+                onChange= {handleInputChange} 
+                 value={datos.email}
               />
               <TextField
                 margin="normal"
@@ -119,8 +124,8 @@ console.log(token);
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={(e) => handleInputChange}
-                // value={datos.password}
+                onChange={ handleInputChange}
+                value={datos.password}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
