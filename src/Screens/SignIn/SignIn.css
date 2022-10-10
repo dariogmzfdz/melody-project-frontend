@@ -1,0 +1,136 @@
+html{
+
+}
+a{
+    text-decoration: none;
+    ;
+}
+.formContainer{
+    background-image: url("../../../public/images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100%;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: right;
+    justify-content: flex-end;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 35%;
+    width:60%;
+    /* height: 90%; */
+    background: rgba(255, 248, 248, 1);
+    border-radius: 10px;
+   
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+}
+h1{
+    background-color: black;
+    margin: 0;
+    padding-left: 40px;
+    font-size: 4em;
+    opacity: 0.7;
+    text-align: left;
+    text-shadow: 5px 10px 10px black ;
+    border-bottom: 5px solid rgba(255, 255, 255, 0.5);
+}
+h3{
+    font-size: 2.5em;
+    font-weight: 600;
+    opacity: 0.7;
+    text-align: right;
+    padding-bottom: 15px;
+    padding-right: 15%;
+    border-bottom: 5px solid rgba(255, 255, 255, 0.323);
+    margin-bottom: 45px;
+
+    margin-right: 5%;
+    margin-left: 5%;
+    box-shadow: 0px 7px 0px #00000046;
+}
+.signinInput{
+    display: flex;
+    justify-content: center;
+    margin: 1.3em auto;
+    width: 70%;
+    height: 45px;
+    background: #e7e7e7;
+    border: 2px solid #393939;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-size: 1em;
+}
+.registerButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 269px;
+    height: 58px;
+    opacity: 0.9;
+    border-radius: 36px;
+    background: #60426D;
+    border: 3px solid #bfbdbd;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.63);
+    backdrop-filter: blur(2px);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 17px;   
+    margin-bottom: 40px
+}
+.registerButton:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px auto;
+    width: 269px;
+    height: 58px;
+    border-radius: 36px;
+    background: #7d6488;
+    border: 3px solid #484848;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.63);
+    backdrop-filter: blur(2px);
+    color: rgba(255, 255, 255, 1);
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 17px;   
+    cursor: pointer;
+    margin-bottom: 40px
+
+}
+label {    
+    font-family: 'Arial';
+    font-style: normal;
+    margin-left: 15%;
+    opacity: 0.8;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 12px;
+    
+    color: #000000;
+}
+.gender{
+    margin-bottom: 20px;
+}
+.radioButton{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.birthDate{
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+}
+.signinDay{
+    margin-left: -15%;
+    height: 45px;
+}
