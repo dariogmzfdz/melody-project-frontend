@@ -1,10 +1,13 @@
 import { Button } from '@mui/material'
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useFirebase';
 
 export default function Logout() { 
 
-const {user} = useAuth();
+  const [datos] = useState({
+    email: "",
+   });
 
 const {logout } = useAuth();
     
@@ -18,7 +21,7 @@ const {logout } = useAuth();
       }  }
   return (
     <>
-    <h3> WELCOME {user.displayName || user.email}</h3>
+    <h3> WELCOME {datos.email}</h3>
 
     <Link to="/"><Button onClick={handleLogout}>{logout ? "Sign Out" : "Login"}</Button>
 </Link> </> 

@@ -57,7 +57,7 @@ const handleSubmit = async(e) =>{
          email: datos.email,
          password: datos.password
      })
-     console.log(result);
+     console.log(result.data);
    
   } catch (error) {
       if (error.response) {
