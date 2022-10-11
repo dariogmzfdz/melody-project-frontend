@@ -1,23 +1,17 @@
-import './App.css';
-import Features from './components/Features/Features';
-import MyPlaylists from './components/MyPlaylists/MyPlaylists';
-import Recommended from './components/Recommended/Recommended';
-import SearchBar from './components/SearchBar/SearchBar';
-import Settings from './components/Settings/Settings';
-import SideMenu from './components/SideMenu/SideMenu';
-import Top from './components/Top/Top';
-
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import AdminView from "./components/Account/AdminView/AdminView";
 
 function App() {
   return (
     <div className="App">
-      <SideMenu />
-      <SearchBar />
-      <MyPlaylists />
-      <Settings />
-      <Features />
-      <Recommended />
-      <Top />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/admin" element={<AdminView />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
