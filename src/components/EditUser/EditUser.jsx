@@ -4,33 +4,42 @@ import {  useState } from "react";
 // import { toast } from "react-toastify";
 
 const EditUser = () => {
-  const [userData, setUserData] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   // const { state, dispatch: ctxDispatch } = useContext(state);
   // const { userInfo } = state;
+  const token = localStorage.getItem('userToken');
+  console.log(token);
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    const userId = await fetch("https://melody-music-stream-ten.vercel.app/login",
-    {
-    headers: {
-        auth_id: userId,
-    },}
-)
-
+  
     try {
-      const data = await axios.put(`https://melody-music-stream-ten.vercel.app/user/${userId}`,
-      {
+    const data = await axios.put('https://melody-music-stream-ten.vercel.app/user', {
+      // headers: {
+      //   'auth_token': token
+      // },
         name: name,
         lastName: lastName,
-      })
-    console.log(data);
-    } catch (error) {
+      
+    })
+    console.log(data)
+  } catch (error) {
       console.log(error);
     }
-  };
 
-  console.log(userData);
+
+    // try {
+    //   const data = await axios.put(`https://melody-music-stream-ten.vercel.app/user`,
+    //   {
+    //     name: name,
+    //     lastName: lastName,
+    //   })
+    // console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
   return (
     <div>
       <a href="#">

@@ -1,6 +1,4 @@
-html{
 
-}
 a{
     text-decoration: none;
     ;
@@ -17,7 +15,7 @@ a{
     align-items: right;
     justify-content: flex-end;
 }
-form{
+/* form{
     display: flex;
     flex-direction: column;
     margin-top: 40px;
@@ -30,7 +28,8 @@ form{
     padding-top: 20px;
     padding-bottom: 30px;
     margin-bottom: 40px;
-}
+
+*/
 h1{
     background-color: black;
     margin: 0;

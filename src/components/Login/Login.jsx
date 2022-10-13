@@ -16,7 +16,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { useState } from 'react';
 import axios from 'axios';
 // import { useAuth } from '../../hooks/useFirebase';
- import { Link  } from 'react-router-dom';
+ import { Link, useNavigate  } from 'react-router-dom';
 // import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
 // import { auth } from '../../config/firebase';
 
@@ -41,7 +41,7 @@ export default function SignInSide() {
   email: "",
   password: "",
  });
-
+const navigate = useNavigate();
 //  const [token,setToken] = useState("");
  
 
@@ -58,6 +58,11 @@ const handleSubmit = async(e) =>{
          password: datos.password
      })
      console.log(result.data);
+     const  {token} = result.data
+     localStorage.setItem('userToken', token)
+     console.log(token);
+     
+     navigate('/logout');
    
   } catch (error) {
       if (error.response) {
