@@ -9,7 +9,7 @@ const SignIn = () => {
   const [userData, setUserData] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  let [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [date, setDate] = useState("");
@@ -44,7 +44,6 @@ const SignIn = () => {
     }
   };
 
-  console.log(userData);
   return (
     <div>
       <a href="#">
@@ -59,7 +58,7 @@ const SignIn = () => {
           type="email"
           placeholder="Email"
           id="email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value.toLowerCase())}
           required
         ></input>
         <label>Password</label>

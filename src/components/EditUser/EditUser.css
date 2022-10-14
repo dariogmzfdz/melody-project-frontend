@@ -1,6 +1,4 @@
-html{
 
-}
 a{
     text-decoration: none;
     ;
@@ -23,7 +21,7 @@ form{
     margin-top: 40px;
     margin-left: 35%;
     width:60%;
-    /* height: 90%; */
+    height: 90%;
     background: rgba(255, 248, 248, 1);
     border-radius: 10px;
    
@@ -31,6 +29,7 @@ form{
     padding-bottom: 30px;
     margin-bottom: 40px;
 }
+
 h1{
     background-color: black;
     margin: 0;
