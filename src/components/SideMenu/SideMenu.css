@@ -1,0 +1,9 @@
+.side-menu {
+    position: sticky;
+    width: 251px;
+    height: 690px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    border-radius: 0px 26px 26px 0px;
+}

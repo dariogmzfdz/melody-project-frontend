@@ -1,0 +1,10 @@
+.recommended-container {
+    position: absolute;
+    width: 800px;
+    height: 211px;
+    left: 308px;
+    top: 680px;
+    background: #FFFFFF;
+    border-radius: 0px 10px 0px 10px;
+    text-align: center;
+}
