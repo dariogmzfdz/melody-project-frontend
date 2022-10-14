@@ -15,7 +15,7 @@ const {logout } = useAuth();
     const handleLogout = async () => {
       try {
         await logout();
-       
+        localStorage.clear();
       } catch (error) {
         console.error(error.message);
       }  }

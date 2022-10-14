@@ -1,5 +1,5 @@
 
-h1{
+.titleBig{
     color: #fff;
     font-size: 12em;
     opacity: 0.7;
@@ -7,7 +7,7 @@ h1{
     text-shadow: 5px 10px 10px black ;
     margin-top: 7%;
 }
-h2{
+.titleMed{
     display: flex;
     justify-content: center;
     color: #fff;

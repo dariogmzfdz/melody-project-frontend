@@ -11,6 +11,7 @@ reducers:{
     },
     logout: (state) => {
         state.user = null;
+        
     },
 },
 });

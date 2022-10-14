@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import "./SignIn.css";
 import {  useState } from "react";
+import { TextField } from "@mui/material";
 // import { toast } from "react-toastify";
 
 const SignIn = () => {
@@ -12,9 +13,9 @@ const SignIn = () => {
   let [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [date, setDate] = useState("");
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  const [birthday, setDate] = useState("");
+  // const [month, setMonth] = useState("");
+  // const [year, setYear] = useState("");
   const [gender, setGender] = useState("");
 
   // const { state, dispatch: ctxDispatch } = useContext(state);
@@ -33,9 +34,9 @@ const SignIn = () => {
         lastName: lastName,
         email: email,
         password: password,
-        date: date,
-        month: month,
-        year: year,
+        birthday: birthday,
+        // month: month,
+        // year: year,
         gender: gender,
       })
     console.log(data);
@@ -47,11 +48,11 @@ const SignIn = () => {
   return (
     <div>
       <a href="#">
-        <h1> MELODY </h1>
+        <h1 className="titleBig"> MELODY </h1>
       </a>
       <div className="formContainer">
-      <form onSubmit={submitHandler}>
-        <h3>Register</h3>
+      <form className='formSign' onSubmit={submitHandler}>
+        <h3 className="title">Register</h3>
         <label id="email">Email</label>
         <input
           className="signinInput"
@@ -95,7 +96,18 @@ const SignIn = () => {
           onChange={(e) => setLastName(e.target.value)}
           required
         ></input>
-        <label>Date of birth</label>
+           <TextField
+             required
+      className="birthDate"
+        id="birthday"
+        label="Birthday"
+        type="date"
+        onChange={(e) => setDate(e.target.value)}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+        {/* <label>Date of birth</label>
         <div className="birthDate">
           <label></label>
           <select
@@ -168,8 +180,8 @@ const SignIn = () => {
             id="year"
             onChange={(e) => setYear(e.target.value)}
             required
-          />
-        </div>
+          /> */}
+        {/* </div> */}
         <label className="gender">Gender:</label>
         <div className="radioButton">
           <label>Female
