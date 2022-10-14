@@ -62,7 +62,7 @@ const handleSubmit = async(e) =>{
      localStorage.setItem('userToken', token)
      console.log(token);
      
-     navigate('/logout');
+     navigate('/home');
    
   } catch (error) {
       if (error.response) {

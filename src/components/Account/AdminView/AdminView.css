@@ -6,11 +6,11 @@
     box-sizing: border-box;
 }
 
-body {
+/* body {
     padding: 24px;
     font-family: 'Source Sans Pro', sans-serif;
     margin: 0;
-}
+} */
 
 table {
     width: 100%;

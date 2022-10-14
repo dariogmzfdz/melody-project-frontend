@@ -76,7 +76,7 @@ const ProductTable = (props) => {
   };
 
   return (
-    <div class="table-container">
+    <div className="table-container">
       <table className="table">
         <caption>Users</caption>
         <thead className="table-header">
@@ -133,8 +133,7 @@ const ProductTable = (props) => {
 export default function AdminView() {
   const [data, setData] = useState([]);
 
-  const key =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzM2IwMGUxMDhiYzE1NDY1MDRiMTQ5NiIsImVtYWlsIjoibWFzdGVyLm1lbG9keUBtc24uY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjY1NDg4ODE0LCJleHAiOjE2NjU1NzUyMTR9.eDvWi28js9L5pZ84-Ab_aSsGI_N4q6hJxxWk7pbYZRU";
+  const key = localStorage.getItem("userToken");
 
   useEffect(() => {
     const fetchData = async () => {
