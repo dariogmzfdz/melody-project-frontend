@@ -69,27 +69,10 @@ const EditUser = () => {
           type="email"
           placeholder="Email"
           id="email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value.toLowerCase())}
           required
         ></input>
-        <label>New Password</label>
-        <input
-          className="signinInput"
-          type="password"
-          placeholder="Password"
-          id="newPassword"
-          required
-          onChange={(e) => setNewPassword(e.target.value)}
-        ></input>
-        <label>Confirm New Password</label>
-        <input
-          className="signinInput"
-          type="password"
-          placeholder="Password"
-          id="confirmNewPassword"
-          onChange={(e) => setConfirmNewPassword(e.target.value)}
-          required
-        ></input>
+
         <label>Name</label>
         <input
           className="signinInput"
@@ -180,7 +163,7 @@ const EditUser = () => {
             onChange={(e) => setYear(e.target.value)}
             required
           />
-        </div>
+        </div >
         <label className="gender">Gender:</label>
         <div className="radioButton">
           <label>Female
@@ -214,7 +197,25 @@ const EditUser = () => {
           />
 </label>
 </div>
-<label>Old Password</label>
+<label>New Password</label>
+        <input
+          className="signinInput"
+          type="password"
+          placeholder="Password"
+          id="newPassword"
+          required
+          onChange={(e) => setNewPassword(e.target.value)}
+        ></input>
+        <label>Confirm New Password</label>
+        <input
+          className="signinInput"
+          type="password"
+          placeholder="Password"
+          id="confirmNewPassword"
+          onChange={(e) => setConfirmNewPassword(e.target.value)}
+          required
+        ></input>
+        <label>Old Password</label>
         <input
           className="signinInput"
           type="password"
