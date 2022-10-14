@@ -11,22 +11,20 @@ import EditUser from './Components/EditUser/EditUser';
 function App() {
 
   return (
-    <EditUser />
-    // <>
-//     // {/* <Router>
-// <AuthProvider> 
+    <Router>
+<AuthProvider> 
   
-//   <Routes>
-//     <Route path='/' element={ <SignInSide/>} />
-//   <Route path="/forgot" element={<ForgotPassword/>} />
-//   <Route path="/signup" element={<Signup/>} />
-//   <Route path='/logout' element={ <Logout/> }/>
-//   <Route path='/form' element={ <FormPassword />}/>
-//   </Routes>
-//   </AuthProvider>
-//   </Router>
-//   </> */}
-//   // );
-)}
+  <Routes>
+  <Route path='/' element={ <SignInSide/>} />
+  <Route path="/forgot" element={<ForgotPassword/>} />
+  <Route path="/signup" element={<Signup/>} />
+  <Route path='/logout' element={ <Logout/> }/>
+  <Route path='/form' element={ <FormPassword />}/>
+  <Route path='/edituser' element={ <EditUser /> }/>
+  </Routes>
+  </AuthProvider>
+  </Router>
+  );
+}
 
 export default App;
