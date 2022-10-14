@@ -19,7 +19,7 @@ import axios from 'axios';
  import { Link, useNavigate  } from 'react-router-dom';
 // import { FacebookAuthProvider, signInWithPopup } from 'firebase/auth';
 // import { auth } from '../../config/firebase';
-
+import logo from '../../utils/img/logo.png'
 
 function Copyright(props) {
   return (
@@ -91,8 +91,8 @@ const handleSubmit = async(e) =>{
               alignItems: 'center',
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-              <LockOutlinedIcon />
+            <Avatar className='avatar'>
+              <img src={logo} className='logo'  alt='logo'/>
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in

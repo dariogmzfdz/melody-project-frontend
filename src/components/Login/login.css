@@ -1,7 +1,16 @@
 .background{
-    background-image: url('../../utils/img/background.jpg');
+    background-image: url('../../utils/img/Melody.png');
     background-size: cover;
     background-position: center;
+}
+.avatar{
+  width: 125px !important;
+  height: 125px !important;
+  margin-bottom: 1em !important;
+
+}
+.logo{
+  width: 100%;
 }
 .outline_btn {
     width: 100%;

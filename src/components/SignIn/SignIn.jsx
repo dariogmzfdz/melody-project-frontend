@@ -2,11 +2,12 @@ import axios from "axios";
 import React from "react";
 import "./SignIn.css";
 import {  useState } from "react";
-import { TextField } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 // import { toast } from "react-toastify";
 
 const SignIn = () => {
-  let newYear = new Date().getFullYear();
+  
   const [userData, setUserData] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -14,12 +15,8 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [birthday, setDate] = useState("");
-  // const [month, setMonth] = useState("");
-  // const [year, setYear] = useState("");
   const [gender, setGender] = useState("");
-
-  // const { state, dispatch: ctxDispatch } = useContext(state);
-  // const { userInfo } = state;
+const navigate = useNavigate();
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -35,10 +32,9 @@ const SignIn = () => {
         email: email,
         password: password,
         birthday: birthday,
-        // month: month,
-        // year: year,
         gender: gender,
       })
+      navigate("/home")
     console.log(data);
     } catch (error) {
       console.log(error);
@@ -47,57 +43,89 @@ const SignIn = () => {
 
   return (
     <div>
-      <a href="#">
-        <h1 className="titleBig"> MELODY </h1>
-      </a>
-      <div className="formContainer">
-      <form className='formSign' onSubmit={submitHandler}>
-        <h3 className="title">Register</h3>
-        <label id="email">Email</label>
-        <input
-          className="signinInput"
+     
+     <Grid container component="main" sx={{ height: '100vh' }}>
+        <Grid className="background"
+          item
+          xs={false}
+          sm={4}
+          md={7}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} className="formBackground" elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              padding: '1em',
+              margin: '3em',
+            }}
+          >
+        <Box className="formSign" onSubmit={submitHandler} component="form" sx={{ mt: 1 }} >
+          <Typography component="h1" variant="h4" className="register" >Register</Typography>
+
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
           type="email"
           placeholder="Email"
-          id="email"
           onChange={(e) => setEmail(e.target.value.toLowerCase())}
-          required
-        ></input>
-        <label>Password</label>
-        <input
-          className="signinInput"
+        ></TextField>
+  
+        <TextField
+         label="Password"
+         className="label"
           type="password"
+          fullWidth
           placeholder="Password"
           id="password"
           required
           onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <label>Confirm Password</label>
-        <input
-          className="signinInput"
+        ></TextField>
+        
+        <TextField 
+         label="Confirm Password"
+        className="label"
+        fullWidth
           type="password"
           placeholder="Password"
           id="confirmPassword"
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
-        ></input>
-        <label>Name</label>
-        <input
-          className="signinInput"
-          placeholder="ej: John"
-          id="name"
-          onChange={(e) => setName(e.target.value)}
-          required
-        ></input>
-        <label>Last Name</label>
-        <input
-          className="signinInput"
-          placeholder="ej: Smith"
-          id="lastName"
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        ></input>
+        ></TextField>
+            <Grid item xs={12} sm={12} className="labels">
+                <TextField
+                  autoComplete="given-name"
+                  name="firstName"
+                  required
+                  className="form-label"
+                  fullWidth
+                  id="firstName"
+                  label="First Name"
+                  onChange={(e) => setName(e.target.value)}
+                  autoFocus
+                />
+             
+        <TextField 
+         label="Last Name"
+         className="form-label"
+         placeholder="ej: Smith"
+         id="lastName"
+         fullWidth
+         onChange={(e) => setLastName(e.target.value)}
+         required
+        ></TextField>
+        </Grid>
            <TextField
-             required
+            required
       className="birthDate"
         id="birthday"
         label="Birthday"
@@ -107,119 +135,56 @@ const SignIn = () => {
           shrink: true,
         }}
       />
-        {/* <label>Date of birth</label>
-        <div className="birthDate">
-          <label></label>
-          <select
-            className="signinInput"
-            placeholder="Day"
-            id="date"
-            onChange={(e) => setDate(e.target.value)}
-            required
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
-          </select>
-          <label></label>
-          <select
-            className="signinInput"
-            placeholder="Mes"
-            id="month"
-            onChange={(e) => setMonth(e.target.value)}
-            required
-          >
-            <option value="1">January</option>
-            <option value="2">Februrary</option>
-            <option value="3">March</option>
-            <option value="4">April</option>
-            <option value="5">May</option>
-            <option value="6">June</option>
-            <option value="7">July</option>
-            <option value="8">August</option>
-            <option value="9">September</option>
-            <option value="10">October</option>
-            <option value="11">November</option>
-            <option value="12">December</option>
-          </select>
-          <label></label>
-          <input
-            className="signinInput"
-            type="number"
-            placeholder="YYYY"
-            min="1910"
-            max={newYear}
-            id="year"
-            onChange={(e) => setYear(e.target.value)}
-            required
-          /> */}
-        {/* </div> */}
-        <label className="gender">Gender:</label>
-        <div className="radioButton">
-          <label>Female
-          <input
-            type="radio"
+        
+       
+<FormControl className="radio">
+<Typography >Gender</Typography>
+<RadioGroup
+  row
+  aria-labelledby="demo-row-radio-buttons-group-label"
+  name="row-radio-buttons-group"
+  >
+          <FormControlLabel
+            control={<Radio />}
             id="gender"
             name="gender-selector"
             value="female"
             onChange={(e) => setGender(e.target.value)}
             required
+            label="Female"
           />
-</label>
-<label>Male
-          <input
-            type="radio"
+
+          <FormControlLabel
+            control={<Radio />}
             id="gender"
             name="gender-selector"
             value="male"
             onChange={(e) => setGender(e.target.value)}
             required
+            label="Male"
           />
-</label>
-<label>Non-binary
-          <input
-            type="radio"
+
+
+          <FormControlLabel
+          control={<Radio />}
             id="gender"
             name="gender-selector"
             value="no-binary"
             onChange={(e) => setGender(e.target.value)}
             required
+            label="No-Binary"
           />
-</label>
-        </div>
-        <button className="registerButton" type="submit">
+          </RadioGroup>
+</FormControl>
+       
+        <Button className="registerButton" type="submit">
           Register
-        </button>
-      </form>
-      </div>
+        </Button>
+     
+      </Box>
+       </Box>
+       </Grid>
+       </Grid>
     </div>
   );
 };

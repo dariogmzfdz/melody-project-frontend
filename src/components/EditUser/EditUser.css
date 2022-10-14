@@ -3,9 +3,11 @@ a{
     text-decoration: none;
     ;
 }
-
+.formBackground{
+    background-color: #000;
+}
 .background{
-    background-image: url('../../utils/img/background.jpg');
+    background-image: url('../../utils/img/Melody.png');
     background-size: cover;
     background-position: center;
 }
@@ -38,45 +40,6 @@ a{
     height: 45px;
     border-radius: 5px;
     font-size: 1em;
-}
-.registerButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px auto;
-    width: 269px;
-    height: 58px;
-    opacity: 0.9;
-    border-radius: 36px;
-    background: #60426D;
-    border: 3px solid #bfbdbd;
-    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.63);
-    backdrop-filter: blur(2px);
-    color: rgba(255, 255, 255, 1);
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 17px;   
-    margin-bottom: 40px
-}
-.registerButton:hover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 40px auto;
-    width: 269px;
-    height: 58px;
-    border-radius: 36px;
-    background: #7d6488;
-    border: 3px solid #484848;
-    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.63);
-    backdrop-filter: blur(2px);
-    color: rgba(255, 255, 255, 1);
-    font-weight: 800;
-    font-size: 18px;
-    line-height: 17px;   
-    cursor: pointer;
-    margin-bottom: 40px
-
 }
 
 .radio{
