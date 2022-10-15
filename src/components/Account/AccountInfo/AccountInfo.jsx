@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import image from "../../../utils/img/logo.png";
+import Profile from "../../Profile/Profile";
+
 
 function AccountInfo() {
   const [modalIsOpen, setIsOpen] = useState(false);

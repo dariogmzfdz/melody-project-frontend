@@ -20,33 +20,32 @@ function Profile() {
   const [isAdmin, setIsAdmin] = useState(true);
 
   const settings = [
-    { text: "Profile", href: "/profile" },
     { text: "Dashboard", href: "/admin" },
     { text: "Logout", href: "/logout" },
   ];
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://melody-music-stream-ten.vercel.app/user",
-        {
-          headers: {
-            auth_token: token,
-          },
-        }
-      );
-      const data = await response.json();
-      const user = data.user;
-      const admin = user.isAdmin;
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const response = await fetch(
+//         "https://melody-music-stream-ten.vercel.app/user",
+//         {
+//           headers: {
+//             auth_token: token,
+//           },
+//         }
+//       );
+//       const data = await response.json();
+//       const user = data.user;
+//       const admin = user.isAdmin;
 
-      setData(user);
-      setIsAdmin(admin);
-    };
+//       setData(user);
+//       setIsAdmin(admin);
+//     };
 
-    fetchData().catch(console.error);
-  }, [token]);
-  useEffect(() => {
-    console.log("isAdmin: ", isAdmin);
-  }, [isAdmin]);
+//     fetchData().catch(console.error);
+// //   }, [token]);
+//   useEffect(() => {
+//     console.log("isAdmin: ", isAdmin);
+//   }, [isAdmin]);
 
   return (
     <div>
