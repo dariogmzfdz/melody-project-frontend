@@ -9,7 +9,7 @@ import Signup from "./components/SignIn/SignIn.jsx";
 import EditUser from "./components/EditUser/EditUser";
 import Home from "./components/Home/Home";
 import AdminView from "./components/Account/AdminView/AdminView";
-
+import Profile from "./components/Profile/Profile.jsx"
 function App() {
   return (
     <>
@@ -24,6 +24,8 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/form" element={<FormPassword />} />
+            <Route path="/profile" element={<Profile />} />
+
           </Routes>
         </AuthProvider>
       </Router>

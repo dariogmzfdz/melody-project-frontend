@@ -210,7 +210,7 @@ const EditUser = () => {
               ></TextField>
 
               <Button className="registerButton" type="submit">
-                Register
+                Edit User
               </Button>
             </Box>
           </Box>
