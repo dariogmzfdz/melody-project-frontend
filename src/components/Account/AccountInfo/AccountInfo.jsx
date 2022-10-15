@@ -5,7 +5,6 @@ import Account from "../../../assets/account.png";
 import "./AccountInfo.css";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
@@ -13,14 +12,17 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import image from "../../../utils/img/logo.png";
-import EditUser from "../EditUser/EditUser.jsx";
 
 function AccountInfo() {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const token = localStorage.getItem("userToken");
-  const settings = [{ EditUser }, "Dashboard", "Logout"];
+  const settings = [
+    { text: 'Profile', href: '/profile' },
+    {  text: 'Dashboard', href: '/admin'},
+  {text: 'Logout', href: '/logout' },
+  ];
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -90,10 +92,10 @@ function AccountInfo() {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={handleCloseUserMenu}>
-              <Typography textAlign="center">{setting}</Typography>
-            </MenuItem>
+          {settings.map((setting) => ( <Link to={setting.href} >
+            <MenuItem key={setting}  onClick={handleCloseUserMenu}>
+              <Typography textAlign="center" textDecoration='none' color="black">{setting.text}</Typography>
+            </MenuItem></Link>
           ))}
         </Menu>
       </Box>
@@ -140,13 +142,7 @@ function AccountInfo() {
           </button>
         </div>
 
-        {isAdmin ? (
-          <div className="admin-options">
-            <Link className="admin-options-btn" to={"/admin"}>
-              Admin options
-            </Link>
-          </div>
-        ) : null}
+       
       </Modal>
     </>
   );
