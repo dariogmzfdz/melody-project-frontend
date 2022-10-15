@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Account from "../../../assets/account.png";
@@ -20,25 +20,25 @@ function AccountInfo() {
   const [data, setData] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const token = localStorage.getItem("userToken");
-  const settings = [
-    { text: 'Profile', href: '/profile' },
-    {  text: 'Dashboard', href: '/admin'},
-  {text: 'Logout', href: '/logout' },
+  const settingAdmin = [
+    {text: 'Dashboard', href: '/admin' ,id: 'dashboard' },
+    {text: 'Profile', href: '/profile' ,id: 'profile'},
+    {text: 'Logout', href: '/logout' ,id: 'logout'},
   ];
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const settingUser = [
+    {text: 'Profile', href: '/profile', id: 'Profile'},
+    {text: 'Logout', href: '/logout' ,id: 'Logout'}, 
+  ];
+
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+  
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -94,13 +94,28 @@ function AccountInfo() {
           open={Boolean(anchorElUser)}
           onClose={handleCloseUserMenu}
         >
-          {settings.map((setting) => ( <Link to={setting.href} >
-            <MenuItem key={setting}  onClick={handleCloseUserMenu}>
-              <Typography textAlign="center" textDecoration='none' color="black">{setting.text}</Typography>
-            </MenuItem></Link>
+          {isAdmin ? 
+          settingAdmin.map((settings) => (
+             
+            <MenuItem  key={settings.id} onClick={handleCloseUserMenu}>
+                 <Link to={settings.href}> <Typography textAlign="center" textDecoration='none' color="black">
+                {settings.text}
+                </Typography></Link>
+            </MenuItem>
+          ))
+          : settingUser.map((settings) => (
+            
+            <MenuItem key={settings.id} onClick={handleCloseUserMenu}>
+               <Link to={settings.href}  >
+                <Typography textAlign="center" textDecoration='none' color="black">
+                 {settings.text}
+                </Typography></Link>
+            </MenuItem> 
           ))}
-        </Menu>
+           </Menu>
       </Box>
+
+       
       <button className="account-btn" onClick={() => setIsOpen(true)}>
         <img className="user-img" src={Account} alt="" />
       </button>
