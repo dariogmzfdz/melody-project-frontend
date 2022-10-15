@@ -67,6 +67,7 @@ import "./AdminView.css";
 import useSortableData from "./useSortableData";
 
 const ProductTable = (props) => {
+  console.log(props)
   const { items, requestSort, sortConfig } = useSortableData(props.products);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
@@ -133,7 +134,7 @@ const ProductTable = (props) => {
 export default function AdminView() {
   const [data, setData] = useState([]);
 
-  const key = localStorage.getItem("userToken");
+  const token = localStorage.getItem("userToken");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -141,7 +142,7 @@ export default function AdminView() {
         "https://melody-music-stream-ten.vercel.app/users",
         {
           headers: {
-            auth_token: key,
+            auth_token: token,
           },
         }
       );
@@ -153,7 +154,7 @@ export default function AdminView() {
     };
 
     fetchData().catch(console.error);
-  }, []);
+  }, [token]);
 
   return (
     <div className="App">
