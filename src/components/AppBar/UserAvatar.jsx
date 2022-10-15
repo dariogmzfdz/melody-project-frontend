@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./AccountInfo.css";
 import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
@@ -9,14 +8,14 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import image from "../../../utils/img/logo.png";
-import Profile from "../../Profile/Profile";
+import image from "../../utils/img/logo.png";
 
-
-function AccountInfo() {
+function UserAvatar() {
+  //User Data with all information
   const [data, setData] = useState([]);
   const [isAdmin, setIsAdmin] = useState(true);
   const token = localStorage.getItem("userToken");
+
   const settingAdmin = [
     { text: "Dashboard", href: "/admin", id: "dashboard" },
     { text: "Profile", href: "/profile", id: "profile" },
@@ -49,18 +48,13 @@ function AccountInfo() {
         }
       );
       const data = await response.json();
-      const user = data.user;
-      const admin = user.isAdmin;
 
-      setIsAdmin(admin);
+      setIsAdmin(data.isAdmin);
+      setData(data.user);
     };
 
     fetchData().catch(console.error);
   }, [token]);
-
-  useEffect(() => {
-    console.log("isAdmin: ", isAdmin);
-  }, [isAdmin]);
 
   return (
     <>
@@ -121,4 +115,4 @@ function AccountInfo() {
   );
 }
 
-export default AccountInfo;
+export default UserAvatar;

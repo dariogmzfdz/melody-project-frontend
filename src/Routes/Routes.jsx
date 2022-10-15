@@ -8,6 +8,7 @@ import Signup from "../components/SignIn/SignIn.jsx";
 import EditUser from "../components/EditUser/EditUser";
 import Home from "../components/Home/Home";
 import AdminView from "../components/Account/AdminView/AdminView";
+import Profile from "../components/Profile/Profile";
 
 export default function RouterApp() {
   return (
@@ -17,6 +18,7 @@ export default function RouterApp() {
           <Routes>
             <Route path="/" element={<SignInSide />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminView />} />
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/signup" element={<Signup />} />

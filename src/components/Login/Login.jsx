@@ -67,7 +67,6 @@ export default function SignInSide() {
       );
       const { token } = result.data;
       localStorage.setItem("userToken", token);
-      console.log(token);
 
       navigate("/home");
     } catch (error) {
