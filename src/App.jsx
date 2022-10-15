@@ -1,15 +1,6 @@
 import "./App.css";
-import SignInSide from "../src/components/Login/Login.jsx";
-import Logout from "../src/components/Logout.jsx";
-import { AuthProvider } from "./hooks/useFirebase";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ForgotPassword from "../src/components/Login/ForgotPassword.jsx";
-import FormPassword from "../src/components/Login/formPassword.jsx";
-import Signup from "./components/SignIn/SignIn.jsx";
-import EditUser from "./components/EditUser/EditUser";
-import Home from "./components/Home/Home";
-import AdminView from "./components/Account/AdminView/AdminView";
-import Profile from "./components/Profile/Profile.jsx"
+import RouterApp from "./Routes/Routes";
+
 function App() {
   return (
     <>
@@ -24,8 +15,6 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/form" element={<FormPassword />} />
-            <Route path="/profile" element={<Profile />} />
-
           </Routes>
         </AuthProvider>
       </Router>

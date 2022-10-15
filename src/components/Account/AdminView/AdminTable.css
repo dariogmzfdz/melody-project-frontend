@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* body {
+    padding: 24px;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin: 0;
+} */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  text-align: left;
+  background-color: #000;
+}
+
+thead button {
+  border: 0;
+  border-radius: none;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: inherit;
+  padding: 0.5em;
+  margin-bottom: 1px;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+tbody tr {
+  background-color: #eee;
+}
+
+tbody tr:hover {
+  background-color: #aaa;
+}
+
+tbody td {
+  padding: 0.5em;
+}
