@@ -1,38 +1,35 @@
 
 import  { useState } from 'react'
-import { useAuth } from '../../hooks/useFirebase';
 import { TextField, Typography } from '@mui/material';
 import {Button} from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import './forgot.css';
+import axios from 'axios';
 export default function ForgotPassword() {
     const [user,setUser] = useState({
         email: "",
-     
       });
-    const [error,setError] = useState("");
-    const {resetPassword} = useAuth();
+      const [error,setError] = useState();
+      const [success,setSuccess] = useState();
 
-    const handleResetPassword = async (e) => {
+const handleResetPassword = async (e) => {
         e.preventDefault();
-        if(!user.email) return setError("Write an email to reset password");
-        try {
-        await resetPassword(user.email);
-        setError('We sent you an email. Check your inbox')
-        } catch(error) {
-        console.log(error.code)
-        if (error.code === "auth/missing-email") return setError("Introduce email");
-        if (error.code === "auth/invalid-email") return setError("Email no existe");
-        if (error.code === "auth/weak-password") return setError("La contraseña debe tener 6 carácteres");
-        if (error.code === "auth/user-not-found") return setError("Usuario no registrado");
-        if (error.code === "auth/too-many-requests") return setError("Demasiados intentos. Intente cambiar la contraseña");
-        if (error.code === "auth/wrong-password" ) return setError("Contraseña errónea");
-        if (error.code === "auth/email-already-in-use" ) return setError("en uso ");
-
-            };
+        axios({
+          method: "post",
+          url: "http://localhost:3000/password-reset",
+          data: user.email,
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+          .then(function (response) {
+            //handle success
+            console.log(response.data.msg);
+          })
+          .catch(function (error) {
+            //handle error
+            setError(error.response.data.msg);
+          });
         }
-   
       const handleChange = ({ target: { value, name } }) =>{
         setUser({ ...user, [name]: value });
       }
@@ -61,6 +58,7 @@ export default function ForgotPassword() {
     
     // value={datos.email}
   />
+  <Typography color='#ff0000'>{error}</Typography>
   <Button
   type="submit"
   fullWidth
@@ -69,6 +67,7 @@ export default function ForgotPassword() {
 >
 Send
 </Button>
+
 <Link to='/'>
 <Button
   sx={{ mt: 1, mb: 1 }}
@@ -76,7 +75,6 @@ Send
 Back
 </Button>
 </Link>
-{error &&  <h3 className='errTitle'>{error}</h3>}
 </Box>
 
 </Box>
