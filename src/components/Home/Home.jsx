@@ -6,6 +6,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import ResponsiveAppBar from "../AppBar/AppBar";
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";
+import Player from "../MusicPlayer/Player";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
       <Features />
       <Recommended />
       <Top />
+      <Player />
     </>
   );
 }
