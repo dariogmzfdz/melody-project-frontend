@@ -1,0 +1,12 @@
+.buttonProfile{
+
+margin: 1rem 0rem;
+display: inline-flex;
+}
+
+.buttonDelete {
+    color: rgb(236, 236, 236) !important;
+    border: rgb(229, 65, 65) solid 1px !important;
+    margin: 0rem 1rem !important    ;
+    background-color: rgb(229, 65, 65) !important;
+}

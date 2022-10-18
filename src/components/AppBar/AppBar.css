@@ -2,4 +2,5 @@
   display: flex;
   width: fit-content;
   width: 50px;
+  border-radius: 2rem;
 }

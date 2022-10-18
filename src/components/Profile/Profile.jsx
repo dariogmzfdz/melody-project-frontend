@@ -1,18 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Account from "../../assets/account.png";
 import { Link } from "react-router-dom";
 import {
   Button,
   Container,
+  Grid,
   TableBody,
   TableCell,
   TableContainer,
   TableRow,
   Typography,
+  Table,
 } from "@mui/material";
-import { Table } from "react-bootstrap";
 import AppBar from "../AppBar/AppBar";
+import './Profile.css';
+import axios from "axios";
 
 function Profile() {
   const [data, setData] = useState([]);
@@ -37,15 +39,32 @@ function Profile() {
     fetchData().catch(console.error);
   }, [token]);
 
+  const deleteUser = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await axios.delete("https://melody-music-stream-ten.vercel.app/user",
+      {
+        headers: {
+          auth_token: token,
+        },
+      }
+    ); const response = await data.json();
+
+  } 
+
+  catch (error){ 
+    (console.log (error))
+   }
+  }
   return (
     <div>
       <AppBar />
       {/* List with the user information */}
       <Container className="user-info">
-        <div className="user-img-container">
+         <div className="user-img-container">
           {/* INSERT USER PHOTO HERE! */}
           <img className="user-img" src={""} alt="" />
-        </div>
+        </div> 
         <TableContainer className="user-data">
           <Table>
             <Typography color="common.white" component="h1" variant="h5">
@@ -72,11 +91,17 @@ function Profile() {
                 <TableCell>Date: </TableCell>
                 <TableCell>{data.birthday}</TableCell>
               </TableRow>
+             <Grid className="buttonProfile">
               <Link to={"/edit"}>
-                <Button variant="contained" LinkComponent={Link} to={"/edit"}>
+                <Button variant="contained">
                   Edit User Data
                 </Button>
-              </Link>
+                </Link>
+                <Button variant="outlined" onClick={deleteUser} className="buttonDelete">
+                  Delete account
+                </Button>
+              
+              </Grid>
             </TableBody>
           </Table>
         </TableContainer>

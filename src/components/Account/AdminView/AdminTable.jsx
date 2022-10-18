@@ -1,8 +1,16 @@
+import {  Paper, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Table } from "react-bootstrap";
 import "./AdminTable.css";
 import useSortableData from "./useSortableData";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AppBar from '../../AppBar/AppBar'
+import axios from "axios";
+import {useState} from 'react'
+
 
 export const UsersTable = (props) => {
   const { items, requestSort, sortConfig } = useSortableData(props.products);
+  
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -10,75 +18,93 @@ export const UsersTable = (props) => {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
+  const [data, setData] = useState([]);
+  const token = localStorage.getItem("userToken");
+
+  const adminUserDelete = async (id) => {
+console.log(id)
+    try {
+      const data = await axios.delete(`https://melody-music-stream-ten.vercel.app/users/${id}`,
+      {
+        headers: {
+          auth_token: token,
+        },
+      }
+    ); const response = await data.json();
+
+  } 
+
+  catch (error){ 
+    (console.log (error))
+   }
+  }
   return (
-    <div className="table-container">
-      <table className="table">
-        <caption>Users</caption>
-        <thead className="table-header">
-          <tr>
-            <th>
-              <button
+    <>
+    <AppBar/>
+    <TableContainer component={Paper}>
+      <Table >
+        <TableHead>
+          <TableRow>
+              <TableCell
                 type="button"
                 onClick={() => requestSort("name")}
                 className={getClassNamesFor("name")}
               >
                 Name
-              </button>
-            </th>
-            <th>
-              <button
+              </TableCell>
+
+              <TableCell
                 type="button"
                 onClick={() => requestSort("lastName")}
-                className={getClassNamesFor("lastName")}
               >
                 Last Name
-              </button>
-            </th>
-            <th>
-              <button
+              </TableCell>
+
+              <TableCell
                 type="button"
                 onClick={() => requestSort("email")}
                 className={getClassNamesFor("email")}
               >
                 Email
-              </button>
-            </th>
-            <th>
-              <button type="button" className={getClassNamesFor("password")}>
+              </TableCell>
+          
+              <TableCell type="button" className={getClassNamesFor("password")}>
                 Gender
-              </button>
-            </th>
-            <th>
-              <button type="button" className={getClassNamesFor("password")}>
+              </TableCell>
+         
+              <TableCell type="button" className={getClassNamesFor("password")}>
                 Birthday
-              </button>
-            </th>
-            <th>
-              <button type="button" className={getClassNamesFor("password")}>
+              </TableCell>
+           
+              <TableCell type="button" className={getClassNamesFor("password")}>
                 Password
-              </button>
-            </th>
-            <th>
-              <button type="button" className={getClassNamesFor("password")}>
+              </TableCell>
+          
+              <TableCell type="button" className={getClassNamesFor("password")}>
                 Last update
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody className="table-content">
+              </TableCell>
+       
+        </TableRow>
+        </TableHead>
+
+        <TableBody  className="table-content">
           {items.map((item) => (
-            <tr key={item.id} className="table-row">
-              <td className="table-data">{item.name}</td>
-              <td className="table-data">{item.lastName}</td>
-              <td className="table-data">{item.email}</td>
-              <td className="table-data">{item.gender}</td>
-              <td className="table-data">{item.birthday}</td>
-              <td className="table-data">{item.password}</td>
-              <td className="table-data">{item.updateAt}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+            <TableRow  key={item.id} >
+              <TableCell >{item.name}</TableCell>
+              <TableCell >{item.lastName}</TableCell>
+              <TableCell >{item.email}</TableCell>
+              <TableCell >{item.gender}</TableCell>
+              <TableCell >{item.birthday}</TableCell>
+              <TableCell >{item.password}</TableCell>
+              <TableCell >{item.updateAt}</TableCell>
+              <TableCell className="butDel"><DeleteIcon className='butDelete' onClick={ () => adminUserDelete(item._id)}/></TableCell>
+
+            
+            </TableRow>
+          ))};
+        </TableBody>
+        </Table>
+    </TableContainer>
+    </>
   );
 };

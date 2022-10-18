@@ -6,38 +6,30 @@
   box-sizing: border-box;
 }
 
-/* body {
-    padding: 24px;
-    font-family: 'Source Sans Pro', sans-serif;
-    margin: 0;
-} */
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.butDel{
+  border: 0;
+  background-color: #fff;
 }
+.butDelete{
+  color:rgb(0, 0, 0) !important;
+  transition: 0ms !important;
 
+}
+.butDelete
+:hover {
+  color:rgb(255, 0, 0) !important;
+  transition: 0ms !important;
+}
 thead th {
   text-align: left;
-  background-color: #000;
+  background-color: rgb(32, 10, 88);
+color: #fff !important;
 }
 
-thead button {
-  border: 0;
-  border-radius: none;
-  font-family: inherit;
-  font-weight: 700;
-  font-size: inherit;
-  padding: 0.5em;
-  margin-bottom: 1px;
-  background: none;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-}
 
 tbody tr {
-  background-color: #eee;
+  background-color: rgb(246, 246, 246);
 }
 
 tbody tr:hover {

@@ -1,5 +1,6 @@
 import { UsersTable } from "./AdminTable";
 import { useState, useEffect } from "react";
+import { TableContainer } from "@mui/material";
 
 export default function AdminView() {
   const [data, setData] = useState([]);
@@ -15,8 +16,8 @@ export default function AdminView() {
           },
         }
       );
-      const data = await response.json();
-      const users = data.users;
+      const result = await response.json();
+      const users = result.users;
       setData(users);
     };
 
@@ -24,8 +25,8 @@ export default function AdminView() {
   }, [token]);
 
   return (
-    <div>
+    <TableContainer >
       <UsersTable products={data} />
-    </div>
+    </TableContainer>
   );
 }
