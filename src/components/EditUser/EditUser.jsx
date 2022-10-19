@@ -82,7 +82,7 @@ const EditUser = () => {
           <Box
             sx={{
               my: 8,
-              mx: 4,
+              mx: 6,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -111,7 +111,8 @@ const EditUser = () => {
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value.toLowerCase())}
               ></TextField>
-
+< Grid container spacing={2} columns={12}>
+<Grid item xs={6}>
               <TextField
                 label="Name"
                 placeholder="ej: John"
@@ -119,15 +120,19 @@ const EditUser = () => {
                 onChange={(e) => setName(e.target.value)}
                 required
               ></TextField>
-
+</Grid> <Grid item xs={6}>
               <TextField
+
                 label="Last Name"
                 placeholder="ej: Smith"
                 id="lastName"
                 onChange={(e) => setLastName(e.target.value)}
                 required
               ></TextField>
-
+              </Grid>
+  </Grid>
+  <Grid container spacing={6} columns={12}>
+<Grid item xs={6}>
               <TextField
                 required
                 className="birthDate"
@@ -139,7 +144,8 @@ const EditUser = () => {
                   shrink: true,
                 }}
               />
-
+</Grid>
+<Grid item xs={6}>
               <FormControl className="radio">
                 <Typography>Gender</Typography>
                 <RadioGroup
@@ -178,7 +184,10 @@ const EditUser = () => {
                   />
                 </RadioGroup>
               </FormControl>
-
+</Grid>
+</Grid>
+< Grid container spacing={2} columns={12}>
+<Grid item xs={12}>
               <TextField
                 label="Old Password"
                 type="password"
@@ -188,7 +197,8 @@ const EditUser = () => {
                 required
                 fullWidth
               ></TextField>
-
+</Grid>
+<Grid item xs={12}>
               <TextField
                 label="New Password"
                 fullWidth
@@ -198,7 +208,9 @@ const EditUser = () => {
                 required
                 onChange={(e) => setNewPassword(e.target.value)}
               ></TextField>
-
+             
+</Grid>
+ <Grid item xs={12}>
               <TextField
                 label="Confirm New Password"
                 fullWidth
@@ -208,7 +220,8 @@ const EditUser = () => {
                 onChange={(e) => setConfirmNewPassword(e.target.value)}
                 required
               ></TextField>
-
+</Grid>
+</Grid>
               <Button className="registerButton" type="submit">
                 Edit User
               </Button>

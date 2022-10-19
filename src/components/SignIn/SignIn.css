@@ -11,14 +11,12 @@
 
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
-    margin: 1em 1em;
+    margin: 1em 1em !important;
 }
 .register{
-    padding: 1em 0em;
+    padding: 1em 0em !important;
 }
-.radio{
- margin: 1em 1em;
-}
+
 .label{
     margin: 1em 0em !important;
 }
@@ -31,10 +29,7 @@ width: 50% !important;
     width: 100% !important;
     display: flex;
 }
-.birthDate{
 
-    margin: 2em 0em !important;
-}
 .registerButton{
     margin: 2em 0em !important;
     background-color: rgb(192, 74, 255) !important;

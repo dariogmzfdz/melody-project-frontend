@@ -8,7 +8,7 @@ import './forgot.css';
 import axios from 'axios';
 export default function ForgotPassword() {
     const [user,setUser] = useState({
-        email: "",
+        email: "", 
       });
       const [error,setError] = useState();
       const [success,setSuccess] = useState();

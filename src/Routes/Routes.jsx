@@ -9,8 +9,11 @@ import EditUser from "../components/EditUser/EditUser";
 import Home from "../components/Home/Home";
 import AdminView from "../components/Account/AdminView/AdminView";
 import Profile from "../components/Profile/Profile";
+import ResetPassword from "../components/ResetPassWord/ResetPassword";
+import axios from "axios";
 
 export default function RouterApp() {
+
   return (
     <div>
       <Router>
@@ -25,6 +28,7 @@ export default function RouterApp() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/form" element={<FormPassword />} />
+            <Route path="/resetpassword/:token" element={<ResetPassword />} />
           </Routes>
         </AuthProvider>
       </Router>
