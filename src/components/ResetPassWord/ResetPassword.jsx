@@ -20,7 +20,7 @@ function ResetPassword() {
             };
 
             const data = await axios.put(
-                "http://localhost:3000/user",
+                "http://localhost:3000/password-reset",
                 {
                     newPassword: newPassword,
                   
@@ -32,9 +32,9 @@ function ResetPassword() {
             );
             console.log(data);
             navigate("/");
-        } catch (data) {
-            const { msg } = data.response.data;
-            console.log(msg);
+        } catch (error) {
+            
+            console.log(error);
         }
     };
     return (

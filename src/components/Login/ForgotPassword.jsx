@@ -3,7 +3,7 @@ import  { useState } from 'react'
 import { TextField, Typography } from '@mui/material';
 import {Button} from '@mui/material';
 import { Box } from '@mui/system';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './forgot.css';
 import axios from 'axios';
 export default function ForgotPassword() {
@@ -12,23 +12,24 @@ export default function ForgotPassword() {
       });
       const [error,setError] = useState();
       const [success,setSuccess] = useState();
-
+const navigate = useNavigate();
 const handleResetPassword = async (e) => {
         e.preventDefault();
-        axios({
-          method: "post",
-          url: "http://localhost:3000/password-reset",
-          data: user.email,
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-          .then(function (response) {
-            //handle success
-            console.log(response.data.msg);
-          })
-          .catch(function (error) {
+       try {
+        const data = await axios.post("http://localhost:3000/password-reset",{
+          email: user.email,
+},{
+  "Access-Control-Allow-Origin": "*",
+})
+.then(success => {
+  setSuccess(success.data.message)
+})
+
+
+} catch(error) {
             //handle error
             setError(error.response.data.msg);
-          });
+          };
         }
       const handleChange = ({ target: { value, name } }) =>{
         setUser({ ...user, [name]: value });
@@ -55,10 +56,9 @@ const handleResetPassword = async (e) => {
     autoComplete="email"
     autoFocus
     onChange={handleChange}
-    
-    // value={datos.email}
   />
   <Typography color='#ff0000'>{error}</Typography>
+  <Typography color='#02c660'>{success}</Typography>
   <Button
   type="submit"
   fullWidth
