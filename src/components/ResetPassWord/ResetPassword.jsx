@@ -23,7 +23,7 @@ function ResetPassword() {
       };
 
       const data = await axios.put(
-        "http://localhost:3000/password-reset",
+        "https://melody-music-stream-ten.vercel.app/password-reset",
         {
           password: newPassword,
         },
