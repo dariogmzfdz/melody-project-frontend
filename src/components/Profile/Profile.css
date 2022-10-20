@@ -10,3 +10,37 @@ display: inline-flex;
     margin: 0rem 1rem !important    ;
     background-color: rgb(229, 65, 65) !important;
 }
+
+.avatarAlign {
+    text-align: -webkit-center;
+}
+.clickRef{
+  display: flex !important;
+        flex-direction: column!important;
+        align-items: center!important;
+        justify-content: center!important;
+        height: 110px!important;
+        width: 110px !important;
+        text-align: center !important;
+}
+
+.uploadNone{
+    display: none !important;
+ 
+    
+}
+
+.clickRef2{
+     
+        height: 100%!important;
+        width: 100% !important;
+}
+.uploadedImage{
+    width: 100%!important;
+     height: 100%!important;  
+
+}
+.textClick{
+    font-size: 0.8rem !important;
+}
+

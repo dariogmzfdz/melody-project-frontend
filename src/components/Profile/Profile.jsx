@@ -11,15 +11,18 @@ import {
   TableRow,
   Typography,
   Table,
+  
+  
 } from "@mui/material";
 import AppBar from "../AppBar/AppBar";
 import './Profile.css';
 import axios from "axios";
+import AvatarUpload from "../AppBar/Avatar";
 
 function Profile() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("userToken");
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -55,7 +58,9 @@ function Profile() {
   catch (error){ 
     (console.log (error))
    }
-  }
+  };
+
+
   return (
     <div>
       <AppBar />
@@ -70,7 +75,10 @@ function Profile() {
             <Typography color="common.white" component="h1" variant="h5">
               User Information
             </Typography>
-            <TableBody>
+           
+<AvatarUpload/>
+            <TableBody> 
+             
               <TableRow className="user-name">
                 <TableCell>Name: </TableCell>
                 <TableCell>{data.name}</TableCell>

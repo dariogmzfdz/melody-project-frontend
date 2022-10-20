@@ -8,7 +8,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import image from "../../utils/img/logo.png";
 
 function UserAvatar() {
   //User Data with all information
@@ -40,7 +39,7 @@ function UserAvatar() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://melody-music-stream-ten.vercel.app/user",
+        "http://localhost:3000/user",
         {
           headers: {
             auth_token: token,
@@ -55,14 +54,20 @@ function UserAvatar() {
 
     fetchData().catch(console.error);
   }, [token]);
+ 
+  
+
+ 
 
   return (
     <>
+
       {/* MATERIAL UI */}
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar alt="Remy Sharp" src={image} />
+            <Avatar  />
+           
           </IconButton>
         </Tooltip>
         <Menu

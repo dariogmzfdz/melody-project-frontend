@@ -10,7 +10,7 @@ import Home from "../components/Home/Home";
 import AdminView from "../components/Account/AdminView/AdminView";
 import Profile from "../components/Profile/Profile";
 import ResetPassword from "../components/ResetPassWord/ResetPassword";
-import axios from "axios";
+import AvatarUpload from "../components/AppBar/Avatar";
 
 export default function RouterApp() {
 

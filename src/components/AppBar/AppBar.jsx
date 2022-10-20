@@ -12,9 +12,9 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import UserAvatar from "./UserAvatar";
-import logo from "../../utils/img/Melody.png";
+import logo from "../../utils/img/logo.png";
+import { Link } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -70,11 +70,11 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+             <Link to="/"> <MenuItem>
+                  <Typography textAlign="center">Home</Typography>
                 </MenuItem>
-              ))}
+                  </Link>
+            
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -95,15 +95,8 @@ const ResponsiveAppBar = () => {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+           
+          
           </Box>
           <UserAvatar />
         </Toolbar>
