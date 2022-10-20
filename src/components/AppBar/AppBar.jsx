@@ -39,8 +39,8 @@ const ResponsiveAppBar = () => {
     <AppBar position="static" sx={{ bgcolor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <img src={logo} atl="logo" className="logo" />
-
+        <Link to="/home">   <img src={logo} atl="logo" className="logo" />
+</Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -70,7 +70,8 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-             <Link to="/"> <MenuItem>
+             <Link to="/home"> 
+             <MenuItem>
                   <Typography textAlign="center">Home</Typography>
                 </MenuItem>
                   </Link>

@@ -16,18 +16,15 @@
   width: 200px;
   height: 200px; 
   border-radius: 10rem;
-  object-fit: cover;
+  object-fit: contain;
  
 }
-.profile input img {
-   border: 0;
-}
+
 .inputFile{
   color: transparent;
   margin-left: 8.5rem;
   margin-bottom: 1rem;
 }
 .inputFileNone{
-  
   display: none;
 }
