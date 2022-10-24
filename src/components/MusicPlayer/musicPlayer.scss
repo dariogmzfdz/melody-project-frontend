@@ -1,5 +1,10 @@
 .player_container
 {
+    position: fixed;
+    bottom: 20px;
+    left: 50px;
+    margin: 0 auto;
+    font-family: arial;
     width: 50%;
     padding: 1rem;
     border: 1px solid rgb(141, 141, 141);
@@ -8,18 +13,35 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    background-color: rgba(0, 0, 0, 0.301);
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.801);
 
     >*
     {
         padding: 0.3rem 0;
         color: rgb(202, 202, 202);
     }
-
+    .controlButtons{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        padding-left: 35px;
+        
+    }
+    .favouriteSong{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;        
+    }
     .title{
         font-size: inherit;
         color: white;
+        text-align: center;
+        margin-bottom: 0px;
+    }
+    svg.heart_btn_action{
+        height: 35px;
+        width: 35px;
     }
     .navigation{
         width: 100%;
@@ -46,6 +68,8 @@
         font-size: inherit;
         display: flex;
         align-items: center;
+        justify-content: center;
+        margin: 0 auto;
 
         .btn_action
         {

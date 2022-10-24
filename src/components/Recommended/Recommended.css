@@ -7,4 +7,5 @@
     background: #FFFFFF;
     border-radius: 0px 10px 0px 10px;
     text-align: center;
+    z-index: -1;
 }
