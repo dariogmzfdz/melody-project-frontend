@@ -1,126 +1,35 @@
 import React from "react";
 import "./Top.css";
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
+import SongImg from "../../assets/album-img.jpg";
+import PlayButton from "@mui/icons-material/PlayArrow";
+import HeartButton from "@mui/icons-material/Favorite";
 
 function Top() {
   const song = (
-    <Box
-      sx={{
-        flex: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginBottom: 5,
-        padding: 5,
-        color: "black",
-        background: "white",
-        borderRadius: "10px 0px 10px 0px",
-      }}
-    ></Box>
+    <div className="container-song">
+      <div className="cover-container">
+        <img src={SongImg} alt="song-img" />
+      </div>
+      <div className="info-container">
+        <span>Song Title</span>
+        <div className="contributors">
+          <p className="track-artist">Artist Name</p>
+        </div>
+      </div>
+      <p className="duration">00:00</p>
+      <PlayButton />
+      <HeartButton />
+    </div>
   );
   return (
-    <Container
-      sx={{
-        position: "absolute",
-        width: 315.96,
-        height: 254,
-        right: 30,
-        top: 120,
-        color: "white",
-      }}
-    >
+    <div className="top-songs-container">
       <h1>Top Songs</h1>
-      {song}
-      {song}
-      {song}
-      {song}
-      {song}
-      {song}
-    </Container>
-    /*     <div className="top-container">
-      <h1>Top Songs</h1>
-
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-        <div className="top-song">
-          <img
-            src=""
-            alt="song"
-          />
-            <h3>song name</h3>
-            <h4>artist name</h4>
-        </div>
-    </div> */
+      <section>{song}</section>
+      <section>{song}</section>
+      <section>{song}</section>
+      <section>{song}</section>
+      <section>{song}</section>
+    </div>
   );
 }
 

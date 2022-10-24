@@ -9,6 +9,7 @@ import EditUser from "../components/EditUser/EditUser";
 import Home from "../components/Home/Home";
 import AdminView from "../components/Account/AdminView/AdminView";
 import Profile from "../components/Profile/Profile";
+import Favorites from "../components/Favorites/Favorites";
 
 export default function RouterApp() {
   return (
@@ -18,6 +19,7 @@ export default function RouterApp() {
           <Routes>
             <Route path="/" element={<SignInSide />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminView />} />
             <Route path="/forgot" element={<ForgotPassword />} />

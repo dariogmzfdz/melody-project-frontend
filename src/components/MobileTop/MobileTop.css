@@ -1,0 +1,46 @@
+.top-bg {
+    position: absolute;
+    width: 400px;
+    height: 350px;
+    top: -32%;
+    border-radius: 0% 100% 70% 30% / 90% 84% 16% 10%;
+    background-color: #fff;
+    z-index: -1;
+}
+
+.top-info {
+    margin-left: 5%;
+    margin-bottom: 15%;
+    z-index: 1;
+    background: linear-gradient(180deg, #2B2C55 0%, #6667AE 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.top-favorites {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.top-favorites h1 {
+    margin-right: 5%;
+}
+
+.favorites-btn {
+    width: 35px;
+    height: 35px;
+    margin: 2%;
+    background: #6667AE;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.favorites-btn:hover {
+    background: #2B2C55;
+}
+
+.favorites-btn:active {
+    transform: scale(0.95);
+}
