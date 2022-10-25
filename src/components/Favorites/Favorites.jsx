@@ -10,6 +10,7 @@ import PlayButton from "@mui/icons-material/PlayArrow";
 import HeartButton from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+import convertDuration from "../../functions/ConvertDuration";
 
 function Favorites() {
   const [data, setData] = useState([]);
@@ -97,15 +98,6 @@ function Favorites() {
       </div>
     </div>
   ); */
-
-  const convertDuration = (duration) => {
-    let minutes = Math.floor(duration / 60);
-    let seconds = Math.floor(duration - minutes * 60);
-    if (seconds.toString().length === 1) {
-      seconds = `0${seconds}`;
-    }
-    return `${minutes}:${seconds}`;
-  };
 
   const searchBar = (
     <Search>
