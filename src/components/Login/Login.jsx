@@ -58,7 +58,7 @@ export default function SignInSide() {
     e.preventDefault();
     try {
       const result = await axios.post(
-        "https://https://melodystream.herokuapp.com/user/login",
+        "https://melodystream.herokuapp.com/user/login",
         {
           email: datos.email,
           password: datos.password,
