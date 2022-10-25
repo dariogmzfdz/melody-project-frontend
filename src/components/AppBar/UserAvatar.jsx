@@ -39,7 +39,7 @@ function UserAvatar() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "http://localhost:3000/user",
+        "https://melodystream.herokuapp.com/user",
         {
           headers: {
             auth_token: token,
@@ -57,7 +57,6 @@ function UserAvatar() {
  
   
 
- 
 
   return (
     <>
@@ -67,7 +66,7 @@ function UserAvatar() {
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
             <Avatar  />
-           
+          
           </IconButton>
         </Tooltip>
         <Menu

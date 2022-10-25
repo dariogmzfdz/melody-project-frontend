@@ -23,12 +23,11 @@ setImage(file.secure_url)
 console.log(file.secure_url)
 setLoading(false)
 }
-  
+
     return (
         <div className="profile">
-            {/* <input type="file"  onChange={submitImg} className='inputFile' /> */}
+            { <input type="file"  onChange={submitImg} className='inputFile' /> }
             {loading ? <h3>Loading images </h3> : (<img src={image} className='profileImg'/>)}
-            {image  ? <input  className='inputFileNone' /> : ( <input type="file"  onChange={submitImg} className='inputFile'/>)}
         </div>
   
     );

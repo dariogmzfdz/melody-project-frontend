@@ -30,6 +30,29 @@ const EditUser = () => {
 
   const token = localStorage.getItem("userToken");
   const navigate = useNavigate();
+  const [image, setImage] = useState('');
+  const [loading,setLoading] = useState(false)
+
+
+  const submitImg = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "images");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dgrk2p8p3/image/upload",{
+          method: "POST",
+          body:data,
+      }
+    )
+    const file= await res.json();
+    setImage(file.secure_url)
+    console.log(file.secure_url)
+    setLoading(false)
+    }
+
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
@@ -42,8 +65,9 @@ const EditUser = () => {
       };
 
       const data = await axios.put(
-        "https://melody-music-stream-ten.vercel.app/user",
+        "https://melodystream.herokuapp.com/user",
         {
+          avatar: image,
           name: name,
           lastName: lastName,
           email: email,
@@ -97,7 +121,10 @@ const EditUser = () => {
               <Typography component="h1" variant="h4">
                 Edit User
               </Typography>
-
+              <div className="profile">
+            { <input type="file"  onChange={submitImg} className='inputFile' /> }
+            {loading ? <h3>Loading images </h3> : (<img src={image} className='profileImg'/>)}
+        </div>
               <TextField
                 margin="normal"
                 required
