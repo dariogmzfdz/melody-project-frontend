@@ -22,11 +22,12 @@ import AvatarUpload from "../AppBar/Avatar";
 function Profile() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("userToken");
- 
+
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://melody-music-stream-ten.vercel.app/user",
+        "https://melodystream.herokuapp.com/user",
         {
           headers: {
             auth_token: token,
@@ -45,7 +46,7 @@ function Profile() {
   const deleteUser = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.delete("https://melody-music-stream-ten.vercel.app/user",
+      const data = await axios.delete("https://melodystream.herokuapp.com/user",
       {
         headers: {
           auth_token: token,
@@ -58,9 +59,11 @@ function Profile() {
   catch (error){ 
     (console.log (error))
    }
+
+
+ 
+
   };
-
-
   return (
     <div>
       <AppBar />
@@ -76,9 +79,11 @@ function Profile() {
               User Information
             </Typography>
            
-<AvatarUpload/>
             <TableBody> 
-             
+            <TableRow className="user-name">
+                <TableCell>Image: </TableCell>
+                <TableCell>{data.image}</TableCell>
+              </TableRow>
               <TableRow className="user-name">
                 <TableCell>Name: </TableCell>
                 <TableCell>{data.name}</TableCell>
