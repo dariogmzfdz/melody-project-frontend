@@ -11,6 +11,7 @@ import HeartButton from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
+import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
 
 function Favorites() {
   const [data, setData] = useState([]);
@@ -79,26 +80,6 @@ function Favorites() {
     fetchData().catch(console.error);
   }, []);
 
-  console.log(data);
-
-  /*   const song = (
-    <div className="container-song-favorites">
-      <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
-      </div>
-      <div className="info-container">
-        <span>{data.name}</span>
-        <div className="contributors">
-          <p className="track-artist">{data.artist}</p>
-        </div>
-      </div>
-      <div className="song-details">
-        <p className="duration">{data.duration}</p>
-        <HeartButton />
-      </div>
-    </div>
-  ); */
-
   const searchBar = (
     <Search>
       <SearchIconWrapper>
@@ -111,10 +92,63 @@ function Favorites() {
     </Search>
   );
 
+  const totalDuration = data.map((song) => song.duration);
+
   return (
     <>
       {isDesktop && (
         <>
+          <div className="container-right">
+            <header>
+              <section className="info">
+                <h6>My songs</h6>
+                <h1>Favorites</h1>
+                <div className="details">
+                  <p>{data.length} Songs</p>
+                  <p id="dot">&bull;</p>
+                  <p>{convertDurationPlaylist(totalDuration)}</p>
+                </div>
+              </section>
+            </header>
+            <table className="favorites-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th>Genre</th>
+                  <th id="duration-header">Duration</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((song, index) => (
+                  <tr key={song.id}>
+                    <td>{index + 1}</td>
+                    <td>
+                      <p>{song.name}</p>
+                    </td>
+                    <td>
+                      <p>{song.artist}</p>
+                    </td>
+                    <td>
+                      <p>{song.genere}</p>
+                    </td>
+                    <td className="duration-field">
+                      {convertDuration(song.duration)}
+                    </td>
+                    <td>
+                      <PlayButton />
+                    </td>
+                    <td>
+                      <HeartButton />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <SideMenu />
         </>
       )}

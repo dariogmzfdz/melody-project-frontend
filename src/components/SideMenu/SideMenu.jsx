@@ -22,7 +22,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useMediaQuery } from "react-responsive";
 
 const drawerWidth = 240;
-const drawerHeight = 600;
 
 function SideMenu() {
   const [value, setValue] = React.useState(0);
@@ -92,31 +91,12 @@ function SideMenu() {
       {isDesktop && (
         <>
           <Drawer
-            variant="temporary"
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-                height: drawerHeight,
-                top: 80,
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-          <Drawer
             variant="permanent"
             sx={{
               display: { xs: "none", sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                height: drawerHeight,
-                top: 80,
               },
             }}
             open

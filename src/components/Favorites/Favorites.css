@@ -1,3 +1,125 @@
+@import url('http://fonts.cdnfonts.com/css/montserrat');
+
+/********************* Desktop view *********************/
+
+.container-right {
+  grid-area: main;
+  padding: 0 40px;
+  margin-left: 16%;
+  font-family: 'Montserrat';
+}
+
+header {
+  display: flex;
+  margin-bottom: 50px;
+  max-height: 180px;
+  color: #fff;
+}
+
+header img {
+  width: 170px;
+  height: auto;
+  border-radius: 8px;
+}
+
+header .info {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+header .info h1 {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 80px;
+}
+
+header .info h6 {
+  margin-bottom: 0;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+header .info .tags-genres {
+  display: flex;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+header .info .tags-genres p {
+  padding: 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  background: rgb(246, 246, 246);
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.2s ease-out;
+}
+
+header .info .tags-genres p:hover {
+  transform: translate(3px, -5px);
+}
+
+header .info .details {
+  display: flex;
+}
+
+header .info p {
+  margin: 2px;
+  font-size: 0.9rem;
+}
+
+#dot {
+  margin: auto 8px;
+}
+
+.favorites-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: linear-gradient(153.34deg, rgba(0, 0, 0, 0.3) -52.04%, rgba(0, 0, 0, 0) 100%);
+  backdrop-filter: blur(21px);
+  color: #fff;
+}
+
+.favorites-table td {
+  position: relative;
+  height: 40px;
+  text-align: left;
+  padding: 0 30px;
+}
+
+.favorites-table td:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.favorites-table td p {
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.favorites-table th {
+  font-size: 1.2rem;
+  border: 0;
+  text-align: left;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  padding: 0 30px;
+}
+
+/********************* Mobile view *********************/
+
 .container-song-favorites {
   position: relative;
   display: flex;
