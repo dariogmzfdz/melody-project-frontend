@@ -9,7 +9,7 @@ export default function AdminView() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://melody-music-stream-ten.vercel.app/users",
+        "https://melodystream.herokuapp.com/users",
         {
           headers: {
             auth_token: token,

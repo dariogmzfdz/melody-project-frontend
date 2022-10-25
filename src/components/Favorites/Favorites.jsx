@@ -6,7 +6,6 @@ import { useMediaQuery } from "react-responsive";
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
 import SongImg from "../../assets/album-img.jpg";
-import PlayButton from "@mui/icons-material/PlayArrow";
 import HeartButton from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";

@@ -3,7 +3,6 @@ import { useMediaQuery } from "react-responsive";
 import Features from "../Features/Features";
 import MyPlaylists from "../MyPlaylists/MyPlaylists";
 import Recommended from "../Recommended/Recommended";
-import SearchBar from "../SearchBar/SearchBar";
 import ResponsiveAppBar from "../AppBar/AppBar";
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";

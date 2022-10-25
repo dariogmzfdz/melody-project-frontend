@@ -17,7 +17,6 @@ import {
 import AppBar from "../AppBar/AppBar";
 import './Profile.css';
 import axios from "axios";
-import AvatarUpload from "../AppBar/Avatar";
 
 function Profile() {
   const [data, setData] = useState([]);
@@ -52,7 +51,8 @@ function Profile() {
           auth_token: token,
         },
       }
-    ); const response = await data.json();
+    ); 
+    const response = await data.json();
 
   } 
 

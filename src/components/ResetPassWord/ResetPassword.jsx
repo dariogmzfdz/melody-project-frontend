@@ -23,7 +23,7 @@ function ResetPassword() {
       };
 
       const data = await axios.put(
-        "https://melody-music-stream-ten.vercel.app/password-reset",
+        "https://melodystream.herokuapp.com/password-reset",
         {
           password: newPassword,
         },

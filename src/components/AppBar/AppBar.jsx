@@ -8,7 +8,6 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import UserAvatar from "./UserAvatar";
@@ -39,7 +38,7 @@ const ResponsiveAppBar = () => {
     <AppBar position="static" sx={{ bgcolor: "black" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <Link to="/home">   <img src={logo} atl="logo" className="logo" />
+        <Link to="/home">   <img src={logo} alt="logo" className="logo" />
 </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

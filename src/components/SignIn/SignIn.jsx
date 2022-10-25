@@ -2,13 +2,13 @@ import axios from "axios";
 import React from "react";
 import "./SignIn.css";
 import { useState } from "react";
-import { Avatar, Box, Button, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// import { toast } from "react-toastify";
+
 
 const SignIn = () => {
 
-  const [userData, setUserData] = useState("");
+
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   let [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ const SignIn = () => {
     }
 
     try {
-      const data = await axios.post("https://melody-music-stream-ten.vercel.app/register",
+      const data = await axios.post("https://melodystream.herokuapp.com/register",
         {
           name: name,
           lastName: lastName,
@@ -40,7 +40,7 @@ const SignIn = () => {
       console.log(error);
     }
   };
- 
+
   return (
     <div>
 
@@ -65,7 +65,7 @@ const SignIn = () => {
           >
             <Box className="formSign" onSubmit={submitHandler} component="form" sx={{ mt: 1 }} >
               <Typography component="h1" variant="h4" className="register" >Register</Typography>
-              
+
               <TextField
                 margin="normal"
                 required

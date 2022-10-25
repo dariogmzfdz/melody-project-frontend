@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import {BsFillSkipStartCircleFill, BsFillPlayCircleFill, BsFillSkipEndCircleFill, BsFillPauseCircleFill, BsFillHeartFill, BsHeart} from 'react-icons/bs'
 import './musicPlayer.scss';
 
@@ -22,7 +22,7 @@ const MusicPlayer = ({audioElem, isPlaying, setIsPlaying, songs, currentSong, se
 
     const skipBack = () => 
     {
-      const index = songs.findIndex(x=>x.title== currentSong)
+      const index = songs.findIndex(x=>x.title === currentSong)
       if (index = 0){
         setCurrentSong(songs[songs.length-1])
       }

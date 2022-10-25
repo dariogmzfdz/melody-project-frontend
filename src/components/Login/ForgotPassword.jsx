@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TextField, Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import { Box } from "@mui/system";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./forgot.css";
 import axios from "axios";
 export default function ForgotPassword() {
@@ -11,13 +11,12 @@ export default function ForgotPassword() {
   });
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
-  const navigate = useNavigate();
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
       const data = await axios
         .post(
-          "https://melody-music-stream-ten.vercel.app/password-reset",
+          "https://melodystream.herokuapp.com/password-reset",
           {
             email: user.email,
           },
