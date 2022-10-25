@@ -78,7 +78,7 @@ const EditUser = () => {
         },
         {
           headers,
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": "https://melodystream.herokuapp.com/user",
         }
       );
       console.log(birthday);
