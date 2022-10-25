@@ -11,6 +11,7 @@ import AdminView from "../components/Account/AdminView/AdminView";
 import Profile from "../components/Profile/Profile";
 import ResetPassword from "../components/ResetPassWord/ResetPassword";
 import AvatarUpload from "../components/AppBar/Avatar";
+import Favorites from "../components/Favorites/Favorites";
 
 export default function RouterApp() {
 
@@ -21,6 +22,7 @@ export default function RouterApp() {
           <Routes>
             <Route path="/" element={<SignInSide />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/favorites" element={<Favorites />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminView />} />
             <Route path="/forgot" element={<ForgotPassword />} />

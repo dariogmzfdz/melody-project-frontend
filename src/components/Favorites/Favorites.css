@@ -1,0 +1,46 @@
+.container-song-favorites {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 95%;
+  height: 60px;
+  border-radius: 8px;
+  margin: 10px;
+  background: #fff;
+}
+
+.container-song-favorites .cover-container {
+  width: 40px;
+  height: 40px;
+  margin: 0 20px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.container-song-favorites .cover-container img {
+  width: 100%;
+  height: auto;
+}
+
+.container-song-favorites .info-container {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+}
+
+.container-song-favorites .info-container span {
+  font-weight: 700;
+}
+
+.container-song-favorites .info-container .contributors .track-artist {
+  color: #444444;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.song-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

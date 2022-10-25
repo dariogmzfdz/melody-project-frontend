@@ -1,0 +1,30 @@
+.header-carrousel {
+    width: 100%;
+    display: flex;
+    margin: 2%;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.header-carrousel h1 {
+    margin: 0;
+}
+
+.arrow {
+    margin: 0 10px;
+    font-size: 1.5rem;
+    transition: all 0.2s ease-out;
+    z-index: 999;
+}
+
+.arrow:hover {
+    cursor: pointer;
+    color: rgb(132, 90, 211);
+}
+
+.items-slider {
+    width: fit-content;
+    display: flex;
+    transition: transform 0.2s ease-out;
+}
