@@ -78,7 +78,7 @@ const EditUser = () => {
         },
         {
           headers,
-          "Access-Control-Allow-Origin": "https://melody-project-frontend.vercel.app/user",
+          "Access-Control-Allow-Origin": "*",
         }
       );
       console.log(birthday);
