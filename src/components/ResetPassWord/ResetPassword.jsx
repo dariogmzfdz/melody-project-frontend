@@ -23,7 +23,7 @@ function ResetPassword() {
       };
 
       const data = await axios.put(
-        "https://melodystream.herokuapp.com/password-reset",
+        "https://melodystream.herokuapp.com/user/password-reset",
         {
           password: newPassword,
         },

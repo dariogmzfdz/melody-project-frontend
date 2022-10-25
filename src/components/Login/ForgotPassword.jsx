@@ -16,7 +16,7 @@ export default function ForgotPassword() {
     try {
       const data = await axios
         .post(
-          "https://melodystream.herokuapp.com/password-reset",
+          "https://melodystream.herokuapp.com/user/password-reset",
           {
             email: user.email,
           },
