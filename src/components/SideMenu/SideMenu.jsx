@@ -79,11 +79,9 @@ function SideMenu() {
           <BottomNavigationAction label="Home" icon={<HomeIcon />} />
         </Link>
         <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-        <BottomNavigationAction
-          label="Favorites"
-          icon={<FavoriteIcon />}
-          href="/favorites"
-        />
+        <Link to="/favorites">
+          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        </Link>
         <BottomNavigationAction label="Account" icon={<AccountCircleIcon />} />
       </BottomNavigation>
     </Box>

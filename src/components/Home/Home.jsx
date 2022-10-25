@@ -30,13 +30,6 @@ function Home() {
 
   return (
     <>
-      <ResponsiveAppBar />
-      <SideMenu />
-      <MyPlaylists />
-      <Features />
-      <Recommended />
-      <Top />
-      <Player />
       {isDesktop && (
         <>
           <ResponsiveAppBar />
@@ -44,6 +37,7 @@ function Home() {
           <MyPlaylists />
           <Features />
           <Recommended />
+          <Player />
         </>
       )}
       {isPhone && (

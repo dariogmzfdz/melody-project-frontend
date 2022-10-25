@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import "./Favorites.css";
 import { styled, alpha } from "@mui/material/styles";
 import { useMediaQuery } from "react-responsive";
@@ -11,6 +12,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 
 function Favorites() {
+  const [data, setData] = useState([]);
+  /*   const token = localStorage.getItem("userToken"); */
+
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
   });
@@ -61,23 +65,47 @@ function Favorites() {
     },
   }));
 
-  const song = (
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://melodystream.herokuapp.com/song/all-songs"
+      );
+      const result = await response.json();
+      const data = result.songs;
+      setData(data);
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+
+  console.log(data);
+
+  /*   const song = (
     <div className="container-song-favorites">
       <div className="cover-container">
         <img src={SongImg} alt="song-img" />
       </div>
       <div className="info-container">
-        <span>Song Title</span>
+        <span>{data.name}</span>
         <div className="contributors">
-          <p className="track-artist">Artist Name</p>
+          <p className="track-artist">{data.artist}</p>
         </div>
       </div>
       <div className="song-details">
-        <p className="duration">00:00</p>
+        <p className="duration">{data.duration}</p>
         <HeartButton />
       </div>
     </div>
-  );
+  ); */
+
+  const convertDuration = (duration) => {
+    let minutes = Math.floor(duration / 60);
+    let seconds = Math.floor(duration - minutes * 60);
+    if (seconds.toString().length === 1) {
+      seconds = `0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  };
 
   const searchBar = (
     <Search>
@@ -103,7 +131,23 @@ function Favorites() {
         <>
           <MobileTop />
           {searchBar}
-          {song}
+          {data.map((song) => (
+            <div key={song._id} className="container-song-favorites">
+              <div className="cover-container">
+                <img src={SongImg} alt="song-img" />
+              </div>
+              <div className="info-container">
+                <span>{song.name}</span>
+                <div className="contributors">
+                  <p className="track-artist">{song.artist}</p>
+                </div>
+              </div>
+              <div className="song-details">
+                <p className="duration">{convertDuration(song.duration)}</p>
+                <HeartButton />
+              </div>
+            </div>
+          ))}
           <SideMenu />
         </>
       )}
