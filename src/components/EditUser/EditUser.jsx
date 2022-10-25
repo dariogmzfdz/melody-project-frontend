@@ -67,7 +67,7 @@ const EditUser = () => {
       const data = await axios.put(
         "https://melodystream.herokuapp.com/user",
         {
-        avatar:image,
+        
           name: name,
           lastName: lastName,
           email: email,
@@ -75,6 +75,7 @@ const EditUser = () => {
           oldPassword: oldPassword,
           birthday: birthday,
           gender: gender,
+          avatar:image,
         },
         {
           headers,
@@ -123,7 +124,7 @@ const EditUser = () => {
               </Typography>
               <div className="profile">
             { <input type="file"  onChange={submitImg} className='inputFile' /> }
-            {loading ? <h3>Loading images </h3> : (<img src={image} className='profileImg'/>)}
+            {loading ? <h3>Loading images </h3> : (<img src={image} alt="userAvatar" className='profileImg'/>)}
         </div>
               <TextField
                 margin="normal"
