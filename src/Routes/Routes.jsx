@@ -12,6 +12,7 @@ import Profile from "../components/Profile/Profile";
 import ResetPassword from "../components/ResetPassWord/ResetPassword";
 import AvatarUpload from "../components/AppBar/Avatar";
 import Favorites from "../components/Favorites/Favorites";
+import Search from "../components/SearchBar/SearchBar";
 
 export default function RouterApp() {
 
@@ -29,7 +30,7 @@ export default function RouterApp() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
-            <Route path="/form" element={<FormPassword />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
           </Routes>
         </AuthProvider>

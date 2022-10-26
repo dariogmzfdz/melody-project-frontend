@@ -93,12 +93,13 @@ function Favorites() {
 
     fetchData().catch(console.error);
   }, []);
-  const songHandler = () => {
-    const Track = [...data];
-    localStorage.setItem('Track', JSON.stringify(Track));
-    console.log(Track);
+  const songHandler = (songId,songUrl,songTitle,songArtist,songDuration,songGenre) => {
+    //  new Track = (songUrl,songTitle,songArtist,songDuration,songGenre)
+     const Track = [{songId,songUrl,songTitle,songArtist,songDuration,songGenre}];
+     localStorage.setItem('Track', JSON.stringify(Track));
+    
   };
-  console.log(data);
+  
   
   const searchBar = (
     <Search>
@@ -144,7 +145,7 @@ function Favorites() {
               </thead>
               <tbody>
                 {data.map((song, index) => (
-                  <tr key={song.id}>
+                  <tr key={song._id}>
                     <td>{index + 1}</td>
                     <td>
                       <p>{song.title}</p>
@@ -159,7 +160,7 @@ function Favorites() {
                       {convertDuration(song.duration)}
                     </td>
                     <td>
-                      <PlayButton onClick={songHandler} />
+                      <PlayButton onClick={() => songHandler(song._id,song.url,song.title,song.artist,song.duration,song.genre)}  />
                     </td>
                     <td>
                       <HeartButton />
