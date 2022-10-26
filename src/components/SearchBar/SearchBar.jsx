@@ -1,29 +1,42 @@
 import { Clear, SearchRounded } from '@mui/icons-material';
 import { CircularProgress, IconButton } from '@mui/material';
 import axios from 'axios';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import  './SearchBar.css'
 
 const Search = () => {
-	const [search, setSearch] = useState("");
-	const [results, setResults] = useState({});
-	const [isFetching, setIsFetching] = useState(false);
+	const [search, setSearch] = useState({
+    query: '',
+    list: []
+  });
+	const [data, setData] = useState({});
+  
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch(
+  //       "https://melodystream.herokuapp.com/song/all-songs"
+  //     );
+  //     const result = await response.json();
+  //     console.log(result.songs);
+  //     setData(result.songs);
+  //   };
 
-	const handleSearch = async ({ currentTarget: input }) => {
-		setSearch(input.value);
-		setResults({});
-		try {
-			setIsFetching(true);
-			const url = "https://melodystream.herokuapp.com/all-songs" + `/${input.value}`;
-			const { data } = await axios.get(url);
-			setResults(data);
-			setIsFetching(false);
-		} catch (error) {
-			console.log(error);
-			setIsFetching(false);
-		}
-	};
+  //   fetchData().catch(console.error);
+  // }, []);
 
+
+	const handleSearch = async (e) => {
+ 
+    const results = data.filter(result => {
+      if (e.target.value === "") return result
+      return result.title.toLowerCase().includes(e.target.value.toLowerCase())
+  })
+setSearch({
+  query:e.target.value,
+  list:results
+})
+  }
+ 
 	return (
 		<div className="container">
 			<div className="search_input_container">
@@ -40,29 +53,29 @@ const Search = () => {
 					<Clear />
 				</IconButton>
 			</div>
-			{isFetching && (
+			
 				<div className="progress_container">
 					<CircularProgress  />
 				</div>
-			)}
-			{Object.keys(results).length !== 0 && (
+			
+	
 				<div className="results_container">
-					{results.songs.length !== 0 && (
+					
 						<div className="songs_container">
-							{results.songs.map((song) => (
-								<Fragment key={song._id} title={song.url}>
-								<h2 song={song}>hol</h2>
+						
+								<Fragment >
+							
 								</Fragment>
-							))}
+						
 						</div>
-					)}
-					{results.playlists.length !== 0 && (
+				
+			
 						<div className="playlists_container">
 						
 						</div>
-					)}
+				
 				</div>
-			)}
+			
 		</div>
 	);
 };
