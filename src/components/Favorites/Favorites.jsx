@@ -12,6 +12,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
+import MusicPlayer from "../MusicPlayer/MusicPlayer";
 
 function Favorites() {
   const [data, setData] = useState([]);
@@ -80,6 +81,25 @@ function Favorites() {
     },
   }));
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://melodystream.herokuapp.com/song/all-songs"
+      );
+      const result = await response.json();
+      const data = result.songs;
+      setData(data);
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+  const songHandler = () => {
+    const Track = [...data];
+    localStorage.setItem('Track', JSON.stringify(Track));
+    console.log(Track);
+  };
+  console.log(data);
+  
   const searchBar = (
     <Search>
       <SearchIconWrapper>
@@ -139,7 +159,7 @@ function Favorites() {
                       {convertDuration(song.duration)}
                     </td>
                     <td>
-                      <PlayButton />
+                      <PlayButton onClick={songHandler} />
                     </td>
                     <td>
                       <HeartButton />
@@ -150,6 +170,7 @@ function Favorites() {
             </table>
           </div>
           <SideMenu />
+          <MusicPlayer />
         </>
       )}
 
@@ -177,6 +198,7 @@ function Favorites() {
           <SideMenu />
         </>
       )}
+      <MusicPlayer />
     </>
   );
 }

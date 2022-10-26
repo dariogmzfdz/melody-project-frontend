@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "react-fontawesome": "^1.7.1",
     "react-icons": "^4.6.0",
+    "react-material-music-player": "^1.1.9",
     "react-modal": "^3.15.1",
     "react-redux": "^8.0.4",
     "react-responsive": "^9.0.0",
