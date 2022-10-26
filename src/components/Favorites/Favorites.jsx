@@ -127,13 +127,13 @@ function Favorites() {
                   <tr key={song.id}>
                     <td>{index + 1}</td>
                     <td>
-                      <p>{song.name}</p>
+                      <p>{song.title}</p>
                     </td>
                     <td>
                       <p>{song.artist}</p>
                     </td>
                     <td>
-                      <p>{song.genere}</p>
+                      <p>{song.genre}</p>
                     </td>
                     <td className="duration-field">
                       {convertDuration(song.duration)}

@@ -1,13 +1,15 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
+import Features from "../Features/Features";
+import MyPlaylists from "../MyPlaylists/MyPlaylists";
+import Recommended from "../Recommended/Recommended";
 import SearchBar from "../SearchBar/SearchBar";
 import ResponsiveAppBar from "../AppBar/AppBar";
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";
-import Player from "../MusicPlayer/Player";
+import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import AlbumCarrousel from "../Albums/AlbumCarrousel";
 import MobileTop from "../MobileTop/MobileTop";
-import HomeHeader from "./HomeHeader/HomeHeader";
 
 function Home() {
   const isDesktop = useMediaQuery({
@@ -30,12 +32,12 @@ function Home() {
     <>
       {isDesktop && (
         <>
-          {/* <ResponsiveAppBar /> */}
-          {<SideMenu />}
-          <HomeHeader />
-          <AlbumCarrousel />
-          <Top />
-          {/* <Player /> */}
+          <ResponsiveAppBar />
+          <SideMenu />
+          <MyPlaylists />
+          <Features />
+          <Recommended />
+          <MusicPlayer />
         </>
       )}
       {isPhone && (
@@ -44,6 +46,8 @@ function Home() {
           <AlbumCarrousel />
           <Top />
           <SideMenu />
+          <MusicPlayer />
+
         </>
       )}
     </>
