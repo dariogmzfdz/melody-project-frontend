@@ -39,15 +39,32 @@ function SideMenu() {
       <Toolbar />
       <Divider />
       <List>
-        {["Home", "Albums", "Playlists", "Labels"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {["Home", "Albums", "Playlists", "Favorites"].map((text, index) => (
+          <Link
+            to={
+              text === "Home"
+                ? "/home"
+                : text === "Favorites"
+                ? "/favorites"
+                : text === "Favorites"
+                ? "/favorites"
+                : text === "Playlists"
+                ? "/playlists"
+                : text === "Albums"
+                ? "/albums"
+                : ""
+            }
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />

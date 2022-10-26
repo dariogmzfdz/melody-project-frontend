@@ -14,6 +14,16 @@ const albums = [
   <AlbumCard />,
   <AlbumCard />,
   <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
+  <AlbumCard />,
 ];
 
 class AlbumCarrousel extends Component {
@@ -47,7 +57,31 @@ class AlbumCarrousel extends Component {
   render() {
     return (
       <>
-        <div>
+        <div className="carrousel-container">
+          <div className="header-carrousel">
+            <h1>For you</h1>
+            <div>
+              <FontAwesomeIcon
+                icon={faChevronLeft}
+                className="arrow"
+                onClick={this.handleLeft}
+              />
+              <FontAwesomeIcon
+                icon={faChevronRight}
+                className="arrow"
+                onClick={this.handleRight.bind(this, albums.length)}
+              />
+            </div>
+          </div>
+          <section>
+            <div className="slider">
+              <div className="items-slider" id="carousel-top-albums">
+                {albums}
+              </div>
+            </div>
+          </section>
+        </div>
+        <div className="carrousel-container">
           <div className="header-carrousel">
             <h1>Trending Albums</h1>
             <div>

@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     margin: 2%;
+    padding-right: 2%;
     justify-content: space-between;
     align-items: center;
     color: #fff;
@@ -27,4 +28,12 @@
     width: fit-content;
     display: flex;
     transition: transform 0.2s ease-out;
+}
+
+@media (min-width: 1200px) {
+    .carrousel-container {
+        width: 50%;
+        margin-left: 20%;
+        overflow-x: hidden;
+    }
 }

@@ -51,6 +51,15 @@
     color: #444444;
 }
 
+@media (min-width: 1200px) {
+    .top-songs-container {
+        width: 25%;
+        margin-left: 74%;
+        margin-top: -35%;
+        overflow-x: hidden;
+    }
+}
+
 @media (max-width: 432px) {
     .container-song .duration {
         display: none;

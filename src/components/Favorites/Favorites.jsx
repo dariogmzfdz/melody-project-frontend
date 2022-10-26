@@ -17,6 +17,19 @@ function Favorites() {
   const [data, setData] = useState([]);
   /*   const token = localStorage.getItem("userToken"); */
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://melodystream.herokuapp.com/song/all-songs"
+      );
+      const result = await response.json();
+      const data = result.songs;
+      setData(data);
+    };
+
+    fetchData().catch(console.error);
+  }, []);
+
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
   });
@@ -66,19 +79,6 @@ function Favorites() {
       },
     },
   }));
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://melodystream.herokuapp.com/song/all-songs"
-      );
-      const result = await response.json();
-      const data = result.songs;
-      setData(data);
-    };
-
-    fetchData().catch(console.error);
-  }, []);
 
   const searchBar = (
     <Search>
