@@ -1,7 +1,7 @@
 import React from "react";
-import { Fragment,useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Favorites.css";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { useMediaQuery } from "react-responsive";
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
@@ -139,7 +139,9 @@ console.log("Track: ",track)
     <>
       {isDesktop && (
         <>
+
     <div className="container">
+      
 			<div className="search_input_container">
 				<IconButton onClick={getTrack}>
 					<SearchRounded />
@@ -155,11 +157,8 @@ console.log("Track: ",track)
 					<Clear />
 				</IconButton>
 			</div>
-			
-				<div className="progress_container">
-					<CircularProgress  />
-				</div>
-			
+
+
 	
 			
 			
@@ -189,7 +188,31 @@ console.log("Track: ",track)
                   <th></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody >
+                {track && 
+                 <tr key={track._id} style={{backgroundColor:'#764daf'}}>
+                  <td></td>
+                    <td>
+                      <p>{track.title}</p>
+                    </td>
+                    <td>
+                      <p>{track.artist}</p>
+                    </td>
+                    <td>
+                      <p>{track.genre}</p>
+                    </td>
+                    <td className="duration-field">
+                      {convertDuration(track.duration)}
+                    </td>
+                    <td>
+                      <PlayButton onClick={() => songHandler(track._id,track.url,track.title,track.artist,track.duration,track.genre)}  />
+                    </td>
+                    <td>
+                      <HeartButton />
+                    </td>
+                  </tr>
+                
+                }
                 {data.map((song, index) => (
                   <tr key={song._id}>
                     <td>{index + 1}</td>
