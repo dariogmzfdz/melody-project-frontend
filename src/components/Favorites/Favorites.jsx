@@ -6,12 +6,14 @@ import { useMediaQuery } from "react-responsive";
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
 import SongImg from "../../assets/album-img.jpg";
-import PlayButton from "@mui/icons-material/PlayArrow";
 import HeartButton from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
+import { IconButton } from "@mui/material";
+import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
+import PlayButton from "../Buttons/PlayButton";
 
 function Favorites() {
   const [data, setData] = useState([]);
@@ -98,6 +100,7 @@ function Favorites() {
     <>
       {isDesktop && (
         <>
+          <SideMenu />
           <div className="container-right">
             <header>
               <section className="info">
@@ -124,32 +127,36 @@ function Favorites() {
               </thead>
               <tbody>
                 {data.map((song, index) => (
-                  <tr key={song.id}>
+                  <tr key={song._id}>
                     <td>{index + 1}</td>
                     <td>
-                      <p>{song.name}</p>
+                      <p>{song.title}</p>
                     </td>
                     <td>
                       <p>{song.artist}</p>
                     </td>
                     <td>
-                      <p>{song.genere}</p>
+                      <p>{song.genre}</p>
                     </td>
                     <td className="duration-field">
                       {convertDuration(song.duration)}
                     </td>
                     <td>
-                      <PlayButton />
+                      <IconButton>
+                        <PlayButton song={song} />
+                      </IconButton>
                     </td>
                     <td>
-                      <HeartButton />
+                      <IconButton>
+                        <HeartButton sx={{ color: "white" }} />
+                      </IconButton>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-          <SideMenu />
+          <MaterialPlayer />
         </>
       )}
 
@@ -163,7 +170,7 @@ function Favorites() {
                 <img src={SongImg} alt="song-img" />
               </div>
               <div className="info-container">
-                <span>{song.name}</span>
+                <span>{song.title}</span>
                 <div className="contributors">
                   <p className="track-artist">{song.artist}</p>
                 </div>

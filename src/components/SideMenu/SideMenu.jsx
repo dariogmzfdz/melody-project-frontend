@@ -41,6 +41,7 @@ function SideMenu() {
       <List>
         {["Home", "Albums", "Playlists", "Favorites"].map((text, index) => (
           <Link
+            key={index + 1}
             to={
               text === "Home"
                 ? "/home"

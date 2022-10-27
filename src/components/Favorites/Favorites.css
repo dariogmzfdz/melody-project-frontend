@@ -97,10 +97,6 @@ header .info p {
   padding: 0 30px;
 }
 
-.favorites-table td:hover {
-  background: rgba(0, 0, 0, 0.3);
-}
-
 .favorites-table td p {
   white-space: nowrap;
   max-width: 200px;

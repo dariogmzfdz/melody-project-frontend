@@ -4,7 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import ResponsiveAppBar from "../AppBar/AppBar";
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";
-import Player from "../MusicPlayer/Player";
+import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
 import AlbumCarrousel from "../Albums/AlbumCarrousel";
 import MobileTop from "../MobileTop/MobileTop";
 import HomeHeader from "./HomeHeader/HomeHeader";
@@ -35,6 +35,7 @@ function Home() {
           <HomeHeader />
           <AlbumCarrousel />
           <Top />
+          <MaterialPlayer />
           {/* <Player /> */}
         </>
       )}
