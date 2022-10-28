@@ -1,6 +1,5 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import MyPlaylists from "../MyPlaylists/MyPlaylists";
 import ResponsiveAppBar from "../AppBar/AppBar";
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";
@@ -31,9 +30,6 @@ function Home() {
         <>
           <ResponsiveAppBar />
           <SideMenu />
-          <MyPlaylists />
-  
-  
         </>
       )}
       {isPhone && (
@@ -43,7 +39,6 @@ function Home() {
           <Top />
           <SideMenu />
           <MusicPlayer />
-
         </>
       )}
     </>
