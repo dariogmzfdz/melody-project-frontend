@@ -15,10 +15,10 @@ import PlayButton from "../Buttons/PlayButton";
 import { CircularProgress, IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import { FaRegHeart, FaHeart } from "react-icons/fa"
+import axios from "axios";
 function Favorites() {
   const [data, setData] = useState([]);
-  /*   const token = localStorage.getItem("userToken"); */
-
+   const token = localStorage.getItem("userToken"); 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -83,7 +83,7 @@ function Favorites() {
       },
     },
   }));
-  const [favourite, setfavourite] = useState([]);
+  const [favourite, setFavourite] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -144,14 +144,38 @@ function Favorites() {
   //---- SEARCH BAR  ---> END
   
   const changeFavourite = (id) => {
+    setFavourite([id]);
     data.forEach((song) => {
       if (song._id == id) {
         song.favourite = !song.favourite;
-        setfavourite([...song._id]);
       }
-      console.log(song);
     });
-  };
+    console.log(favourite);
+    putLikedSong(favourite);
+  }
+
+  const putLikedSong = async (favourite) => {
+  try { 
+    const data = await axios.put(
+      `https://melodystream.herokuapp.com/song/like/${favourite}`,
+      
+      {          
+        headers: {
+          auth_token: token,
+        }
+      }
+      )
+         const response = await data.json();
+
+      } 
+      catch (data) {
+        const { msg } = data.response.data;
+        console.log(msg);
+    
+
+      }    } 
+       
+
   
   return (
     <>
@@ -313,6 +337,7 @@ function Favorites() {
       )}
     </>
   );
-}
+  };
+
 
 export default Favorites;
