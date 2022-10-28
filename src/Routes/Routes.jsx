@@ -13,7 +13,6 @@ import ResetPassword from "../components/ResetPassWord/ResetPassword";
 import AvatarUpload from "../components/AppBar/Avatar";
 import Favorites from "../components/Favorites/Favorites";
 import Search from "../components/SearchBar/SearchBar";
-import PlaylistModel from "../components/MyPlaylists/CreatePlaylist";
 
 export default function RouterApp() {
 
@@ -32,7 +31,6 @@ export default function RouterApp() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/playlistmodel" element={<PlaylistModel />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
           </Routes>
         </AuthProvider>

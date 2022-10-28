@@ -10,13 +10,11 @@ import HeartButton from "@mui/icons-material/Favorite";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
-import { IconButton } from "@mui/material";
 import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
 import PlayButton from "../Buttons/PlayButton";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import { CircularProgress, IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
-
+import { FaRegHeart, FaHeart } from "react-icons/fa"
 function Favorites() {
   const [data, setData] = useState([]);
   /*   const token = localStorage.getItem("userToken"); */
@@ -41,6 +39,8 @@ function Favorites() {
   const isPhone = useMediaQuery({
     query: "(max-width: 450px)",
   });
+
+
 
   // const Search = styled("div")(({ theme }) => ({
   //   position: "relative",
@@ -83,7 +83,7 @@ function Favorites() {
       },
     },
   }));
-
+  const [favourite, setfavourite] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -138,10 +138,21 @@ function Favorites() {
     setInputTrack("");
   }
 
-  console.log("input Title: ", inputTrack);
-  console.log("Track: ", track);
-
+  // console.log("input Title: ", inputTrack);
+  // console.log("Track: ", track);
+  
   //---- SEARCH BAR  ---> END
+  
+  const changeFavourite = (id) => {
+    data.forEach((song) => {
+      if (song._id == id) {
+        song.favourite = !song.favourite;
+        setfavourite([...song._id]);
+      }
+      console.log(song);
+    });
+  };
+  
   return (
     <>
       {isDesktop && (
@@ -241,9 +252,7 @@ function Favorites() {
                       {convertDuration(song.duration)}
                     </td>
                     <td>
-                      <IconButton>
-                        <PlayButton song={song} />
-                      </IconButton>
+
                       <PlayButton
                         onClick={() =>
                           songHandler(
@@ -257,10 +266,16 @@ function Favorites() {
                         }
                       />
                     </td>
-                    <td>
-                      <IconButton>
-                        <HeartButton sx={{ color: "white" }} />
-                      </IconButton>
+                    <td  onClick={() => changeFavourite(song._id)}>
+                    {song?.favourite ? (
+                        <i>
+                          <FaHeart />
+                        </i>
+                      ) : (
+                        <i>
+                          <FaRegHeart />
+                        </i>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -269,7 +284,6 @@ function Favorites() {
           </div>
           <MaterialPlayer />
           <SideMenu />
-          <MusicPlayer />
         </>
       )}
 
@@ -297,7 +311,6 @@ function Favorites() {
           <SideMenu />
         </>
       )}
-      <MusicPlayer />
     </>
   );
 }
