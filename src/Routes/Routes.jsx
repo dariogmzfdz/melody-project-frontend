@@ -3,7 +3,6 @@ import { AuthProvider } from "../hooks/useFirebase";
 import SignInSide from "../components/Login/Login";
 import Logout from "../components/Logout.jsx";
 import ForgotPassword from "../components/Login/ForgotPassword.jsx";
-import FormPassword from "../components/Login/formPassword.jsx";
 import Signup from "../components/SignIn/SignIn.jsx";
 import EditUser from "../components/EditUser/EditUser";
 import Home from "../components/Home/Home";
