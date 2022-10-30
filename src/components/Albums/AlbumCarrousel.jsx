@@ -65,7 +65,7 @@ import AlbumCard from "./AlbumCard";
                 {
                   data?.length > 0 ? data.map((card)=>{
                     return  <AlbumCard key={card._id} title={card.name} imgSrc={card.thumbnail}/>
-                  }) :  <h2>no dataa</h2>
+                  }) :  <h2>no data</h2>
                 }
               </div>
             </div>
@@ -93,7 +93,7 @@ import AlbumCard from "./AlbumCard";
 
              { random?.length > 0 ? random.map((card)=>{
                     return  <AlbumCard key={card._id} title={card.name} imgSrc={card.thumbnail}/>
-                  }) :  <h2>no dataa</h2>}
+                  }) :  <h2>no data</h2>}
               </div>
             </div>
           </section>

@@ -1,11 +1,9 @@
 import React, { useEffect,useState }from "react";
 import { useMediaQuery } from "react-responsive";
-import MyPlaylists from "../MyPlaylists/MyPlaylists";
 import ResponsiveAppBar from "../AppBar/AppBar";
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";
 import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import AlbumCarrousel from "../Albums/AlbumCarrousel";
 import MobileTop from "../MobileTop/MobileTop";
 import HomeHeader from "./HomeHeader/HomeHeader"
@@ -88,7 +86,6 @@ function Home() {
           <AlbumCarrousel />
           <Top />
           <SideMenu />
-          <MusicPlayer />
         </>
       )}
     </>

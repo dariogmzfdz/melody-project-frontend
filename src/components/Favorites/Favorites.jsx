@@ -10,17 +10,15 @@ import HeartButton from "@mui/icons-material/Favorite";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
-import { IconButton } from "@mui/material";
 import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
 import PlayButton from "../Buttons/PlayButton";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
-
+import { FaRegHeart, FaHeart } from "react-icons/fa"
+import axios from "axios";
 function Favorites() {
   const [data, setData] = useState([]);
-  /*   const token = localStorage.getItem("userToken"); */
-
+   const token = localStorage.getItem("userToken"); 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -41,6 +39,8 @@ function Favorites() {
   const isPhone = useMediaQuery({
     query: "(max-width: 450px)",
   });
+
+
 
   // const Search = styled("div")(({ theme }) => ({
   //   position: "relative",
@@ -83,7 +83,7 @@ function Favorites() {
       },
     },
   }));
-
+  const [favourite, setFavourite] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -138,10 +138,51 @@ function Favorites() {
     setInputTrack("");
   }
 
-  console.log("input Title: ", inputTrack);
-  console.log("Track: ", track);
-
+  // console.log("input Title: ", inputTrack);
+  // console.log("Track: ", track);
+  
   //---- SEARCH BAR  ---> END
+  
+  const changeFavourite = (id) => {
+    setFavourite([id]);
+    data.forEach((song) => {
+      if (song._id == id) {
+        song.favourite = !song.favourite;
+      }
+    });
+    console.log(favourite);
+    // putLikedSong(favourite);
+    fetchLikedSong()
+  }
+
+  // const putLikedSong = async (favourite) => {
+    
+  // try { 
+  //   const data = await axios.put(
+  //     `https://melodystream.herokuapp.com/song/like/${favourite}`,
+      
+  //     {          
+  //       headers: {
+  //         auth_token: token,
+  //       }
+  //     }
+  //     )
+  //        const response = await data.json();
+
+  //     } 
+  //     catch (data) {
+  //       const { msg } = data.response.data;
+  //       console.log(msg);
+    
+
+  //     }    } 
+  const putLikedSong = {
+    method: 'PUT',
+    headers: { auth_token: token },
+  };
+  const fetchLikedSong = async () => await fetch(`https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favourite}`, putLikedSong);
+
+  
   return (
     <>
       {isDesktop && (
@@ -241,9 +282,7 @@ function Favorites() {
                       {convertDuration(song.duration)}
                     </td>
                     <td>
-                      <IconButton>
-                        <PlayButton song={song} />
-                      </IconButton>
+
                       <PlayButton
                         onClick={() =>
                           songHandler(
@@ -257,10 +296,16 @@ function Favorites() {
                         }
                       />
                     </td>
-                    <td>
-                      <IconButton>
-                        <HeartButton sx={{ color: "white" }} />
-                      </IconButton>
+                    <td  onClick={() => changeFavourite(song._id)}>
+                    {song?.favourite ? (
+                        <i>
+                          <FaHeart />
+                        </i>
+                      ) : (
+                        <i>
+                          <FaRegHeart />
+                        </i>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -269,7 +314,6 @@ function Favorites() {
           </div>
           <MaterialPlayer />
           <SideMenu />
-          <MusicPlayer />
         </>
       )}
 
@@ -297,9 +341,9 @@ function Favorites() {
           <SideMenu />
         </>
       )}
-      <MusicPlayer />
     </>
   );
-}
+  };
+
 
 export default Favorites;
