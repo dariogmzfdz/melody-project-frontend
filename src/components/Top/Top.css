@@ -1,5 +1,6 @@
 .top-songs-container h1 {
     color: #fff;
+
 }
 
 .container-song {
@@ -54,13 +55,15 @@
 .playBtn .heartBtn{
     position: absolute;
     margin-right: 5rem;
+    border: none;
+    background-color: white;
 }
 
 @media (min-width: 1200px) {
     .top-songs-container {
         width: 25%;
         margin-left: 74%;
-        margin-top: -25%;
+        margin-top: -35%;
         overflow-x: hidden;
     }
 }

@@ -9,6 +9,9 @@ import MobileTop from "../MobileTop/MobileTop";
 import HomeHeader from "./HomeHeader/HomeHeader"
 
 function Home() {
+
+  const token = localStorage.getItem("userToken");
+
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
   });
@@ -25,8 +28,7 @@ function Home() {
     query: "(max-width: 450px)",
   });
 
-  const [data, setData] = useState([]);
-   const token = localStorage.getItem("userToken");
+  const [data, setData] = useState([]); 
 
   const fetchData = async () => {
     const response = await fetch(
@@ -64,7 +66,32 @@ function Home() {
 
    useEffect(()=>{
     fetchRandom()},[]);
+
+
    
+    const [likedSongs, setLikedSongs] = useState([]);
+   const favourites = async () => {
+    const response = await fetch(
+      "https://melodystream.herokuapp.com/song/like",
+      {
+        headers: {
+          auth_token: token,
+        },
+      }
+    );
+    const liked = await response.json();
+   
+    
+    setLikedSongs(liked);
+ 
+
+
+}
+
+  useEffect(() => {
+    favourites()}, [])
+   ;
+
 
   return (
     <>
@@ -73,9 +100,9 @@ function Home() {
          
           <HomeHeader />
           {<SideMenu />}
-        <AlbumCarrousel data={data.data} random={random.data}/>
-          <Top />
-          <MaterialPlayer />         
+        <AlbumCarrousel data={data.data} random={random.data} />
+          <Top favourites = {likedSongs.songs} />
+          <MaterialPlayer />
           <SideMenu />
          
         </>

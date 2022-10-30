@@ -1,36 +1,20 @@
 import React from "react";
 import "./Top.css";
-import SongImg from "../../assets/album-img.jpg";
-import PlayButton from "@mui/icons-material/PlayArrow";
-import HeartButton from "@mui/icons-material/Favorite";
 
-function Top() {
-  const song = (
-    <div className="container-song">
-      <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
-      </div>
-      <div className="info-container">
-        <span>Song Title</span>
-        <div className="contributors">
-          <p className="track-artist">Artist Name</p>
-        </div>
-      </div>
-      <p className="duration">00:00</p>
-      <PlayButton className= "playBtn" />
-      <HeartButton className= "heartBtn" />
-    </div>
-  );
+import SongCart from "./SongCart"
+
+
+function Top( {favourites}) {
+ 
   return (
     <div className="top-songs-container">
-      <h1>Top Songs</h1>
-      <section>{song}</section>
-      <section>{song}</section>
-      <section>{song}</section>
-      <section>{song}</section>
-      <section>{song}</section>
-      <section>{song}</section>
-      <section>{song}</section>
+      <h1>Liked Songs</h1>
+      <section>{ favourites?.length > 0 ? favourites.slice(0, 8).map((card)=>{
+    return  <SongCart key={card._id} title={card.title} artist={card.artist} duration={card.duration}/>
+  }) :  <h2>no data</h2>}
+  
+  </section>
+      
     </div>
   );
 }

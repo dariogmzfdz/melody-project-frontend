@@ -18,7 +18,7 @@ import AlbumCard from "./AlbumCard";
   //   this.handleRight = this.handleRight.bind(this);
   // }
 
-  console.log(random)
+  
 
   // handleRight(total) {
   //   let limit = Math.floor(total / 2) - 1;
