@@ -115,6 +115,7 @@ function SideMenu() {
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
+                zIndex: 1,
               },
             }}
             open
