@@ -151,30 +151,36 @@ function Favorites() {
       }
     });
     console.log(favourite);
-    putLikedSong(favourite);
+    // putLikedSong(favourite);
+    fetchLikedSong()
   }
 
-  const putLikedSong = async (favourite) => {
-  try { 
-    const data = await axios.put(
-      `https://melodystream.herokuapp.com/song/like/${favourite}`,
+  // const putLikedSong = async (favourite) => {
+    
+  // try { 
+  //   const data = await axios.put(
+  //     `https://melodystream.herokuapp.com/song/like/${favourite}`,
       
-      {          
-        headers: {
-          auth_token: token,
-        }
-      }
-      )
-         const response = await data.json();
+  //     {          
+  //       headers: {
+  //         auth_token: token,
+  //       }
+  //     }
+  //     )
+  //        const response = await data.json();
 
-      } 
-      catch (data) {
-        const { msg } = data.response.data;
-        console.log(msg);
+  //     } 
+  //     catch (data) {
+  //       const { msg } = data.response.data;
+  //       console.log(msg);
     
 
-      }    } 
-       
+  //     }    } 
+  const putLikedSong = {
+    method: 'PUT',
+    headers: { auth_token: token },
+  };
+  const fetchLikedSong = async () => await fetch(`https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favourite}`, putLikedSong);
 
   
   return (
