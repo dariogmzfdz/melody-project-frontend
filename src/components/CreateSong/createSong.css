@@ -21,7 +21,7 @@
   margin-left: 0.5rem;
 }
 .inputs{
-    display: none;
+   color: transparent;
 }
 .buttonFile{
     padding: 0.5rem 4rem !important ;

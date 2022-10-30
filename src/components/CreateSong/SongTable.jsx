@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import "./createSong.css";
-import { Box, Button,IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
+import { Box, Button, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { MusicNoteOutlined } from "@mui/icons-material";
+import axios from "axios";
 
 
 const Songs = () => {
@@ -31,14 +32,63 @@ const Songs = () => {
 		pb: 3,
 	};
 
-	const [selectedAudio, setSelectedAudio] = useState(null);
-	const [audioUrl, setAudioUrl] = useState(null);
 
-	useEffect(() => {
-		if (selectedAudio) {
-			setAudioUrl(URL.createObjectURL(selectedAudio));
+
+	const [name, setName] = useState("");
+	const [artist, setArtist] = useState("");
+		const [audio, setAudio ] = useState("");
+		const [ url, setUrl ] = useState("");
+		const [hasSong, setHasSong] = useState(false);
+		const [song, setSong] = useState("");
+		const changeHandler = (event) => {
+			setAudio(event.target.files[0]);
+			setUrl(true);
+		  };
+		
+		  const handleSubmission = () => {
+			const formData = new FormData();
+			formData.append("song", audio);
+		
+			fetch("http://localhost:4000/cloud/uploadsong", {
+			  method: "POST",
+			  body: formData,
+		 
+			},
+			  )
+			  .then((response) => response.json())
+			  .then((result) => {
+				console.log("Success:", result);
+				setSong(result);
+				setHasSong(true);
+			  })
+			  .catch((error) => {
+				console.error("Error:", error);
+			  });
+		  };
+		
+		  const token = localStorage.getItem("userToken");
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const data = await axios.post("https://melodystream.herokuapp.com/song",
+				{
+					title: name,
+					artist: artist,
+					genre: "Pop",
+					url: song.url,
+					duration:song.duration,
+				}, 
+				{	
+					headers: {
+					auth_token: token,
+		  }  
+		},)
+			
+			console.log(data);
+		} catch (error) {
+			console.log(error);
 		}
-	}, [selectedAudio]);
+	};
 
 	return (
 		<div className='container'>
@@ -55,66 +105,81 @@ const Songs = () => {
 					aria-describedby="parent-modal-description"
 				>
 					<Box sx={{ ...style, width: 400 }}>
-						
-							<Paper >
 
-								<form style={{width:'100%'}} >
-									<div className="inputText">
-										<TextField
-											name="name"
-											label="Enter song name"
+						<Paper >
+
+							<form style={{ width: '100%' }} onSubmit={handleSubmit}>
+								<div className="inputText">
+									<TextField
+										name="name"
+										onChange={(e) => setName(e.target.value)}
+										label="Enter song name"
+									// required={true}
+									/>
+								</div>
+								<div className="inputArtist">
+									<TextField
+										name="artist"
+										label="Artist name"
 										// required={true}
-										/>
-									</div>
-									<div className="inputArtist">
-										<TextField
-											name="artist"
-											label="Artist name"
-										// required={true}
+										onChange={(e) => setArtist(e.target.value)}
 
-										/>
-									</div>
-									<div className="inputDiv">
-										<Button
-											variant="contained"
-											component="label"
-											className="buttonFile"
-										> {<MusicNoteOutlined />}
-											<input
-												className="inputs"
-												label="Choose song"
-												type="file"
-												accept="audio/*"
-												name="song"
-												onChange={(e) => setSelectedAudio(e.target.files[0])}
-
-											/>
-										</Button>
-									</div>
-									{audioUrl && selectedAudio && (
-										<Box  mt={2} textAlign="center">
-
-											<Typography >{selectedAudio.name} </Typography>
-										</Box>
-									)}
+									/>
+								</div>
+								<div>
 									
+<div className="inputDiv">
+									<Button
+										variant="contained"
+										component="label"
+										className="buttonFile"
+									> {<MusicNoteOutlined />}
+<input 
+											className="inputs"
+											label="Choose song"
+											type="file"
+											accept="audio/*"
+											name="song" onChange={changeHandler}>
+	</input>
+	</Button>
+
+</div>
+<div>
+
+						{url ? (
+                  <div className='inputDiv'>
+                    <Button
+                     variant= "outlined"
+                    
+                      onClick={handleSubmission}
+                    >
+                      Add song                    </Button>
+                  </div>
+                ) : (
+                  <div></div>
+               )}	</div>
+             <h3 style={{textAlign:"center"}}>  {audio.name}</h3>
+</div>
+								
 
 
 
-									<div className="inputSubmit">
-										<Button
-											variant='outlined'
-											type="submit"
-										>Submit
-										</Button>
-									</div>
-								</form>
-							</Paper>
-				
+
+								<div className="inputSubmit">
+									<Button
+										variant='outlined'
+										type="submit"
+									>Submit
+									</Button>
+								</div>
+							</form>
+						</Paper>
+
 
 					</Box>
 				</Modal>
 			</div>
+			
 			<TableContainer component={Paper} >
 				<Table>
 					<TableHead>
@@ -156,6 +221,7 @@ const Songs = () => {
 
 				</Table>
 			</TableContainer>
+			
 		</div>
 	);
 };

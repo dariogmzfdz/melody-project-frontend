@@ -9,13 +9,10 @@ import Home from "../components/Home/Home";
 import AdminView from "../components/Account/AdminView/AdminView";
 import Profile from "../components/Profile/Profile";
 import ResetPassword from "../components/ResetPassWord/ResetPassword";
-<<<<<<< Updated upstream
-import CreateSong from "../components/CreateSong/SongTable";
-=======
->>>>>>> Stashed changes
 import Favorites from "../components/Favorites/Favorites";
 import Search from "../components/SearchBar/SearchBar";
 import Playlists from "../components/MyPlaylists/Playlists";
+import Songs from "../components/CreateSong/SongTable";
 
 export default function RouterApp() {
   return (
@@ -33,12 +30,8 @@ export default function RouterApp() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/search" element={<Search />} />
-<<<<<<< Updated upstream
-            <Route path="/playlistmodel" element={<PlaylistModel />} />
-            <Route path="/song" element={<CreateSong />} />
-=======
+            <Route path="/songs" element={<Songs />} />
             <Route path="/playlists" element={<Playlists />} />
->>>>>>> Stashed changes
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
           </Routes>
         </AuthProvider>
