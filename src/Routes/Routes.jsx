@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "../hooks/useFirebase";
 import SignInSide from "../components/Login/Login";
@@ -13,9 +14,11 @@ import ResetPassword from "../components/ResetPassWord/ResetPassword";
 import AvatarUpload from "../components/AppBar/Avatar";
 import Favorites from "../components/Favorites/Favorites";
 import Search from "../components/SearchBar/SearchBar";
-import PlaylistModel from "../components/MyPlaylists/CreatePlaylist";
+import Discover from "../pages/Discover";
+import MusicPlayer from "../components/MusicPlayer/index";
 
 export default function RouterApp() {
+  const { activeSong } = useSelector((state) => state.player);
 
   return (
     <div>
@@ -32,11 +35,16 @@ export default function RouterApp() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/edit" element={<EditUser />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/playlistmodel" element={<PlaylistModel />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
+            <Route path="/discover" element={<Discover />} />
           </Routes>
         </AuthProvider>
       </Router>
+      {activeSong?.title && (
+        <div className="absolute h-28 bottom-0 left-0 right-0 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
+          <MusicPlayer />
+        </div>
+      )}
     </div>
   );
 }

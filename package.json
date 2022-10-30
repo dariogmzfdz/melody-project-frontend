@@ -21,6 +21,7 @@
     "core-js": "^3.25.5",
     "firebase": "^9.10.0",
     "jsonwebtoken": "^8.5.1",
+    "postcss": "^8.4.18",
     "react": "^18.2.0",
     "react-avatar-edit": "^1.2.0",
     "react-bootstrap": "^2.5.0",
@@ -28,7 +29,6 @@
     "react-fontawesome": "^1.7.1",
     "react-h5-audio-player": "^3.8.6",
     "react-icons": "^4.6.0",
-    "react-material-music-player": "^1.2.0-beta.4",
     "react-material-music-player": "^1.1.9",
     "react-modal": "^3.15.1",
     "react-redux": "^8.0.4",
@@ -38,6 +38,7 @@
     "react-toastify": "^9.0.8",
     "sass": "^1.55.0",
     "styled-components": "^5.3.6",
+    "tailwindcss": "^3.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import "./Favorites.css";
 import { styled } from "@mui/material/styles";
@@ -10,29 +11,19 @@ import HeartButton from "@mui/icons-material/Favorite";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
-import { IconButton } from "@mui/material";
 import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
 import PlayButton from "../Buttons/PlayButton";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import { CircularProgress, IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
+import SongCard from "../SongCard/SongCard";
+import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
 
 function Favorites() {
-  const [data, setData] = useState([]);
+  const { data } = useGetAllSongsQuery();
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+
+  console.log(data);
   /*   const token = localStorage.getItem("userToken"); */
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://melodystream.herokuapp.com/song/all-songs"
-      );
-      const result = await response.json();
-      const data = result.songs;
-      setData(data);
-    };
-
-    fetchData().catch(console.error);
-  }, []);
 
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
@@ -41,61 +32,6 @@ function Favorites() {
   const isPhone = useMediaQuery({
     query: "(max-width: 450px)",
   });
-
-  // const Search = styled("div")(({ theme }) => ({
-  //   position: "relative",
-  //   borderRadius: theme.shape.borderRadius,
-  //   backgroundColor: alpha(theme.palette.common.white, 0.15),
-  //   "&:hover": {
-  //     backgroundColor: alpha(theme.palette.common.white, 0.25),
-  //   },
-  //   marginLeft: 0,
-  //   width: "100%",
-  //   [theme.breakpoints.up("sm")]: {
-  //     marginLeft: theme.spacing(1),
-  //     width: "auto",
-  //   },
-  // }));
-
-  // const SearchIconWrapper = styled("div")(({ theme }) => ({
-  //   padding: theme.spacing(0, 2),
-  //   height: "100%",
-  //   position: "absolute",
-  //   pointerEvents: "none",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://melodystream.herokuapp.com/song/all-songs"
-      );
-      const result = await response.json();
-      const data = result.songs;
-      setData(data);
-    };
-
-    fetchData().catch(console.error);
-  }, []);
 
   const songHandler = (
     songId,
@@ -112,7 +48,7 @@ function Favorites() {
     localStorage.setItem("Track", JSON.stringify(Track));
     console.log(Track);
   };
-  const totalDuration = data.map((song) => song.duration);
+  /* const totalDuration = data.map((song) => song.duration); */
 
   //---- SEARCH BAR ---> START
 
@@ -138,8 +74,8 @@ function Favorites() {
     setInputTrack("");
   }
 
-  console.log("input Title: ", inputTrack);
-  console.log("Track: ", track);
+  /* console.log("input Title: ", inputTrack);
+  console.log("Track: ", track); */
 
   //---- SEARCH BAR  ---> END
   return (
@@ -174,11 +110,21 @@ function Favorites() {
                 <div className="details">
                   <p>{data.length} Songs</p>
                   <p id="dot">&bull;</p>
-                  <p>{convertDurationPlaylist(totalDuration)}</p>
+                  {/* <p>{convertDurationPlaylist(totalDuration)}</p> */}
                 </div>
               </section>
             </header>
-            <table className="favorites-table">
+            {data?.map((song, i) => (
+              <SongCard
+                key={song._id}
+                song={song}
+                isPlaying={isPlaying}
+                activeSong={activeSong}
+                data={data}
+                i={i}
+              />
+            ))}
+            {/* <table className="favorites-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -226,7 +172,7 @@ function Favorites() {
                   </tr>
                 )}
                 {data.map((song, index) => (
-                  <tr key={song._id}>
+                   <tr key={song._id}>
                     <td>{index + 1}</td>
                     <td>
                       <p>{song.title}</p>
@@ -242,34 +188,32 @@ function Favorites() {
                     </td>
                     <td>
                       <IconButton>
-                        <PlayButton song={song} />
+                        <PlayButton
+                          onClick={() =>
+                            songHandler(
+                              song._id,
+                              song.url,
+                              song.title,
+                              song.artist,
+                              song.duration,
+                              song.genre
+                            )
+                          }
+                        />
                       </IconButton>
-                      <PlayButton
-                        onClick={() =>
-                          songHandler(
-                            song._id,
-                            song.url,
-                            song.title,
-                            song.artist,
-                            song.duration,
-                            song.genre
-                          )
-                        }
-                      />
                     </td>
                     <td>
                       <IconButton>
                         <HeartButton sx={{ color: "white" }} />
                       </IconButton>
                     </td>
-                  </tr>
+                  </tr> 
                 ))}
               </tbody>
-            </table>
+            </table> */}
           </div>
           <MaterialPlayer />
           <SideMenu />
-          <MusicPlayer />
         </>
       )}
 
@@ -297,7 +241,6 @@ function Favorites() {
           <SideMenu />
         </>
       )}
-      <MusicPlayer />
     </>
   );
 }
