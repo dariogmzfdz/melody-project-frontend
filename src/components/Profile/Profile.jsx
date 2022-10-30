@@ -17,7 +17,7 @@ import {
 import AppBar from "../AppBar/AppBar";
 import './Profile.css';
 import axios from "axios";
-import AvatarUpload from "../AppBar/Avatar";
+//import AvatarUpload from "../AppBar/Avatar";
 
 function Profile() {
   const [data, setData] = useState([]);

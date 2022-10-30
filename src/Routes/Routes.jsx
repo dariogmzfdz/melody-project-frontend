@@ -14,7 +14,6 @@ import ResetPassword from "../components/ResetPassWord/ResetPassword";
 import AvatarUpload from "../components/AppBar/Avatar";
 import Favorites from "../components/Favorites/Favorites";
 import Search from "../components/SearchBar/SearchBar";
-import Discover from "../pages/Discover";
 import MusicPlayer from "../components/MusicPlayer/index";
 
 export default function RouterApp() {
@@ -36,7 +35,6 @@ export default function RouterApp() {
             <Route path="/edit" element={<EditUser />} />
             <Route path="/search" element={<Search />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
-            <Route path="/discover" element={<Discover />} />
           </Routes>
         </AuthProvider>
       </Router>

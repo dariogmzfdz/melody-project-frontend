@@ -11,19 +11,21 @@ import HeartButton from "@mui/icons-material/Favorite";
 import InputBase from "@mui/material/InputBase";
 import convertDuration from "../../functions/ConvertDuration";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
-import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
-import PlayButton from "../Buttons/PlayButton";
 import { CircularProgress, IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
 import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
+import axios from "axios";
+import Loader from "../Loader/Loader";
+import Error from "../Error/Error";
 
 function Favorites() {
-  const { data } = useGetAllSongsQuery();
+  const { data, isFetching, error } = useGetAllSongsQuery();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const [favorite, setFavorite] = useState([]);
 
   console.log(data);
-  /*   const token = localStorage.getItem("userToken"); */
+  const token = localStorage.getItem("userToken");
 
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
@@ -48,7 +50,6 @@ function Favorites() {
     localStorage.setItem("Track", JSON.stringify(Track));
     console.log(Track);
   };
-  /* const totalDuration = data.map((song) => song.duration); */
 
   //---- SEARCH BAR ---> START
 
@@ -74,10 +75,59 @@ function Favorites() {
     setInputTrack("");
   }
 
-  /* console.log("input Title: ", inputTrack);
-  console.log("Track: ", track); */
+  // console.log("input Title: ", inputTrack);
+  // console.log("Track: ", track);
 
   //---- SEARCH BAR  ---> END
+
+  const changeFavorite = (id) => {
+    setFavorite([id]);
+    data.forEach((song) => {
+      if (song._id == id) {
+        song.favorite = !song.favorite;
+      }
+    });
+    console.log(favorite);
+    // putLikedSong(favorite);
+    fetchLikedSong();
+  };
+
+  // const putLikedSong = async (favorite) => {
+
+  // try {
+  //   const data = await axios.put(
+  //     `https://melodystream.herokuapp.com/song/like/${favorite}`,
+
+  //     {
+  //       headers: {
+  //         auth_token: token,
+  //       }
+  //     }
+  //     )
+  //        const response = await data.json();
+
+  //     }
+  //     catch (data) {
+  //       const { msg } = data.response.data;
+  //       console.log(msg);
+
+  //     }    }
+  const putLikedSong = {
+    method: "PUT",
+    headers: { auth_token: token },
+  };
+  const fetchLikedSong = async () =>
+    await fetch(
+      `https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favorite}`,
+      putLikedSong
+    );
+
+  if (isFetching) return <Loader title="Loading Top Charts" />;
+
+  if (error) return <Error />;
+
+  const totalDuration = data.songs.map((song) => song.duration);
+
   return (
     <>
       {isDesktop && (
@@ -108,23 +158,13 @@ function Favorites() {
                 <h6>My songs</h6>
                 <h1>Favorites</h1>
                 <div className="details">
-                  <p>{data.length} Songs</p>
+                  <p>{data.songs.length} Songs</p>
                   <p id="dot">&bull;</p>
-                  {/* <p>{convertDurationPlaylist(totalDuration)}</p> */}
+                  <p>{convertDurationPlaylist(totalDuration)}</p>
                 </div>
               </section>
             </header>
-            {data?.map((song, i) => (
-              <SongCard
-                key={song._id}
-                song={song}
-                isPlaying={isPlaying}
-                activeSong={activeSong}
-                data={data}
-                i={i}
-              />
-            ))}
-            {/* <table className="favorites-table">
+            <table className="favorites-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -137,82 +177,21 @@ function Favorites() {
                 </tr>
               </thead>
               <tbody>
-                {track && (
-                  <tr key={track._id} style={{ backgroundColor: "#764daf" }}>
-                    <td></td>
-                    <td>
-                      <p>{track.title}</p>
-                    </td>
-                    <td>
-                      <p>{track.artist}</p>
-                    </td>
-                    <td>
-                      <p>{track.genre}</p>
-                    </td>
-                    <td className="duration-field">
-                      {convertDuration(track.duration)}
-                    </td>
-                    <td>
-                      <PlayButton
-                        onClick={() =>
-                          songHandler(
-                            track._id,
-                            track.url,
-                            track.title,
-                            track.artist,
-                            track.duration,
-                            track.genre
-                          )
-                        }
-                      />
-                    </td>
-                    <td>
-                      <HeartButton />
-                    </td>
-                  </tr>
-                )}
-                {data.map((song, index) => (
-                   <tr key={song._id}>
-                    <td>{index + 1}</td>
-                    <td>
-                      <p>{song.title}</p>
-                    </td>
-                    <td>
-                      <p>{song.artist}</p>
-                    </td>
-                    <td>
-                      <p>{song.genre}</p>
-                    </td>
-                    <td className="duration-field">
-                      {convertDuration(song.duration)}
-                    </td>
-                    <td>
-                      <IconButton>
-                        <PlayButton
-                          onClick={() =>
-                            songHandler(
-                              song._id,
-                              song.url,
-                              song.title,
-                              song.artist,
-                              song.duration,
-                              song.genre
-                            )
-                          }
-                        />
-                      </IconButton>
-                    </td>
-                    <td>
-                      <IconButton>
-                        <HeartButton sx={{ color: "white" }} />
-                      </IconButton>
-                    </td>
-                  </tr> 
+                {data.songs.map((song, i) => (
+                  <SongCard
+                    key={song._id}
+                    song={song}
+                    isPlaying={isPlaying}
+                    activeSong={activeSong}
+                    data={data}
+                    i={i}
+                    changeFavorite={changeFavorite}
+                    convertDuration={convertDuration}
+                  />
                 ))}
               </tbody>
-            </table> */}
+            </table>
           </div>
-          <MaterialPlayer />
           <SideMenu />
         </>
       )}
@@ -220,7 +199,6 @@ function Favorites() {
       {isPhone && (
         <>
           <MobileTop />
-          {/* {searchBar} */}
           {data.map((song) => (
             <div key={song._id} className="container-song-favorites">
               <div className="cover-container">
