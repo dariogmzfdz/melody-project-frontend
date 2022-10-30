@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./AlbumCarrousel.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,99 +8,92 @@ import {
 
 import AlbumCard from "./AlbumCard";
 
-const albums = [
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-];
 
-class AlbumCarrousel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { index: 0 };
-    this.handleLeft = this.handleLeft.bind(this);
-    this.handleRight = this.handleRight.bind(this);
-  }
 
-  handleRight(total) {
-    let limit = Math.floor(total / 2) - 1;
-    if (this.state.index < limit) {
-      let n = this.state.index + 1;
-      this.setState({ index: n });
-      document.getElementById(
-        "carousel-top-albums"
-      ).style.transform = `translateX(-${n * (170 + 40)}px)`;
-    }
-  }
-  handleLeft() {
-    if (this.state.index > 0) {
-      let n = this.state.index - 1;
-      this.setState({ index: n });
-      document.getElementById(
-        "carousel-top-albums"
-      ).style.transform = `translateX(-${n * (170 + 40)}px)`;
-    }
-  }
+  function AlbumCarrousel({data, random}) {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { index: 0 };
+  //   this.handleLeft = this.handleLeft.bind(this);
+  //   this.handleRight = this.handleRight.bind(this);
+  // }
 
-  render() {
+  console.log(random)
+
+  // handleRight(total) {
+  //   let limit = Math.floor(total / 2) - 1;
+  //   if (this.state.index < limit) {
+  //     let n = this.state.index + 1;
+  //     this.setState({ index: n });
+  //     document.getElementById(
+  //       "carousel-top-albums"
+  //     ).style.transform = `translateX(-${n * (170 + 40)}px)`;
+  //   }
+  // }
+  // handleLeft() {
+  //   if (this.state.index > 0) {
+  //     let n = this.state.index - 1;
+  //     this.setState({ index: n });
+  //     document.getElementById(
+  //       "carousel-top-albums"
+  //     ).style.transform = `translateX(-${n * (170 + 40)}px)`;
+  //   }
+  // }
+
+
     return (
       <>
         <div className="carrousel-container">
           <div className="header-carrousel">
-            <h1>For you</h1>
+            <h1>Your Playlists</h1>
             <div>
               <FontAwesomeIcon
                 icon={faChevronLeft}
                 className="arrow"
-                onClick={this.handleLeft}
+                // onClick={this.handleLeft}
               />
               <FontAwesomeIcon
                 icon={faChevronRight}
                 className="arrow"
-                onClick={this.handleRight.bind(this, albums.length)}
+                // onClick={this.handleRight.bind(this, albums.length)}
               />
             </div>
           </div>
           <section>
             <div className="slider">
               <div className="items-slider" id="carousel-top-albums">
-                {albums}
+                {
+                  data?.length > 0 ? data.map((card)=>{
+                    return  <AlbumCard key={card._id} title={card.name} imgSrc={card.thumbnail}/>
+                  }) :  <h2>no dataa</h2>
+                }
               </div>
             </div>
           </section>
         </div>
         <div className="carrousel-container">
           <div className="header-carrousel">
-            <h1>Trending Albums</h1>
+            <h1>Random Playlists</h1>
             <div>
               <FontAwesomeIcon
                 icon={faChevronLeft}
                 className="arrow"
-                onClick={this.handleLeft}
+                // onClick={this.handleLeft}
               />
               <FontAwesomeIcon
                 icon={faChevronRight}
                 className="arrow"
-                onClick={this.handleRight.bind(this, albums.length)}
+                // onClick={this.handleRight.bind(this, albums.length)}
               />
             </div>
           </div>
           <section>
             <div className="slider">
               <div className="items-slider" id="carousel-top-albums">
-                {albums}
+
+             { random?.length > 0 ? random.map((card)=>{
+                    return  <AlbumCard key={card._id} title={card.name} imgSrc={card.thumbnail}/>
+                  }) :  <h2>no dataa</h2>}
               </div>
             </div>
           </section>
@@ -108,6 +101,6 @@ class AlbumCarrousel extends Component {
       </>
     );
   }
-}
+
 
 export default AlbumCarrousel;

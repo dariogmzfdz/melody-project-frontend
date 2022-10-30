@@ -6,7 +6,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 95%;
+    width: 90%;
     height: 60px;
     border-radius: 8px;
     margin: 10px;
@@ -51,11 +51,16 @@
     color: #444444;
 }
 
+.playBtn .heartBtn{
+    position: absolute;
+    margin-right: 5rem;
+}
+
 @media (min-width: 1200px) {
     .top-songs-container {
         width: 25%;
         margin-left: 74%;
-        margin-top: -35%;
+        margin-top: -25%;
         overflow-x: hidden;
     }
 }

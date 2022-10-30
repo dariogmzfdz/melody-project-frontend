@@ -17,8 +17,8 @@ function Top() {
         </div>
       </div>
       <p className="duration">00:00</p>
-      <PlayButton />
-      <HeartButton />
+      <PlayButton className= "playBtn" />
+      <HeartButton className= "heartBtn" />
     </div>
   );
   return (

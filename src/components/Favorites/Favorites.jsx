@@ -14,7 +14,7 @@ import { IconButton } from "@mui/material";
 import MaterialPlayer from "../MaterialPlayer/MaterialPlayer";
 import PlayButton from "../Buttons/PlayButton";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
-import { CircularProgress, IconButton } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 
 function Favorites() {
