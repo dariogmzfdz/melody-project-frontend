@@ -1,3 +1,5 @@
+/** CREATE PLAYLIST SECTION **/
+
 .privacy-box {
   width: 30%;
 }
@@ -19,36 +21,6 @@
   text-shadow: none;
 }
 
-.btn-newPlaylist {
-  background-color: #f8f9fa;
-  border: 1px solid #f8f9fa;
-  border-radius: 4px;
-  color: #3c4043;
-  cursor: pointer;
-  font-family: arial, sans-serif;
-  font-size: 14px;
-  height: 36px;
-  line-height: 27px;
-  min-width: 54px;
-  padding: 0 16px;
-  text-align: center;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: pre;
-}
-
-.btn-newPlaylist:hover {
-  border-color: #dadce0;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 2px;
-  color: #202124;
-}
-
-.btn-newPlaylist:focus {
-  border-color: #4285f4;
-  outline: none;
-}
-
 .buttons-container {
   display: flex;
   justify-content: flex-end;
@@ -67,25 +39,32 @@
   grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 10rem;
   grid-gap: 1rem;
   grid-auto-flow: row;
+  margin: 4rem;
+}
+
+/** PlaylistItem section **/
+
+.playlist-container {
+  display: flex;
+  flex-direction: column;
+}
+.playlist-thumbnail {
+  border: 2px solid black;
 }
 
 #thumbnail-img {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
+  border: 0.3rem solid black;
+  border-radius: 4px;
 }
 
 .item {
   position: relative;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   background-color: #f3f3f3;
-  border-radius: 7px;
-}
-
-.newPlaylist {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  border-radius: 4px;
 }
 
 .addImg {
@@ -107,4 +86,30 @@
 
 .image-upload > input {
   display: none;
+}
+
+/** EDIT PLAYLIST SECTION **/
+.container-playlistView {
+  margin: 4rem;
+  color: #f3f3f3d3;
+}
+
+.thumbnail {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+}
+
+.container-flex {
+  display: flex;
+}
+
+.playlist-description {
+  margin-top: 2rem;
+}
+
+.playlist-description > p {
+  line-height: 4px;
 }

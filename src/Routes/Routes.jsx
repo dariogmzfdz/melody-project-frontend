@@ -13,6 +13,7 @@ import Favorites from "../components/Favorites/Favorites";
 import Search from "../components/SearchBar/SearchBar";
 import Playlists from "../components/MyPlaylists/Playlists";
 import Songs from "../components/CreateSong/SongTable";
+import PlaylistEdit from "../components/MyPlaylists/EditPlaylist/PlaylistEdit";
 
 export default function RouterApp() {
   return (
@@ -25,6 +26,7 @@ export default function RouterApp() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<AdminView />} />
+            <Route path="/resetpassword/:token" element={<ResetPassword />} />
             <Route path="/forgot" element={<ForgotPassword />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/logout" element={<Logout />} />
@@ -33,6 +35,8 @@ export default function RouterApp() {
             <Route path="/songs" element={<Songs />} />
             <Route path="/playlists" element={<Playlists />} />
             <Route path="/resetpassword/:token" element={<ResetPassword />} />
+            <Route path="/playlists" element={<Playlists />} />
+            <Route path="/playlist-edit" element={<PlaylistEdit />} />
           </Routes>
         </AuthProvider>
       </Router>
