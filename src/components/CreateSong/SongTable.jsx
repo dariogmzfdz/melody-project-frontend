@@ -49,7 +49,7 @@ const Songs = () => {
 			const formData = new FormData();
 			formData.append("song", audio);
 		
-			fetch("http://localhost:4000/cloud/uploadsong", {
+			fetch("https://melodystream.herokuapp.com/cloud/uploadsong", {
 			  method: "POST",
 			  body: formData,
 		 
@@ -67,7 +67,9 @@ const Songs = () => {
 		  };
 		
 		  const token = localStorage.getItem("userToken");
-	const handleSubmit = async (e) => {
+	
+	
+		  const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			const data = await axios.post("https://melodystream.herokuapp.com/song",
@@ -89,6 +91,27 @@ const Songs = () => {
 			console.log(error);
 		}
 	};
+const [dataSong, setDataSong] = useState("")
+	const getSongs = async (e) => {
+		e.preventDefault();
+		try {
+			const dataSong = await axios.get("https://melodystream.herokuapp.com/all-users-songs",
+			
+				{	
+					headers: {
+					auth_token: token,
+		  }  
+		  	
+			},)
+	setDataSong();
+			console.log(dataSong);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	console.log(dataSong);
+
 
 	return (
 		<div className='container'>
@@ -160,8 +183,6 @@ const Songs = () => {
                )}	</div>
              <h3 style={{textAlign:"center"}}>  {audio.name}</h3>
 </div>
-								
-
 
 
 
@@ -195,8 +216,8 @@ const Songs = () => {
 
 						<TableRow >
 
-							<TableCell align="center">Song Name</TableCell>
-							<TableCell align="center">Artist</TableCell>
+							<TableCell align="center">{dataSong.name}</TableCell>
+							<TableCell align="center">{dataSong.artist}</TableCell>
 							<TableCell align="center">
 								<Link to=''>
 									<IconButton >

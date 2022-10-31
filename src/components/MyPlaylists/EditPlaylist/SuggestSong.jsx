@@ -30,15 +30,17 @@ function SuggestSong({
   return (
     <div className="container-song">
       <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
-      </div>
+        
+      
       <PlayPause
         isPlaying={isPlaying}
         activeSong={activeSong}
         song={song}
         handlePause={handlePauseClick}
         handlePlay={handlePlayClick}
+        className="playpause"
       />
+      </div>
       <div className="info-container">
         <span>{song.title}</span>
         <div className="contributors">
@@ -46,7 +48,7 @@ function SuggestSong({
         </div>
       </div>
       <button>
-        <FavoriteIcon />
+        <FavoriteIcon className="favoriteIcon"/>
       </button>
       <Box sx={{ display: "flex" }}>
         <div>
