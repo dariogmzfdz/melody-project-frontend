@@ -42,8 +42,6 @@ export default function PlaylistModal({
     thumbnail: thumbnail,
   });
 
-  console.log(playlist);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleChange = (e) => {
