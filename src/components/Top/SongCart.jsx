@@ -7,13 +7,9 @@ import HeartButton from "@mui/icons-material/Favorite";
 
 import convertDuration from "../../functions/ConvertDuration";
 
-
-
-function SongCart({ title, artist, duration}){  
-
-
-    return (
-        <div className="container-song">
+function SongCart({ title, artist, duration }) {
+  return (
+    <div className="container-song">
       <div className="cover-container">
         <img src={SongImg} alt="song-img" />
       </div>
@@ -24,12 +20,14 @@ function SongCart({ title, artist, duration}){
         </div>
       </div>
       <p className="duration">{convertDuration(duration)}</p>
-      <button  className= "playBtn"><PlayButton/></button>
-      <button  className= "heartBtn"><HeartButton/></button>
-    
+      <button className="playBtn">
+        <PlayButton />
+      </button>
+      <button className="heartBtn">
+        <HeartButton />
+      </button>
     </div>
-    )
+  );
 }
-
 
 export default SongCart;

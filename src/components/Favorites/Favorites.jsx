@@ -82,8 +82,8 @@ function Favorites() {
 
   const changeFavorite = (id) => {
     setFavorite([id]);
-    data.forEach((song) => {
-      if (song._id == id) {
+    data.songs.forEach((song) => {
+      if (song._id === id) {
         song.favorite = !song.favorite;
       }
     });

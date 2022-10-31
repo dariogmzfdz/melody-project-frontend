@@ -38,14 +38,11 @@ function UserAvatar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        "https://melodystream.herokuapp.com/user",
-        {
-          headers: {
-            auth_token: token,
-          },
-        }
-      );
+      const response = await fetch("https://melodystream.herokuapp.com/user", {
+        headers: {
+          auth_token: token,
+        },
+      });
       const data = await response.json();
 
       setIsAdmin(data.isAdmin);
@@ -54,19 +51,14 @@ function UserAvatar() {
 
     fetchData().catch(console.error);
   }, [token]);
- 
-  
-
 
   return (
     <>
-
       {/* MATERIAL UI */}
       <Box sx={{ flexGrow: 0 }}>
         <Tooltip title="Open settings">
           <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-            <Avatar  />
-          
+            <Avatar />
           </IconButton>
         </Tooltip>
         <Menu
