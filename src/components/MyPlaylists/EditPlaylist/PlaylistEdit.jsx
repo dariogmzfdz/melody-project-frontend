@@ -5,16 +5,15 @@ import ResponsiveAppBar from "../../AppBar/AppBar";
 import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
 import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
-import { FileUpload } from "@mui/icons-material";
-import SongImg from "../../../assets/album-img.jpg";
-import PlayPause from "../../SongCard/PlayPause";
 import SuggestSong from "./SuggestSong";
 import { useGetAllSongsQuery } from "../../../redux/services/melodyApi";
 import "../../Favorites/Favorites";
 import { Typography } from "@mui/material";
+import Button from "@mui/material/Button";
 
 function PlaylistViewSongs() {
   const [playlist, setPlaylist] = useState({});
+  const [randomSongs, setRandomSongs] = useState([]);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
 
@@ -43,6 +42,10 @@ function PlaylistViewSongs() {
 
     fetchPlaylist().catch(console.error);
   }, []);
+
+  // const refreshRandomSongs = () => {
+  //   setRandomSongs(getMultipleRandom());
+  // };
 
   if (isFetching) return <div>Loading...</div>;
 
@@ -77,7 +80,7 @@ function PlaylistViewSongs() {
             Suggestions
           </Typography>
           {/* {tracks} */}
-          {data.songs.map((song, i) => (
+          {data.songs.slice(0, 7).map((song, i) => (
             <SuggestSong
               key={song._id}
               song={song}
@@ -89,6 +92,19 @@ function PlaylistViewSongs() {
             />
           ))}
         </div>
+        <Button
+          sx={{
+            color: "white",
+            borderColor: "white",
+            m: 2,
+            p: 1,
+            pl: 3,
+            pr: 3,
+          }}
+          variant="outlined"
+        >
+          REFRESH
+        </Button>
       </div>
     </>
   );
