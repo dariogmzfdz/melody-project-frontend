@@ -1,16 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import "./Favorites.css";
-import { styled } from "@mui/material/styles";
 import { useMediaQuery } from "react-responsive";
+import "./Favorites.css";
+
+import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
+import convertDuration from "../../functions/ConvertDuration";
+import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
 import SongImg from "../../assets/album-img.jpg";
 import HeartButton from "@mui/icons-material/Favorite";
 import InputBase from "@mui/material/InputBase";
-import convertDuration from "../../functions/ConvertDuration";
-import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
 import { CircularProgress, IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
@@ -74,9 +75,6 @@ function Favorites() {
   function handleSearchClear(e) {
     setInputTrack("");
   }
-
-  /* console.log("input Title: ", inputTrack);
-  console.log("Track: ", track); */
 
   //---- SEARCH BAR  ---> END
 
@@ -202,7 +200,10 @@ function Favorites() {
           {data.map((song) => (
             <div key={song._id} className="container-song-favorites">
               <div className="cover-container">
-                <img src={SongImg} alt="song-img" />
+                <img
+                  src="	https://mussica.info/wp-content/uploads/2021/08/nirvana-640-logo-1200x675-cover.jpeg"
+                  alt="song-img"
+                />
               </div>
               <div className="info-container">
                 <span>{song.title}</span>
