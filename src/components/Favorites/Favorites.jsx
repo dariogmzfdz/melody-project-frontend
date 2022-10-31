@@ -3,23 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import "./Favorites.css";
-
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
 import convertDuration from "../../functions/ConvertDuration";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import MobileTop from "../MobileTop/MobileTop";
-import SideMenu from "../SideMenu/SideMenu";
-import SongImg from "../../assets/album-img.jpg";
 import HeartButton from "@mui/icons-material/Favorite";
-import InputBase from "@mui/material/InputBase";
-import { CircularProgress, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
 import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
-import axios from "axios";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
-import { getRandomSongs } from "../../redux/features/playerSlice";
 
 function Favorites() {
   const { data, isFetching, error } = useGetAllSongsQuery();
@@ -131,30 +124,10 @@ function Favorites() {
     <>
       {isDesktop && (
         <>
-          <SideMenu />
-
-          <div className="container">
-            <div className="search_input_container">
-              <IconButton onClick={getTrack}>
-                <SearchRounded />
-              </IconButton>
-              <input
-                type="text"
-                placeholder="Search for songs and playlists"
-                name="songTitle"
-                onChange={handleSearch}
-                value={inputTrack}
-              />
-              <IconButton onClick={handleSearchClear}>
-                <Clear />
-              </IconButton>
-            </div>
-          </div>
-
           <div className="container-right">
             <header>
               <section className="info">
-                <h6>My songs</h6>
+                <h6>Your songs</h6>
                 <h1>Favorites</h1>
                 <div className="details">
                   <p>{data.songs.length} Songs</p>
@@ -162,8 +135,25 @@ function Favorites() {
                   <p>{convertDurationPlaylist(totalDuration)}</p>
                 </div>
               </section>
+              <div className="container">
+                <div className="search_input_container">
+                  <IconButton onClick={getTrack}>
+                    <SearchRounded />
+                  </IconButton>
+                  <input
+                    type="text"
+                    placeholder="Search for songs and playlists"
+                    name="songTitle"
+                    onChange={handleSearch}
+                    value={inputTrack}
+                  />
+                  <IconButton onClick={handleSearchClear}>
+                    <Clear />
+                  </IconButton>
+                </div>
+              </div>
             </header>
-            <table className="favorites-table">
+            <table className="favorites-table animate-slideup">
               <thead>
                 <tr>
                   <th>#</th>
@@ -190,7 +180,6 @@ function Favorites() {
               </tbody>
             </table>
           </div>
-          <SideMenu />
         </>
       )}
 
@@ -217,7 +206,6 @@ function Favorites() {
               </div>
             </div>
           ))}
-          <SideMenu />
         </>
       )}
     </>

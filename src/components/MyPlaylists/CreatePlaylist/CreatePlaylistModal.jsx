@@ -54,7 +54,7 @@ export default function CreatePlaylistModal() {
     e.preventDefault();
 
     const options = {
-      url: "http://localhost:4000/playlist/create",
+      url: "https://melodystream.herokuapp.com/playlist/create",
       method: "POST",
       headers: {
         Accept: "application/json",

@@ -3,6 +3,12 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        mons: ["Montserrat", "sans-serif"],
+      },
+      lineHeight: {
+        80: "5rem",
+      },
       colors: {
         black: "#191624",
       },

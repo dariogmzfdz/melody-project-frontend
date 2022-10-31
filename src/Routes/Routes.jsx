@@ -16,29 +16,33 @@ import MusicPlayer from "../components/MusicPlayer/index";
 import Songs from "../components/CreateSong/SongTable";
 import Playlists from "../components/MyPlaylists/Playlists";
 import PlaylistEdit from "../components/MyPlaylists/EditPlaylist/PlaylistEdit";
+import SideMenu from "../components/SideMenu/SideMenu";
 
 export default function RouterApp() {
   const { activeSong } = useSelector((state) => state.player);
   return (
     <div>
       <Router>
+        <SideMenu />
         <AuthProvider>
-          <Routes>
-            <Route path="/" element={<SignInSide />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<AdminView />} />
-            <Route path="/resetpassword/:token" element={<ResetPassword />} />
-            <Route path="/forgot" element={<ForgotPassword />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/edit" element={<EditUser />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/songs" element={<Songs />} />
-            <Route path="/playlists" element={<Playlists />} />
-            <Route path="/playlist-edit" element={<PlaylistEdit />} />
-          </Routes>
+          <div className="flex-1 h-fit pb-28">
+            <Routes>
+              <Route path="/" element={<SignInSide />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<AdminView />} />
+              <Route path="/resetpassword/:token" element={<ResetPassword />} />
+              <Route path="/forgot" element={<ForgotPassword />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/edit" element={<EditUser />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/songs" element={<Songs />} />
+              <Route path="/playlists" element={<Playlists />} />
+              <Route path="/playlist-edit" element={<PlaylistEdit />} />
+            </Routes>
+          </div>
         </AuthProvider>
       </Router>
       {activeSong?.title && (
