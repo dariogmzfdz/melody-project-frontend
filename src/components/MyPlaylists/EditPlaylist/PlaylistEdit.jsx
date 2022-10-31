@@ -61,7 +61,7 @@ function PlaylistViewSongs() {
             />
           </div>
           <Box sx={{ ml: 4 }}>
-            <h2>{playlist?.name}</h2>
+            <Typography variant="h5">{playlist?.name}</Typography>
             <p>{playlist?.description}</p>
             <div className="playlist-description">
               <p>{!playlist?.publicAccessible ? "Private" : "Public"}</p>
@@ -73,7 +73,9 @@ function PlaylistViewSongs() {
           <EditPlaylistModal playlist={playlist} />
         </div>
         <div>
-          <Typography sx={{ color: "#f3f3f3" }}>Suggestions</Typography>
+          <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
+            Suggestions
+          </Typography>
           {/* {tracks} */}
           {data.songs.map((song, i) => (
             <SuggestSong
