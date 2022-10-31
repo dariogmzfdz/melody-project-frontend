@@ -18,13 +18,12 @@ import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
 import axios from "axios";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
+import { getRandomSongs } from "../../redux/features/playerSlice";
 
 function Favorites() {
   const { data, isFetching, error } = useGetAllSongsQuery();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const [favorite, setFavorite] = useState([]);
 
-  console.log(data);
   const token = localStorage.getItem("userToken");
 
   const isDesktop = useMediaQuery({
@@ -54,6 +53,7 @@ function Favorites() {
   //---- SEARCH BAR ---> START
 
   const [track, setTrack] = useState();
+  const [randomSongs, setRandomSongs] = useState([]);
   const [inputTrack, setInputTrack] = useState("");
   // const {songTitle} = searchTrack
 
@@ -80,18 +80,6 @@ function Favorites() {
 
   //---- SEARCH BAR  ---> END
 
-  const changeFavorite = (id) => {
-    setFavorite([id]);
-    data.songs.map((song) => {
-      if (song._id == id) {
-        song.favorite = !song.favorite;
-      }
-    });
-    console.log(favorite);
-    // putLikedSong(favorite);
-    fetchLikedSong();
-  };
-
   // const putLikedSong = async (favorite) => {
 
   // try {
@@ -112,7 +100,7 @@ function Favorites() {
   //       console.log(msg);
 
   //     }    }
-  const putLikedSong = {
+  /* const putLikedSong = {
     method: "PUT",
     headers: { auth_token: token },
   };
@@ -121,6 +109,19 @@ function Favorites() {
       `https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favorite}`,
       putLikedSong
     );
+
+  const changeFavorite = (id) => {
+    setFavorite([id]);
+    data.songs.map((song) => {
+      const { _id } = song;
+      if (_id === id) {
+        song.favorite = !song.favorite;
+      }
+    });
+    console.log(favorite);
+    // putLikedSong(favorite);
+    fetchLikedSong();
+  }; */
 
   if (isFetching) return <Loader title="Loading Top Charts" />;
 
@@ -185,7 +186,6 @@ function Favorites() {
                     activeSong={activeSong}
                     data={data}
                     i={i}
-                    changeFavorite={changeFavorite}
                     convertDuration={convertDuration}
                   />
                 ))}
