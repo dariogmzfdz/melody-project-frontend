@@ -4,18 +4,26 @@ export const melodyApi = createApi({
   reducerPath: "melodyApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://melodystream.herokuapp.com",
-    /*     prepareHeaders: (headers) => {
+    prepareHeaders: (headers) => {
       headers.set(
         "auth_token",
-        "e4580cc1e1mshb00f739b2574fd3p149c43jsnf8f7e85cb721"
+        localStorage.getItem("userToken") || "no token found"
       );
 
       return headers;
-    }, */
+    },
   }),
   endpoints: (builder) => ({
     getAllSongs: builder.query({ query: () => "/song/all-songs" }),
+    getPlaylist: builder.query({ query: () => "/playlist/user/playlist" }),
+    getLikedSongs: builder.query({ query: () => "/song/like" }),
   }),
 });
 
-export const { useGetAllSongsQuery } = melodyApi;
+console.log(localStorage.getItem("userToken"));
+
+export const {
+  useGetAllSongsQuery,
+  useGetPlaylistQuery,
+  useGetLikedSongsQuery,
+} = melodyApi;

@@ -5,8 +5,12 @@ import Top from "../Top/Top";
 import AlbumCarrousel from "../Albums/AlbumCarrousel";
 import MobileTop from "../MobileTop/MobileTop";
 import HomeHeader from "./HomeHeader/HomeHeader";
+import { useGetPlaylistQuery } from "../../redux/services/melodyApi";
+import Loader from "../Loader/Loader";
+import Error from "../Error/Error";
 
 function Home() {
+  const { data, isFetching, error } = useGetPlaylistQuery();
   const token = localStorage.getItem("userToken");
 
   const isDesktop = useMediaQuery({
@@ -16,25 +20,6 @@ function Home() {
   const isPhone = useMediaQuery({
     query: "(max-width: 450px)",
   });
-
-  const [data, setData] = useState([]);
-
-  const fetchData = async () => {
-    const response = await fetch(
-      "https://melodystream.herokuapp.com/playlist/user/playlist",
-      {
-        headers: {
-          auth_token: token,
-        },
-      }
-    );
-    const data = await response.json();
-    setData(data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const [random, setRandom] = useState([]);
   const fetchRandom = async () => {
@@ -54,24 +39,9 @@ function Home() {
     fetchRandom();
   }, []);
 
-  const [likedSongs, setLikedSongs] = useState([]);
-  const favorites = async () => {
-    const response = await fetch(
-      "https://melodystream.herokuapp.com/song/like",
-      {
-        headers: {
-          auth_token: token,
-        },
-      }
-    );
-    const liked = await response.json();
+  if (isFetching) return <Loader title="Loading Top Charts" />;
 
-    setLikedSongs(liked);
-  };
-
-  useEffect(() => {
-    favorites();
-  }, []);
+  if (error) return <Error />;
 
   return (
     <>
@@ -80,7 +50,7 @@ function Home() {
           <HomeHeader />
           {<SideMenu />}
           <AlbumCarrousel data={data.data} random={random.data} />
-          <Top favorites={likedSongs.songs} />
+          <Top />
           <SideMenu />
         </>
       )}

@@ -75,15 +75,15 @@ function Favorites() {
     setInputTrack("");
   }
 
-  // console.log("input Title: ", inputTrack);
-  // console.log("Track: ", track);
+  /* console.log("input Title: ", inputTrack);
+  console.log("Track: ", track); */
 
   //---- SEARCH BAR  ---> END
 
   const changeFavorite = (id) => {
     setFavorite([id]);
-    data.songs.forEach((song) => {
-      if (song._id === id) {
+    data.songs.map((song) => {
+      if (song._id == id) {
         song.favorite = !song.favorite;
       }
     });
