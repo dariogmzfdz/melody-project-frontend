@@ -26,6 +26,13 @@
 .buttonFile{
     padding: 0.5rem 4rem !important ;
 }
+.butDiv{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+align-items: center;
+   
+}
 .inputDiv{
 display: flex;
 justify-content: center;
