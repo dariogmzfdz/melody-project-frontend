@@ -93,7 +93,14 @@ export default function CreatePlaylistModal() {
     <div>
       <Button
         variant="outlined"
-        sx={{ mt: 2, color: "white" }}
+        sx={{
+          color: "white",
+          borderColor: "white",
+          m: 2,
+          p: 1,
+          pl: 3,
+          pr: 3,
+        }}
         onClick={handleOpen}
       >
         New Playlist
