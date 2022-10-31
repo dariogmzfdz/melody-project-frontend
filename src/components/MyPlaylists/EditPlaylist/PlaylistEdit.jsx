@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "../playlists.css";
-import ResponsiveAppBar from "../../AppBar/AppBar";
 import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
 import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
@@ -23,7 +22,7 @@ function PlaylistViewSongs() {
     const fetchPlaylist = async () => {
       const response = await fetch(
         //https://melodystream.herokuapp.com/playlist/${playlistID}
-        `http://localhost:4000/playlist/user/playlist`,
+        `https://melodystream.herokuapp.com/playlist/user/playlist`,
         {
           headers: {
             auth_token: token,
@@ -53,24 +52,23 @@ function PlaylistViewSongs() {
 
   return (
     <>
-      <ResponsiveAppBar />
-      <div className="container-playlistEdit">
-        <div className="container_playlist__detail">
-          <div className="thumbnail">
-            <img
-              className="thumbnail"
-              src={playlist?.thumbnail}
-              alt="thumbnail"
-            />
-          </div>
-          <Box sx={{ ml: 4 }}>
-            <Typography variant="h5">{playlist?.name}</Typography>
+      <div className="flex flex-col ml-80 font-mons text-white h-full">
+        <div className="flex items-center h-64 mb-1">
+          <img
+            className="w-56 h-56 rounded-lg"
+            src={playlist?.thumbnail}
+            alt="thumbnail"
+          />
+          <section className="flex flex-col justify-center grow ml-5">
+            <h1 className=" not-italic text-6xl font-black whitespace-nowrap text-ellipsis leading-80">
+              {playlist?.name}
+            </h1>
             <p>{playlist?.description}</p>
             <div className="playlist-description">
               <p>{!playlist?.publicAccessible ? "Private" : "Public"}</p>
               <p>{playlist?.tracks?.length} songs</p>
             </div>
-          </Box>
+          </section>
         </div>
         <div>
           <EditPlaylistModal playlist={playlist} />
