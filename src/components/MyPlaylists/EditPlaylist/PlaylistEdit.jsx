@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import "../playlists.css";
 import ResponsiveAppBar from "../../AppBar/AppBar";
 import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
@@ -6,10 +7,16 @@ import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
 import { FileUpload } from "@mui/icons-material";
 import SongImg from "../../../assets/album-img.jpg";
+import PlayPause from "../../SongCard/PlayPause";
+import SuggestSong from "./SuggestSong";
+import { useGetAllSongsQuery } from "../../../redux/services/melodyApi";
+import "../../Favorites/Favorites";
+import { Typography } from "@mui/material";
 
 function PlaylistViewSongs() {
   const [playlist, setPlaylist] = useState({});
-  console.log(playlist);
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+  const { data, isFetching, error } = useGetAllSongsQuery();
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -37,48 +44,15 @@ function PlaylistViewSongs() {
     fetchPlaylist().catch(console.error);
   }, []);
 
-  const [songs, setSongs] = useState([]);
-  // const { errorMsg, setErrorMsg } = React.useState();
-  useEffect(() => {
-    try {
-      fetch("https://melodystream.herokuapp.com/song/all-songs")
-        .then((res) => res.json())
-        .then((data) => setSongs(data.songs));
-    } catch (error) {
-      if (error.response) {
-        // setErrorMsg(error.response.data.msg);
-        console.log(error.response.data.msg);
-      }
-    }
-  }, []);
+  if (isFetching) return <div>Loading...</div>;
 
-  const tracks = songs.map((song) => {
-    return (
-      <div className="container-song">
-        <div className="cover-container">
-          <img src={SongImg} alt="song-img" />
-        </div>
-        <div className="info-container">
-          <span>{song.title}</span>
-          <div className="contributors">
-            <p className="track-artist">{song.artist}</p>
-          </div>
-        </div>
-        <p className="duration">{convertDuration(song.duration)}</p>
-        <button className="playBtn">{/* <PlayButton /> */} PLAY</button>
-        <button className="heartBtn">
-          {/* <HeartButton /> */}
-          LIKE
-        </button>
-      </div>
-    );
-  });
+  if (error) return <div>Error</div>;
 
   return (
     <>
       <ResponsiveAppBar />
-      <div className="container-playlistView">
-        <div className="container-flex">
+      <div className="container-playlistEdit">
+        <div className="container_playlist__detail">
           <div className="thumbnail">
             <img
               className="thumbnail"
@@ -99,8 +73,19 @@ function PlaylistViewSongs() {
           <EditPlaylistModal playlist={playlist} />
         </div>
         <div>
-          <h3>Suggestions</h3>
-          {tracks}
+          <Typography sx={{ color: "#f3f3f3" }}>Suggestions</Typography>
+          {/* {tracks} */}
+          {data.songs.map((song, i) => (
+            <SuggestSong
+              key={song._id}
+              song={song}
+              isPlaying={isPlaying}
+              activeSong={activeSong}
+              data={data}
+              i={i}
+              convertDuration={convertDuration}
+            />
+          ))}
         </div>
       </div>
     </>

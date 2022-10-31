@@ -89,8 +89,11 @@
 }
 
 /** EDIT PLAYLIST SECTION **/
-.container-playlistView {
+.container-playlistEdit {
   margin: 4rem;
+}
+.container_playlist__detail {
+  display: flex;
   color: #f3f3f3d3;
 }
 
@@ -102,14 +105,10 @@
   border-radius: 5px;
 }
 
-.container-flex {
-  display: flex;
-}
-
 .playlist-description {
   margin-top: 2rem;
 }
 
 .playlist-description > p {
-  line-height: 4px;
+  line-height: 1.5rem;
 }

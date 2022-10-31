@@ -6,7 +6,6 @@ import "./Favorites.css";
 
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
 import convertDuration from "../../functions/ConvertDuration";
-import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
 import SongImg from "../../assets/album-img.jpg";

@@ -1,75 +1,74 @@
 .top-songs-container h1 {
-    color: #fff;
-
+  color: #fff;
 }
 
 .container-song {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 90%;
-    height: 60px;
-    border-radius: 8px;
-    margin: 10px;
-    background: #fff;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 90%;
+  height: 60px;
+  border-radius: 8px;
+  margin: 10px;
+  background: #fff;
 }
 
 .container-song .cover-container {
-    width: 40px;
-    height: 40px;
-    margin: 0 20px;
-    border-radius: 5px;
-    overflow: hidden;
+  width: 40px;
+  height: 40px;
+  margin: 0 20px;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .container-song .cover-container img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .container-song .info-container {
-    display: flex;
-    flex-direction: column;
-    color: #000;
+  display: flex;
+  flex-direction: column;
+  color: #000;
 }
 
 .container-song .info-container span {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .container-song .info-container .contributors .track-artist {
-    color: #444444;
-    font-size: 0.8rem;
-    margin: 0;
+  color: #444444;
+  font-size: 0.8rem;
+  margin: 0;
 }
 
 .container-song .duration {
-    position: absolute;
-    right: 125px;
-    min-width: 45px;
-    margin: 0;
-    font-size: 0.8rem;
-    color: #444444;
+  position: absolute;
+  right: 125px;
+  min-width: 45px;
+  margin: 0;
+  font-size: 0.8rem;
+  color: #444444;
 }
 
 .playBtn .heartBtn {
-    position: absolute;
-    margin-right: 5rem;
-    border: none;
-    background-color: white;
+  position: absolute;
+  margin-right: 5rem;
+  border: none;
+  background-color: white;
 }
 
 @media (min-width: 1200px) {
-    .top-songs-container {
-        width: 25%;
-        margin-left: 74%;
-        margin-top: -35%;
-        overflow-x: hidden;
-    }
+  .top-songs-container {
+    width: 25%;
+    margin-left: 74%;
+    margin-top: -35%;
+    overflow-x: hidden;
+  }
 }
 
 @media (max-width: 432px) {
-    .container-song .duration {
-        display: none;
-    }
+  .container-song .duration {
+    display: none;
+  }
 }
