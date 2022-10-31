@@ -100,7 +100,14 @@ export default function PlaylistModal({
         variant="outlined"
         startIcon={<ModeEditOutlineIcon />}
         className="btn-newPlaylist"
-        sx={{ color: "white", m: 2, p: 1, pl: 3, pr: 3 }}
+        sx={{
+          color: "white",
+          borderColor: "white",
+          m: 2,
+          p: 1,
+          pl: 3,
+          pr: 3,
+        }}
         onClick={handleOpen}
       >
         Edit Playlist
