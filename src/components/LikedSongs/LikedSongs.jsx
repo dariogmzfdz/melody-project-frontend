@@ -1,5 +1,6 @@
 
 import { Favorite } from "@mui/icons-material";
+import axios from "axios";
 import React from "react";
 
 function LikedSongs({ song }) {
@@ -7,32 +8,36 @@ function LikedSongs({ song }) {
 
 
   // console.log("songs", likedSongs)
-  // console.log("id", likedSongs._id)
 
-  function changeFavorite(id) {
-    const likedId = id;
-    console.log(likedId);
-    
-        // song.filter()
 
-        // song.filter(song=> likedId !== song._id);
-      
-  const putLikedSong = {
-    method: "PUT",
-    headers: { auth_token: token },
-  };
-  const fetchLikedSong = async () =>
-    await fetch(
-        `http://melodystream.herokuapp.com/song/like/${likedId}`,
-        putLikedSong
-        );
- 
-    fetchLikedSong();
-    window.location.reload()
+  const favorite = async(id) => {
+		  console.log(id)
+		try {
+			const data = await axios.put(`https://melodystream.herokuapp.com/song/like/${id}`,
+			
+      {
+     id:song._id,
+      },
+      {
+        
+					headers: 
+          {
+						auth_token: token,
+					},
+				}
+			)
+      window.location.reload()
+const result = await data.json();   
+console.log(result);
+		}
+		catch (error) {
+			(console.log(error))
+		}
+	}
+
+  return (
+  <td onClick={()=>favorite(song._id)}><Favorite/></td>
+  )
   }
-
-
-  return <td onClick={()=>changeFavorite(song._id)}><Favorite/></td>;
-}
 
 export default LikedSongs;
