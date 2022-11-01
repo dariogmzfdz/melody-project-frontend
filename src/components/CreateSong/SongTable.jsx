@@ -246,11 +246,7 @@ setOpen(true))
 									{song.artist}
 								</TableCell>
 								<TableCell align="center">
-									<Link to=''>
-										<IconButton onClick={(setOpen) => editSong(song._id)}  >
-											<Edit />
-										</IconButton>
-									</Link>
+									
 									<IconButton onClick={() => deleteSong(song._id)}>
 										<Delete />
 									</IconButton>
