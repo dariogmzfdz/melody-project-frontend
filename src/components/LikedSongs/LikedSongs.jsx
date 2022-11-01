@@ -28,6 +28,7 @@ function LikedSongs({ song }) {
         );
  
     fetchLikedSong();
+    window.location.reload()
   }
 
 
