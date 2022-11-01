@@ -10,9 +10,9 @@ function LikedSongs({ song }) {
   // console.log("id", likedSongs._id)
 
   function changeFavorite(id) {
-    console.log(id);
     const likedId = id;
-  
+    console.log(likedId);
+    
         // song.filter()
 
         // song.filter(song=> likedId !== song._id);

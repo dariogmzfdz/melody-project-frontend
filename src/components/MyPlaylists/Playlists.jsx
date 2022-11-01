@@ -3,16 +3,34 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistImg from "../../assets/album-img.jpg";
 import { useGetPlaylistQuery } from "../../redux/services/melodyApi";
 import CreatePlaylistModal from "./CreatePlaylist/CreatePlaylistModal";
+import { useNavigate } from "react-router-dom";
 
 function Playlists() {
   const { data, isFetching, error } = useGetPlaylistQuery();
   const playlists = data?.data;
+  const token = localStorage.getItem("userToken");
 
-  console.log(playlists);
 
+  function getId(id){
+    const playlistId = id
+    
+    const fetchPlaylist = async (id) =>
+    await fetch(
+      `https://melodystream.herokuapp.com/playlist/${playlistId}`,
+      {
+        method: 'GET',
+        headers: {auth_token: token},
+        mode: 'no-cors',
+        id: playlistId,
+      }
+      )
+      fetchPlaylist();
+  }
   if (isFetching) return <div>Loading...</div>;
 
   if (error) return <div>Error</div>;
+
+
 
   return (
     <div className="flex flex-col ml-80 font-mons text-white h-full">
@@ -42,6 +60,7 @@ function Playlists() {
                   alt="song_img"
                   src={playlist.thumbnail}
                   className="w-full h-full rounded-lg"
+                  onClick={()=>getId(playlist._id)}
                 />
               </div>
 
