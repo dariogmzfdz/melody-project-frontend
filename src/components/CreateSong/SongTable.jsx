@@ -11,7 +11,9 @@ import axios from "axios";
 import { useGetUserSongsQuery } from "../../redux/services/melodyApi";
 
 
-const Songs = () => {
+
+
+const Songs =  () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => {
 		setOpen(true);
@@ -42,7 +44,7 @@ const Songs = () => {
 	const [hasSong, setHasSong] = useState(false);
 	const [song, setSong] = useState("");
 	const [success, setSuccess] = useState("");
-	const { data, isFetching, error } = useGetUserSongsQuery();
+	const { data, isFetching, error } =  useGetUserSongsQuery();
 	const [submitMsg, setsubmitMsg] = useState("");
 	const token = localStorage.getItem("userToken");
 
@@ -51,11 +53,11 @@ const Songs = () => {
 		setUrl(true);
 	};
 
-	const handleSubmission = () => {
+	const handleSubmission = async() => {
 		const formData = new FormData();
 		formData.append("song", audio);
 
-		fetch("http://localhost:4000/cloud/uploadsong", {
+		await fetch("http://localhost:4000/cloud/uploadsong", {
 			method: "POST",
 			body: formData,
 
@@ -73,8 +75,9 @@ const Songs = () => {
 			});
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const handleSubmit = async(e) => {
+			
+			e.preventDefault();
 		try {
 			const data = await axios.post("https://melodystream.herokuapp.com/song",
 				{
@@ -89,16 +92,20 @@ const Songs = () => {
 						auth_token: token,
 					}
 				},)
+			
+
 			handleClose();
 			setsubmitMsg("Song successfully upload");
 			console.log(data);
+			window.location.reload()
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 
-	const deleteSong = async (id) => {
+	const deleteSong = async(id) => {
+		
 		try {
 			const response = await axios.delete(`https://melodystream.herokuapp.com/song/${id}`,
 				{
@@ -106,15 +113,20 @@ const Songs = () => {
 						auth_token: token,
 					},
 				}
-			);
-			const result = await response.json();
+			)
+			const result = await response.json;
+			window.location.reload()
 		}
 		catch (error) {
 			(console.log(error))
 		}
 	}
 
-
+const editSong = (id) => {
+	console.log(id)
+if(id) return (
+setOpen(true))
+}
 
 	if (isFetching) return <div>Loading...</div>;
 
@@ -138,7 +150,7 @@ const Songs = () => {
 
 						<Paper >
 
-							<form style={{ width: '100%' }} onSubmit={handleSubmit}>
+							<form style={{ width: '100%' }}  onSubmit={ handleSubmit}>
 								<div className="inputText">
 									<TextField
 										name="name"
@@ -235,7 +247,7 @@ const Songs = () => {
 								</TableCell>
 								<TableCell align="center">
 									<Link to=''>
-										<IconButton >
+										<IconButton onClick={(setOpen) => editSong(song._id)}  >
 											<Edit />
 										</IconButton>
 									</Link>

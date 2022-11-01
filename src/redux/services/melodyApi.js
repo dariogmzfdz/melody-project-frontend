@@ -5,7 +5,7 @@ export const melodyApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://melodystream.herokuapp.com",
     prepareHeaders: (headers) => {
-      headers.set(
+       headers.set(
         "auth_token",
         localStorage.getItem("userToken") || "no token found"
       );
@@ -23,7 +23,7 @@ export const melodyApi = createApi({
 
 console.log(localStorage.getItem("userToken"));
 
-export const {
+export   const  {
   useGetUserSongsQuery, 
   useGetAllSongsQuery,
   useGetPlaylistQuery,
