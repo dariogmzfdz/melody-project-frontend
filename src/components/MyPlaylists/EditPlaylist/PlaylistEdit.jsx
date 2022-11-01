@@ -6,21 +6,40 @@ import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
 import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
 import SuggestSong from "./SuggestSong";
-import Songs from "./Songs";
-import { useGetAllSongsQuery } from "../../../redux/services/melodyApi";
+import {
+  useGetAllSongsQuery,
+  useGetSongQuery,
+} from "../../../redux/services/melodyApi";
 import "../../Favorites/Favorites";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import Songs from "./Songs";
+import axios from "axios";
+import {
+  isEditable,
+  isEditableInput,
+} from "@testing-library/user-event/dist/utils";
 
 function PlaylistViewSongs() {
   const token = localStorage.getItem("userToken") || null;
+
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
+  const [songDetails, setSongDetails] = useState();
+  const [tracksId, setTracksId] = useState([]);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
 
-  console.log(lastPlaylist);
+  // console.log("Playlists", userPlaylists);
+  // console.log("lastPlaylist: ", lastPlaylist);
+
+  //REDUX
+  // const {
+  //   data: songsData,
+  //   isFetching: isFetchingSongs,
+  //   error: songsError,
+  // } = useGetSongQuery({ songId });
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -41,6 +60,7 @@ function PlaylistViewSongs() {
         const lastPlaylistCreated = Object.values(data.data).pop();
         setUserPlaylists(data.data);
         setLastPlaylistCreated(lastPlaylistCreated);
+        setTracksId(lastPlaylist.tracks);
       } catch (error) {
         console.log(error);
       }
@@ -49,12 +69,25 @@ function PlaylistViewSongs() {
     fetchPlaylist().catch(console.error);
   }, []);
 
-  // const refreshRandomSongs = () => {
-  //   setRandomSongs(getMultipleRandom());
-  // };
+  const [idDetails, setIdDetails] = useState();
+
+  // console.log(tracksId);
+  const getDetails = async () => {
+    Object.keys(tracksId).forEach((key) => {
+      fetch(`http://localhost:4000/song/select/${tracksId[key]._id}`)
+        .then((res) => res.json())
+        .then((data) =>
+          setIdDetails((prevId) => ({
+            ...prevId,
+            Id: data.songs,
+          }))
+        );
+    });
+  };
+
+  console.log(idDetails);
 
   if (isFetching) return <div>Loading...</div>;
-
   if (error) return <div>Error</div>;
 
   function randomIndex(count) {
@@ -74,6 +107,37 @@ function PlaylistViewSongs() {
     }
     setRandomSongs(randomSongs);
   }
+
+  //Component with song info add
+  // const userSong = userSongs.songs.map((song, i) => (
+  //   <Songs
+  //     key={song._id}
+  //     song={song}
+  //     lastPlaylist={lastPlaylist}
+  //     userPlaylists={userPlaylists}
+  //     isPlaying={isPlaying}
+  //     activeSong={activeSong}
+  //     data={data}
+  //     i={i}
+  //     convertDuration={convertDuration}
+  //   />
+  // ));
+
+  // console.log(userSong);
+
+  const suggestionSongs = randomSongs.map((song, i) => (
+    <SuggestSong
+      key={song._id}
+      song={song}
+      lastPlaylist={lastPlaylist}
+      userPlaylists={userPlaylists}
+      isPlaying={isPlaying}
+      activeSong={activeSong}
+      data={data}
+      i={i}
+      convertDuration={convertDuration}
+    />
+  ));
 
   return (
     <>
@@ -104,27 +168,14 @@ function PlaylistViewSongs() {
             <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
               Your playlist is empty, we can suggest you some songs!
             </Typography>
-          ) : (
-            <Songs />
-          )}
-          {/* {tracks} */}
+          ) : null}
+          {/*render server msg*/}
           {randomSongs.length > 0 ? (
-            randomSongs.map((song, i) => (
-              <SuggestSong
-                key={song._id}
-                song={song}
-                lastPlaylist={lastPlaylist}
-                userPlaylists={userPlaylists}
-                isPlaying={isPlaying}
-                activeSong={activeSong}
-                data={data}
-                i={i}
-                convertDuration={convertDuration}
-              />
-            ))
-          ) : (
-            <div></div>
-          )}
+            <div>
+              {/* userSong */}
+              {suggestionSongs}
+            </div>
+          ) : null}
         </div>
         {randomSongs.length > 0 ? (
           <Button
@@ -152,7 +203,8 @@ function PlaylistViewSongs() {
               pr: 3,
             }}
             variant="outlined"
-            onClick={getRandomSongs}
+            // onClick={getRandomSongs}
+            onClick={getDetails}
           >
             SUGGEST SONGS
           </Button>

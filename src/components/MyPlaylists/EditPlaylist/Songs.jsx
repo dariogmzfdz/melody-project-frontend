@@ -91,6 +91,7 @@ function Songs({
         song={song}
         handlePause={handlePauseClick}
         handlePlay={handlePlayClick}
+        className="playpause"
       />
       <div className="info-container">
         <span>{song.title}</span>
@@ -99,7 +100,7 @@ function Songs({
         </div>
       </div>
       <button>
-        <FavoriteIcon />
+        <FavoriteIcon className="favoriteIcon" />
       </button>
       <Box sx={{ display: "flex" }}>
         <div>
@@ -125,7 +126,7 @@ function Songs({
               horizontal: "left",
             }}
           >
-            <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+            <Typography sx={{ p: 2 }}>Insert playlist name</Typography>
           </Popover>
         </div>
       </Box>

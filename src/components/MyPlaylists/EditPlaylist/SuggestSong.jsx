@@ -9,6 +9,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 
 function SuggestSong({
   song,
@@ -21,6 +22,9 @@ function SuggestSong({
   convertDuration,
 }) {
   const token = localStorage.getItem("userToken") || null;
+  const [serverMsg, setServerMsg] = React.useState("");
+  const [serverMsgError, setServerMsgError] = React.useState("");
+  const [isSongAdd, setIsSongAdd] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -53,34 +57,46 @@ function SuggestSong({
       headers: {
         Accept: "application/json",
         auth_token: token,
-        "Content-Type": "application/json;text/html;charset=UTF-8",
+        "Content-Type": "application/json;charset=UTF-8",
       },
-      data: songsId,
+      data: {
+        song_id: songsId,
+      },
     };
 
     try {
       const result = await axios(options);
       console.log(result.msg);
+      setServerMsg(result.msg);
+      alert(serverMsg);
+      setIsSongAdd(true);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.msg);
+        setServerMsgError(error.response.data.msg);
+        alert(serverMsgError);
+        setIsSongAdd(false);
       }
     }
   };
 
+  // {isSongAdd ? (
+  //   <Alert severity="success">{serverMsg}</Alert>
+  // ) : (
+  //   <Alert severity="info">{serverMsgError}</Alert>
+  // )}
+
   return (
     <div className="container-song">
       <div className="cover-container">
-        
-      
-      <PlayPause
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        song={song}
-        handlePause={handlePauseClick}
-        handlePlay={handlePlayClick}
-        className="playpause"
-      />
+        <PlayPause
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+          className="playpause"
+        />
       </div>
       <div className="info-container">
         <span>{song.title}</span>
@@ -89,7 +105,7 @@ function SuggestSong({
         </div>
       </div>
       <button>
-        <FavoriteIcon className="favoriteIcon"/>
+        <FavoriteIcon className="favoriteIcon" />
       </button>
       <Box sx={{ display: "flex" }}>
         <div>
