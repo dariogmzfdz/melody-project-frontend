@@ -1,10 +1,6 @@
-import { Identity } from "@mui/base";
+
 import { Favorite } from "@mui/icons-material";
 import React from "react";
-import { useState } from "react";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
-import Favorites from "../Favorites/Favorites";
-import SongCard from "../SongCard/SongCard";
 
 function LikedSongs({ song }) {
   const token = localStorage.getItem("userToken");
@@ -16,7 +12,7 @@ function LikedSongs({ song }) {
   function changeFavorite(id) {
     console.log(id);
     const likedId = id;
-
+  
         // song.filter()
 
         // song.filter(song=> likedId !== song._id);

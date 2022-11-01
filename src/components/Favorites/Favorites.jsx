@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import {  useSelector } from "react-redux";
+import { useState} from "react";
 import { useMediaQuery } from "react-responsive";
 import "./Favorites.css";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
@@ -18,7 +18,7 @@ function Favorites() {
   const { data, isFetching, error } = useGetLikedSongsQuery();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-  const token = localStorage.getItem("userToken");
+  
 
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
