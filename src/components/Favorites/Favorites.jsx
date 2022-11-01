@@ -79,9 +79,9 @@ function Favorites() {
       {
         headers: {
           auth_token: token,
-        },
-      },
-    }
+        }
+      })
+  }
   // ---- SEARCH BAR  ---> END
 
   // const putLikedSong = async (favorite) => {
