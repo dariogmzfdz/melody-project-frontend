@@ -86,6 +86,8 @@ function SuggestSong({
   };
 
   const [open, setOpen] = React.useState(true);
+  const [openError, setOpenError] = React.useState(true);
+
   console.log(serverError);
 
   return (
@@ -133,7 +135,7 @@ function SuggestSong({
       </div>
       {serverError && (
         <Box sx={{ width: "100%" }}>
-          <Collapse in={open}>
+          <Collapse in={openError}>
             <Alert
               action={
                 <IconButton
@@ -141,10 +143,11 @@ function SuggestSong({
                   color="inherit"
                   size="small"
                   onClick={() => {
-                    setOpen(false);
+                    setOpenError(false);
                   }}
                 >
-                  <CloseIcon fontSize="inherit" />
+                  <CloseIcon  
+                 fontSize="inherit" />
                 </IconButton>
               }
               severity="warning"
@@ -166,7 +169,7 @@ function SuggestSong({
         </div>
         <div>
           <button onClick={(e) => addSuggestSong(e, song._id)}>
-            <PlaylistAddIcon />
+            <PlaylistAddIcon onClick={() => setOpenError(true)} />
           </button>
         </div>
       </Box>
