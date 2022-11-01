@@ -5,7 +5,7 @@ import AlbumImg from "../../assets/album-img.jpg";
 import PlayPause from "./PlayPause";
 import { playPause, setActiveSong } from "../../redux/features/playerSlice";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-
+import LikedSongs from "../LikedSongs/LikedSongs";
 const SongCard = ({
   song,
   isPlaying,
@@ -48,16 +48,8 @@ const SongCard = ({
           handlePlay={handlePlayClick}
         />
       </td>
-      <td onClick={() => changeFavorite(song._id)}>
-        {song?.favorite ? (
-          <i>
-            <FaHeart />
-          </i>
-        ) : (
-          <i>
-            <FaRegHeart />
-          </i>
-        )}
+      <td>
+        <LikedSongs key={song._id} song={song} />
       </td>
     </tr>
   );

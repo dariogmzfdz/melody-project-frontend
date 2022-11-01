@@ -24,7 +24,6 @@ function Favorites() {
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const [favorite, setFavorite] = useState([]);
 
-  console.log(data);
   const token = localStorage.getItem("userToken");
 
   const isDesktop = useMediaQuery({
@@ -75,57 +74,41 @@ function Favorites() {
     setInputTrack("");
   }
 
-  /* console.log("input Title: ", inputTrack);
-  console.log("Track: ", track); */
+  //!Get liked songs
 
-  //---- SEARCH BAR  ---> END
-
-  const changeFavorite = (id) => {
-    setFavorite([id]);
-    data.songs.map((song) => {
-      if (song._id == id) {
-        song.favorite = !song.favorite;
+  const [likedSongs, setLikedSongs] = useState([]);
+  console.log(likedSongs)
+  const favourites = async () => {
+    const response = await fetch(
+      "https://melodystream.herokuapp.com/song/like",
+      {
+        headers: {
+          auth_token: token,
+        },
       }
-    });
-    console.log(favorite);
-    // putLikedSong(favorite);
-    fetchLikedSong();
-  };
-
-  // const putLikedSong = async (favorite) => {
-
-  // try {
-  //   const data = await axios.put(
-  //     `https://melodystream.herokuapp.com/song/like/${favorite}`,
-
-  //     {
-  //       headers: {
-  //         auth_token: token,
-  //       }
-  //     }
-  //     )
-  //        const response = await data.json();
-
-  //     }
-  //     catch (data) {
-  //       const { msg } = data.response.data;
-  //       console.log(msg);
-
-  //     }    }
-  const putLikedSong = {
-    method: "PUT",
-    headers: { auth_token: token },
-  };
-  const fetchLikedSong = async () =>
-    await fetch(
-      `https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favorite}`,
-      putLikedSong
     );
+    const liked = await response.json();
 
-  if (isFetching) return <Loader title="Loading Top Charts" />;
+    setLikedSongs(liked);
+  };
+  useEffect(() => {
+    favourites();
+  }, []);
 
-  if (error) return <Error />;
+  // const favoriteId = (id) => {
+  //   setFavorite([id]);
+  //   data.songs.map((song) => {
+  //     console.log(song)
+  //     if (song._id === id) {
+  //       song.favorite = !song.favorite;
+  //     }
+  //   });
+  //   fetchLikedSong();
+  // };
 
+  if (isFetching) return <div>Loading...</div>;
+
+  if (error) return <div>Error</div>;
   const totalDuration = data.songs.map((song) => song.duration);
 
   return (
@@ -177,15 +160,14 @@ function Favorites() {
                 </tr>
               </thead>
               <tbody>
-                {data.songs.map((song, i) => (
+                {likedSongs.songs.map((song, i) => (
                   <SongCard
                     key={song._id}
                     song={song}
                     isPlaying={isPlaying}
                     activeSong={activeSong}
-                    data={data}
                     i={i}
-                    changeFavorite={changeFavorite}
+                    // changeFavorite={changeFavorite}
                     convertDuration={convertDuration}
                   />
                 ))}
