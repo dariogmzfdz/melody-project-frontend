@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import {  useSelector } from "react-redux";
+import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import "./Favorites.css";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
@@ -10,15 +10,14 @@ import HeartButton from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
-import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
+import { useGetLikedSongsQuery } from "../../redux/services/melodyApi";
 import Loader from "../Loader/Loader";
-import Error from "../Error/Error";
+
 
 function Favorites() {
-  const { data, isFetching, error } = useGetAllSongsQuery();
+  const { data, isFetching, error } = useGetLikedSongsQuery();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
-  const token = localStorage.getItem("userToken");
 
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
@@ -71,17 +70,22 @@ function Favorites() {
 
   //!Get liked songs
 
-  const [likedSongs, setLikedSongs] = useState([]);
-  console.log(likedSongs)
-  const favourites = async () => {
-    const response = await fetch(
-      "https://melodystream.herokuapp.com/song/like",
-      {
-        headers: {
-          auth_token: token,
-        }
-      })
-  }
+  // const [likedSongs, setLikedSongs] = useState([]);
+  // const favourites = async () => {
+  //   const response = await fetch(
+  //     'https://melodystream.herokuapp.com/song/like',
+  //     {
+  //       headers: {
+  //         method: 'GET',
+  //         auth_token: token,
+  //       }
+  //     }
+     
+  //   )
+  //   const result = await response.json();
+  //    setLikedSongs(result);
+  // }
+  // console.log(likedSongs);
   // ---- SEARCH BAR  ---> END
 
   // const putLikedSong = async (favorite) => {
@@ -103,48 +107,35 @@ function Favorites() {
   //       const { msg } = data.response.data;
   //       console.log(msg);
 
-  //     }    }
-  /* const putLikedSong = {
-    method: "PUT",
-    headers: { auth_token: token },
-  };
-  const fetchLikedSong = async () =>
-    await fetch(
-      `https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favorite}`,
-      putLikedSong
-    );
-    const liked = await response.json();
+      // }    }
+       
+//    const putLikedSong = {
+//     method: "PUT",
+//     headers: { auth_token: token }
+//   }
+//   const fetchLikedSong = async () =>{
+//   const response =  await fetch(
+//       `https://melodystream.herokuapp.com/song/like/${favorite}`,
+//       putLikedSong
+//     );
+//     const result = await response.json();
 
-    setLikedSongs(liked);
-  };
-  useEffect(() => {
-    favourites();
-  }, []);
+//     setFavorite(result);
+//   };
+// console.log(favorite);
+ const [favorite, setFavorite] = useState([]);
+  if (isFetching) return <Loader title="Loading Top Charts" />;
+
   const changeFavorite = (id) => {
     setFavorite([id]);
     data.songs.map((song) => {
-      const { _id } = song;
-      if (_id === id) {
-        song.favorite = !song.favorite;
+     
+      if (song._id == id) {
+        console.log(song.favorite)
       }
     });
-    console.log(favorite);
-    // putLikedSong(favorite);
-    fetchLikedSong();
-  }; */
-
-  if (isFetching) return <Loader title="Loading Top Charts" />;
-
-  // const favoriteId = (id) => {
-  //   setFavorite([id]);
-  //   data.songs.map((song) => {
-  //     console.log(song)
-  //     if (song._id === id) {
-  //       song.favorite = !song.favorite;
-  //     }
-  //   });
-  //   fetchLikedSong();
-  // };
+    setFavorite();
+  };
 
   if (isFetching) return <div>Loading...</div>;
 
@@ -197,14 +188,14 @@ function Favorites() {
                 </tr>
               </thead>
               <tbody>
-                {likedSongs.songs.map((song, i) => (
+                {data.songs.map((song, i) => (
                   <SongCard
+                  i={i}
                     key={song._id}
                     song={song}
                     isPlaying={isPlaying}
-                    activeSong={activeSong}
-                    i={i}
-                    // changeFavorite={changeFavorite}
+                    onClick={activeSong}
+                    //  changeFavorite={changeFavorite}
                     convertDuration={convertDuration}
                   />
                 ))}
