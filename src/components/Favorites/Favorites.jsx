@@ -10,12 +10,12 @@ import HeartButton from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
-import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
+import { useGetLikedSongsQuery } from "../../redux/services/melodyApi";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 
 function Favorites() {
-  const { data, isFetching, error } = useGetAllSongsQuery();
+  const { data, isFetching, error } = useGetLikedSongsQuery();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
 
   const token = localStorage.getItem("userToken");

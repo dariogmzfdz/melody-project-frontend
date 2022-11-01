@@ -5,7 +5,6 @@ import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
 import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
 import SuggestSong from "./SuggestSong";
-import Songs from "./Songs";
 import { useGetAllSongsQuery } from "../../../redux/services/melodyApi";
 import "../../Favorites/Favorites";
 import { Typography } from "@mui/material";
@@ -18,8 +17,6 @@ function PlaylistViewSongs() {
   const [randomSongs, setRandomSongs] = useState([]);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
-
-  console.log(lastPlaylist);
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -48,14 +45,6 @@ function PlaylistViewSongs() {
     fetchPlaylist().catch(console.error);
   }, []);
 
-  // const refreshRandomSongs = () => {
-  //   setRandomSongs(getMultipleRandom());
-  // };
-
-  if (isFetching) return <div>Loading...</div>;
-
-  if (error) return <div>Error</div>;
-
   function randomIndex(count) {
     return Math.floor(Math.random() * count);
   }
@@ -74,36 +63,24 @@ function PlaylistViewSongs() {
     setRandomSongs(randomSongs);
   }
 
+  if (isFetching) return <div>Loading...</div>;
+
+  if (error) return <div>Error</div>;
+
   return (
     <>
-<<<<<<< HEAD
-      <div className="flex flex-col ml-80 font-mons text-white h-full">
+      <div className="flex flex-col ml-80 font-mons h-full">
         <div className="flex items-center h-64 mb-1">
           <img
             className="w-56 h-56 rounded-lg"
-            src={playlist?.thumbnail}
+            src={lastPlaylist?.thumbnail}
             alt="thumbnail"
           />
-          <section className="flex flex-col justify-center grow ml-5">
+          <section className="flex flex-col justify-center grow ml-5 text-white">
             <h1 className=" not-italic text-6xl font-black whitespace-nowrap text-ellipsis leading-80">
-              {playlist?.name}
+              {lastPlaylist?.name}
             </h1>
-            <p>{playlist?.description}</p>
-=======
-      <ResponsiveAppBar />
-      <div className="container-playlistEdit">
-        <div className="container_playlist__detail">
-          <div className="thumbnail">
-            <img
-              className="thumbnail"
-              src={lastPlaylist?.thumbnail}
-              alt="thumbnail"
-            />
-          </div>
-          <Box sx={{ ml: 4 }}>
-            <Typography variant="h5">{lastPlaylist?.name}</Typography>
             <p>{lastPlaylist?.description}</p>
->>>>>>> origin/playlist
             <div className="playlist-description">
               <p>{!lastPlaylist?.publicAccessible ? "Private" : "Public"}</p>
               <p>{lastPlaylist?.tracks?.length} songs</p>
@@ -119,7 +96,7 @@ function PlaylistViewSongs() {
               Your playlist is empty, we can suggest you some songs!
             </Typography>
           ) : (
-            <Songs />
+            <div>{/* <Songs /> */}</div>
           )}
           {/* {tracks} */}
           {randomSongs.length > 0 ? (
