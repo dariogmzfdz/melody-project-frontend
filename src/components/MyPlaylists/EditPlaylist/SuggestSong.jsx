@@ -10,6 +10,10 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import Collapse from "@mui/material/Collapse";
 
 function SuggestSong({
   song,
@@ -22,9 +26,12 @@ function SuggestSong({
   convertDuration,
 }) {
   const token = localStorage.getItem("userToken") || null;
+
   const [serverMsg, setServerMsg] = React.useState("");
-  const [serverMsgError, setServerMsgError] = React.useState("");
   const [isSongAdd, setIsSongAdd] = React.useState(false);
+
+  const [ErrorMsg, setErrorMsg] = React.useState("");
+  const [serverError, setSeverError] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -66,25 +73,20 @@ function SuggestSong({
 
     try {
       const result = await axios(options);
-      console.log(result.msg);
-      setServerMsg(result.msg);
-      alert(serverMsg);
+      console.log(result);
+      setServerMsg(result.data.msg);
       setIsSongAdd(true);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data.msg);
-        setServerMsgError(error.response.data.msg);
-        alert(serverMsgError);
-        setIsSongAdd(false);
+        setErrorMsg(error.response.data.msg);
+        setSeverError(true);
       }
     }
   };
 
-  // {isSongAdd ? (
-  //   <Alert severity="success">{serverMsg}</Alert>
-  // ) : (
-  //   <Alert severity="info">{serverMsgError}</Alert>
-  // )}
+  const [open, setOpen] = React.useState(true);
+  console.log(serverError);
 
   return (
     <div className="container-song">
@@ -104,6 +106,55 @@ function SuggestSong({
           <p className="track-artist">{song.artist}</p>
         </div>
       </div>
+      <div>
+        {isSongAdd && (
+          <Box sx={{ width: "100%" }}>
+            <Collapse in={open}>
+              <Alert
+                action={
+                  <IconButton
+                    aria-label="close"
+                    color="inherit"
+                    size="small"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    <CloseIcon fontSize="inherit" />
+                  </IconButton>
+                }
+                sx={{ mb: 2 }}
+              >
+                {serverMsg}
+              </Alert>
+            </Collapse>
+          </Box>
+        )}
+      </div>
+      {serverError && (
+        <Box sx={{ width: "100%" }}>
+          <Collapse in={open}>
+            <Alert
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setOpen(false);
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+              severity="warning"
+              sx={{ mb: 2 }}
+            >
+              {ErrorMsg}
+            </Alert>
+          </Collapse>
+        </Box>
+      )}
       <button>
         <FavoriteIcon className="favoriteIcon" />
       </button>

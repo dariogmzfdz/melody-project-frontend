@@ -26,13 +26,13 @@ function PlaylistViewSongs() {
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
-  const [songDetails, setSongDetails] = useState();
-  const [tracksId, setTracksId] = useState([]);
+  const [trackDetails, setTrackDetails] = useState();
+  // const [tracksId, setTracksId] = useState([]);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
 
   // console.log("Playlists", userPlaylists);
-  // console.log("lastPlaylist: ", lastPlaylist);
+  console.log("lastPlaylist: ", lastPlaylist._id);
 
   //REDUX
   // const {
@@ -60,7 +60,7 @@ function PlaylistViewSongs() {
         const lastPlaylistCreated = Object.values(data.data).pop();
         setUserPlaylists(data.data);
         setLastPlaylistCreated(lastPlaylistCreated);
-        setTracksId(lastPlaylist.tracks);
+        // setTracksId(lastPlaylist.tracks);
       } catch (error) {
         console.log(error);
       }
@@ -69,23 +69,43 @@ function PlaylistViewSongs() {
     fetchPlaylist().catch(console.error);
   }, []);
 
-  const [idDetails, setIdDetails] = useState();
+  // const [idDetails, setIdDetails] = useState();
 
   // console.log(tracksId);
-  const getDetails = async () => {
-    Object.keys(tracksId).forEach((key) => {
-      fetch(`http://localhost:4000/song/select/${tracksId[key]._id}`)
-        .then((res) => res.json())
-        .then((data) =>
-          setIdDetails((prevId) => ({
-            ...prevId,
-            Id: data.songs,
-          }))
-        );
-    });
-  };
+  // const getDetails = async () => {
+  //   Object.keys(tracksId)?.forEach((key) => {
+  //     fetch(`http://localhost:4000/song/select/${tracksId[key]._id}`)
+  //       .then((res) => res.json())
+  //       .then((data) =>
+  //         setIdDetails((prevData) => {
+  //           return {
+  //             ...prevData,
+  //             id: data,
+  //           };
+  //         })
+  //       );
+  //   });
+  // };
 
-  console.log(idDetails);
+  const getPlaylistBId = async () => {
+    const response = await fetch(
+      //https://melodystream.herokuapp.com/playlist/${playlistID}
+      `http://localhost:4000/playlist/${lastPlaylist._id}`,
+      {
+        headers: {
+          auth_token: token,
+        },
+      }
+    );
+
+    try {
+      const data = await response.json();
+      setTrackDetails(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(trackDetails);
 
   if (isFetching) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
@@ -203,8 +223,8 @@ function PlaylistViewSongs() {
               pr: 3,
             }}
             variant="outlined"
-            // onClick={getRandomSongs}
-            onClick={getDetails}
+            onClick={getRandomSongs}
+            // onClick={getPlaylistBId}
           >
             SUGGEST SONGS
           </Button>
