@@ -67,6 +67,7 @@ const SongCard = ({
       <td className="duration-field">{convertDuration(song.duration)}</td>
       <td>
         <PlayPause
+        className="play"
           isPlaying={isPlaying}
           activeSong={activeSong}
           song={song}

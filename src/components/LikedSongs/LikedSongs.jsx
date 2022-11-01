@@ -1,4 +1,5 @@
 import { Identity } from "@mui/base";
+import { Favorite } from "@mui/icons-material";
 import React from "react";
 import { useState } from "react";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
@@ -34,7 +35,7 @@ function LikedSongs({ song }) {
   }
 
 
-  return <td onClick={()=>changeFavorite(song._id)}>like</td>;
+  return <td onClick={()=>changeFavorite(song._id)}><Favorite/></td>;
 }
 
 export default LikedSongs;
