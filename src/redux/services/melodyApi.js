@@ -20,8 +20,6 @@ export const melodyApi = createApi({
   }),
 });
 
-console.log(localStorage.getItem("userToken"));
-
 export const {
   useGetAllSongsQuery,
   useGetPlaylistQuery,

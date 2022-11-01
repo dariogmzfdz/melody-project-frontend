@@ -1,28 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import "./Favorites.css";
-import { styled } from "@mui/material/styles";
 import { useMediaQuery } from "react-responsive";
-import MobileTop from "../MobileTop/MobileTop";
-import SideMenu from "../SideMenu/SideMenu";
-import SongImg from "../../assets/album-img.jpg";
-import HeartButton from "@mui/icons-material/Favorite";
-import InputBase from "@mui/material/InputBase";
-import convertDuration from "../../functions/ConvertDuration";
+import "./Favorites.css";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
-import { CircularProgress, IconButton } from "@mui/material";
+import convertDuration from "../../functions/ConvertDuration";
+import MobileTop from "../MobileTop/MobileTop";
+import HeartButton from "@mui/icons-material/Favorite";
+import { IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
 import { useGetAllSongsQuery } from "../../redux/services/melodyApi";
-import axios from "axios";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
 
 function Favorites() {
   const { data, isFetching, error } = useGetAllSongsQuery();
   const { activeSong, isPlaying } = useSelector((state) => state.player);
-  const [favorite, setFavorite] = useState([]);
 
   const token = localStorage.getItem("userToken");
 
@@ -53,6 +47,7 @@ function Favorites() {
   //---- SEARCH BAR ---> START
 
   const [track, setTrack] = useState();
+  const [randomSongs, setRandomSongs] = useState([]);
   const [inputTrack, setInputTrack] = useState("");
   // const {songTitle} = searchTrack
 
@@ -85,7 +80,38 @@ function Favorites() {
         headers: {
           auth_token: token,
         },
-      }
+      },
+    }
+  // ---- SEARCH BAR  ---> END
+
+  // const putLikedSong = async (favorite) => {
+
+  // try {
+  //   const data = await axios.put(
+  //     `https://melodystream.herokuapp.com/song/like/${favorite}`,
+
+  //     {
+  //       headers: {
+  //         auth_token: token,
+  //       }
+  //     }
+  //     )
+  //        const response = await data.json();
+
+  //     }
+  //     catch (data) {
+  //       const { msg } = data.response.data;
+  //       console.log(msg);
+
+  //     }    }
+  /* const putLikedSong = {
+    method: "PUT",
+    headers: { auth_token: token },
+  };
+  const fetchLikedSong = async () =>
+    await fetch(
+      `https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favorite}`,
+      putLikedSong
     );
     const liked = await response.json();
 
@@ -94,6 +120,20 @@ function Favorites() {
   useEffect(() => {
     favourites();
   }, []);
+  const changeFavorite = (id) => {
+    setFavorite([id]);
+    data.songs.map((song) => {
+      const { _id } = song;
+      if (_id === id) {
+        song.favorite = !song.favorite;
+      }
+    });
+    console.log(favorite);
+    // putLikedSong(favorite);
+    fetchLikedSong();
+  }; */
+
+  if (isFetching) return <Loader title="Loading Top Charts" />;
 
   // const favoriteId = (id) => {
   //   setFavorite([id]);
@@ -115,30 +155,10 @@ function Favorites() {
     <>
       {isDesktop && (
         <>
-          <SideMenu />
-
-          <div className="container">
-            <div className="search_input_container">
-              <IconButton onClick={getTrack}>
-                <SearchRounded />
-              </IconButton>
-              <input
-                type="text"
-                placeholder="Search for songs and playlists"
-                name="songTitle"
-                onChange={handleSearch}
-                value={inputTrack}
-              />
-              <IconButton onClick={handleSearchClear}>
-                <Clear />
-              </IconButton>
-            </div>
-          </div>
-
           <div className="container-right">
             <header>
               <section className="info">
-                <h6>My songs</h6>
+                <h6>Your songs</h6>
                 <h1>Favorites</h1>
                 <div className="details">
                   <p>{data.songs.length} Songs</p>
@@ -146,8 +166,25 @@ function Favorites() {
                   <p>{convertDurationPlaylist(totalDuration)}</p>
                 </div>
               </section>
+              <div className="container">
+                <div className="search_input_container">
+                  <IconButton onClick={getTrack}>
+                    <SearchRounded />
+                  </IconButton>
+                  <input
+                    type="text"
+                    placeholder="Search for songs and playlists"
+                    name="songTitle"
+                    onChange={handleSearch}
+                    value={inputTrack}
+                  />
+                  <IconButton onClick={handleSearchClear}>
+                    <Clear />
+                  </IconButton>
+                </div>
+              </div>
             </header>
-            <table className="favorites-table">
+            <table className="favorites-table animate-slideup">
               <thead>
                 <tr>
                   <th>#</th>
@@ -174,7 +211,6 @@ function Favorites() {
               </tbody>
             </table>
           </div>
-          <SideMenu />
         </>
       )}
 
@@ -184,7 +220,10 @@ function Favorites() {
           {data.map((song) => (
             <div key={song._id} className="container-song-favorites">
               <div className="cover-container">
-                <img src={SongImg} alt="song-img" />
+                <img
+                  src="	https://mussica.info/wp-content/uploads/2021/08/nirvana-640-logo-1200x675-cover.jpeg"
+                  alt="song-img"
+                />
               </div>
               <div className="info-container">
                 <span>{song.title}</span>
@@ -198,7 +237,6 @@ function Favorites() {
               </div>
             </div>
           ))}
-          <SideMenu />
         </>
       )}
     </>

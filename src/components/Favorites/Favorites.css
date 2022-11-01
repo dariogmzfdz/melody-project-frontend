@@ -16,12 +16,6 @@ header {
   color: #fff;
 }
 
-header img {
-  width: 170px;
-  height: auto;
-  border-radius: 8px;
-}
-
 header .info {
   flex-grow: 1;
   display: flex;
@@ -46,27 +40,6 @@ header .info h6 {
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
-}
-
-header .info .tags-genres {
-  display: flex;
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-
-header .info .tags-genres p {
-  padding: 5px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #fff;
-  background: rgb(246, 246, 246);
-  cursor: pointer;
-  margin-right: 10px;
-  transition: all 0.2s ease-out;
-}
-
-header .info .tags-genres p:hover {
-  transform: translate(3px, -5px);
 }
 
 header .info .details {
