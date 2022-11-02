@@ -21,11 +21,25 @@ function PlaylistViewSongs() {
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
-  // const [trackDetails, setTrackDetails] = useState();
+
+  const [serverMsg, setServerMsg] = React.useState("");
+  const [isSongAdd, setIsSongAdd] = React.useState(false);
+
+  const [ErrorMsg, setErrorMsg] = React.useState("");
+  const [serverError, setSeverError] = React.useState(false);
+
+  const [isTrackDefined, setIsTrackDefined] = React.useState();
+  const [track, setTrack] = React.useState([
+    {
+      title: "",
+      artist: "",
+      duration: "",
+      ur: "",
+    },
+  ]);
 
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
-  // const { songData } = useGetPlaylistSongsQuery(lastPlaylist._id);
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -46,33 +60,62 @@ function PlaylistViewSongs() {
         const lastPlaylistCreated = Object.values(data.data).pop();
         setUserPlaylists(data.data);
         setLastPlaylistCreated(lastPlaylistCreated);
+        // console.log(lastPlaylistCreated._id);
+        getPlaylistById(lastPlaylistCreated._id);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchPlaylist().catch(console.error);
+
+    const getPlaylistById = async (id) => {
+      const response = await fetch(
+        //https://melodystream.herokuapp.com/playlist/${playlistID}
+        `http://localhost:4000/playlist/${id}`,
+        {
+          headers: {
+            auth_token: token,
+          },
+        }
+      );
+
+      try {
+        const data = await response.json();
+        console.log(data);
+        setTrack(data.songs);
+        setIsTrackDefined(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }, []);
 
-  // const getPlaylistById = async () => {
-  //   const response = await fetch(
-  //     //https://melodystream.herokuapp.com/playlist/${playlistID}
-  //     `http://localhost:4000/playlist/${lastPlaylist._id}`,
-  //     {
-  //       headers: {
-  //         auth_token: token,
-  //       },
-  //     }
-  //   );
+  // useEffect(() => {
+  //   const songId = lastPlaylist._id;
 
-  //   try {
-  //     const data = await response.json();
-  //     setTrackDetails(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // console.log(trackDetails);
+  //   const getPlaylistById = async (songId) => {
+  //     const response = await fetch(
+  //       //https://melodystream.herokuapp.com/playlist/${playlistID}
+  //       `http://localhost:4000/playlist/${songId}`,
+  //       {
+  //         headers: {
+  //           auth_token: token,
+  //         },
+  //       }
+  //     );
+
+  //     try {
+  //       const data = await response.json();
+  //       console.log(data);
+  //       setTrack(data.songs);
+  //       setIsTrackDefined(true);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getPlaylistById(songId);
+  // }, []);
 
   if (isFetching) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
@@ -94,9 +137,21 @@ function PlaylistViewSongs() {
     }
     setRandomSongs(randomSongs);
   }
-  // console.log(trackDetails);
 
-  // ©
+  const playlistSongs = track.map((song, i) => (
+    <Songs
+      key={song._id}
+      song={song}
+      lastPlaylist={lastPlaylist}
+      userPlaylists={userPlaylists}
+      isPlaying={isPlaying}
+      activeSong={activeSong}
+      data={data}
+      i={i}
+      convertDuration={convertDuration}
+    />
+  ));
+  console.log(playlistSongs);
 
   const suggestionSongs = randomSongs.map((song, i) => (
     <SuggestSong
@@ -136,19 +191,20 @@ function PlaylistViewSongs() {
         <div>
           <EditPlaylistModal playlist={lastPlaylist} />
         </div>
+        <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
+          Songs
+        </Typography>
+        <Box sx={{ mb: 5 }}>{playlistSongs}</Box>
+        <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
+          Suggestions
+        </Typography>
         <div>
           {lastPlaylist?.tracks?.length === 0 ? (
             <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
               Your playlist is empty, we can suggest you some songs!
             </Typography>
           ) : null}
-          {/*render server msg*/}
-          {randomSongs.length > 0 ? (
-            <div>
-              {/* {songsList} */}
-              {suggestionSongs}
-            </div>
-          ) : null}
+          {randomSongs.length > 0 ? <div>{suggestionSongs}</div> : null}
         </div>
         {randomSongs.length > 0 ? (
           <Button

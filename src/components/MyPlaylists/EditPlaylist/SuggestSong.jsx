@@ -59,15 +59,6 @@ function SuggestSong({
     dispatch(playPause(true));
   };
 
-  //? Popover button add song to any playlist
-  // const showUserPlaylists = userPlaylists.map((playlist) => {
-  //   return (
-  //     <div key={playlist?._id}>
-  //       <Typography sx={{ p: 2 }}>{playlist?.name}</Typography>
-  //     </div>
-  //   );
-  // });
-
   const addSuggestSong = async (e, songId) => {
     e.preventDefault();
     const playlistId = lastPlaylist?._id;
@@ -99,98 +90,65 @@ function SuggestSong({
       }
     }
   };
-  useEffect(() => {
-    const songId = lastPlaylist._id;
-    function Music(title, artist, duration, url) {
-      this.title = title;
-      this.artist = artist;
-      this.duration = duration;
-      this.url = url;
-    }
+  // useEffect(() => {
+  //   const songId = lastPlaylist._id;
 
-    const getPlaylistById = async (songId) => {
-      const response = await fetch(
-        //https://melodystream.herokuapp.com/playlist/${playlistID}
-        `http://localhost:4000/playlist/${songId}`,
-        {
-          headers: {
-            auth_token: token,
-          },
-        }
-      );
+  //   const getPlaylistById = async (songId) => {
+  //     const response = await fetch(
+  //       //https://melodystream.herokuapp.com/playlist/${playlistID}
+  //       `http://localhost:4000/playlist/${songId}`,
+  //       {
+  //         headers: {
+  //           auth_token: token,
+  //         },
+  //       }
+  //     );
 
-      try {
-        const data = await response.json();
-        console.log(data);
-        setTrackDetails(data);
-        const { songs } = trackDetails;
-        for (let music of songs) {
-          let Track = new Music(
-            music.title,
-            music.artist,
-            music.duration,
-            music.url
-          );
-          console.log(Track);
-          // console.log(Track.title);
-          //   this.setTrack(prevState => ({
-          //     itemList: prevState.itemList.map(
-          //     obj => (obj._id === 1234 ? Object.assign(obj, { description: "New Description" }) : obj)
-          //   )
-          // }));
-          setIsTrackDefined(true);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getPlaylistById(songId);
-  }, []);
-
-  // Track.map((music) => {
-  //   setTrack((prevMusic) => {
-  //     return {
-  //       ...prevMusic,
-  //       title: music.title,
-  //       artist: music.artist,
-  //       duration: music.duration,
-  //       url: music.url,
-  //     };
-  //   });
-  // });
-  console.log(track);
+  //     try {
+  //       const data = await response.json();
+  //       console.log(data);
+  //       setTrack(data.songs);
+  //       setIsTrackDefined(true);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   getPlaylistById(songId);
+  // }, []);
 
   return (
     <>
-      <div className="container-song added">
-        <div className="cover-container">
-          <PlayPause
-            isPlaying={isPlaying}
-            activeSong={activeSong}
-            song={song}
-            handlePause={handlePauseClick}
-            handlePlay={handlePlayClick}
-            className="playpause"
-          />
-        </div>
-        <div className="info-container">
-          <span>{track.title}</span>
-          <div className="contributors">
-            <p className="track-artist">{track.artist}</p>
+      {/* {track.map((music) => {
+        <div className="container-song added">
+          <div className="cover-container">
+            <PlayPause
+              isPlaying={isPlaying}
+              activeSong={activeSong}
+              song={music}
+              handlePause={handlePauseClick}
+              handlePlay={handlePlayClick}
+              className="playpause"
+            />
           </div>
-        </div>
-        <button>
-          <FavoriteIcon className="favoriteIcon" />
-        </button>
-        <Box sx={{ display: "flex" }}>
-          <div>
-            <Typography sx={{ p: 1 }}>
-              {convertDuration(track.duration)}
-            </Typography>
+          <div className="info-container">
+            <span>{music.title}</span>
+            <div className="contributors">
+              <p className="track-artist">{music.artist}</p>
+            </div>
           </div>
-        </Box>
-      </div>
-      {/* <div className="container-song suggestions">
+          <button>
+            <FavoriteIcon className="favoriteIcon" />
+          </button>
+          <Box sx={{ display: "flex" }}>
+            <div>
+              <Typography sx={{ p: 1 }}>
+                {convertDuration(music.duration)}
+              </Typography>
+            </div>
+          </Box>
+        </div>;
+      })} */}
+      <div className="container-song suggestions">
         <div className="cover-container">
           <PlayPause
             isPlaying={isPlaying}
@@ -276,7 +234,7 @@ function SuggestSong({
             </button>
           </div>
         </Box>
-      </div> */}
+      </div>
     </>
   );
 }

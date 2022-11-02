@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import Popover from "@mui/material/Popover";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import axios from "axios";
 
 function Songs({
   song,
@@ -21,8 +20,18 @@ function Songs({
   data,
   i,
   convertDuration,
+  playlistId,
 }) {
   const token = localStorage.getItem("userToken") || null;
+
+  const [serverMsg, setServerMsg] = React.useState("");
+  const [isSongAdd, setIsSongAdd] = React.useState(false);
+
+  const [ErrorMsg, setErrorMsg] = React.useState("");
+  const [serverError, setSeverError] = React.useState(false);
+
+  // const [open, setOpen] = React.useState(true);
+  // const [openError, setOpenError] = React.useState(true);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
@@ -55,30 +64,6 @@ function Songs({
   //     </div>
   //   );
   // });
-
-  const addSuggestSong = async (e, songId) => {
-    e.preventDefault();
-    const id = lastPlaylist?._id;
-    const options = {
-      url: `http://localhost:4000/playlist/add-song/${id}`,
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        auth_token: token,
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      data: songId,
-    };
-
-    try {
-      const result = await axios(options);
-      console.log(result);
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.msg);
-      }
-    }
-  };
 
   return (
     <div className="container-song">
