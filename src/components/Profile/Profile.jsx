@@ -9,12 +9,11 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Typography,
   Table,
 } from "@mui/material";
-import AppBar from "../AppBar/AppBar";
 import "./Profile.css";
 import axios from "axios";
+import Paper from "@mui/material/Paper";
 //import AvatarUpload from "../AppBar/Avatar";
 
 function Profile() {
@@ -56,39 +55,30 @@ function Profile() {
   return (
     <div className="flex items-center justify-center h-fit ml-[18%] text-white">
       {/* List with the user information */}
-      <Container className="user-info">
-        <div className="user-img-container">
-          {/* INSERT USER PHOTO HERE! */}
-          <img className="user-img" src={""} alt="" />
-        </div>
-        <TableContainer className="user-data">
+      <Container sx={{ width: 650 }}>
+        <h1 className="not-italic text-6xl font-black whitespace-nowrap text-ellipsis leading-80 font-mon">
+          User Information
+        </h1>
+        <TableContainer component={Paper}>
           <Table>
-            <h1 className="not-italic text-6xl font-black whitespace-nowrap text-ellipsis leading-80 font-mon">
-              User Information
-            </h1>
-
             <TableBody className="text-white">
-              <TableRow className="user-name">
-                <TableCell>Image: </TableCell>
-                <TableCell>{data.image}</TableCell>
-              </TableRow>
-              <TableRow className="user-name">
+              <TableRow>
                 <TableCell>Name: </TableCell>
                 <TableCell>{data.name}</TableCell>
               </TableRow>
-              <TableRow className="user-name">
+              <TableRow>
                 <TableCell>LastName:</TableCell>
                 <TableCell> {data.lastName}</TableCell>
               </TableRow>
-              <TableRow className="user-name">
+              <TableRow>
                 <TableCell>Gender: </TableCell>
                 <TableCell>{data.gender}</TableCell>
               </TableRow>
-              <TableRow className="user-email">
+              <TableRow>
                 <TableCell>Email:</TableCell>{" "}
                 <TableCell>{data.email}</TableCell>
               </TableRow>
-              <TableRow className="user-email">
+              <TableRow>
                 <TableCell>Date: </TableCell>
                 <TableCell>{data.birthday}</TableCell>
               </TableRow>
