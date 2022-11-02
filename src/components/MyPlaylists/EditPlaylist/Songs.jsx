@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import Popover from "@mui/material/Popover";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import axios from "axios";
+import LikedSongs from "../../LikedSongs/LikedSongs";
 
 function Songs({
   song,
@@ -21,8 +21,10 @@ function Songs({
   data,
   i,
   convertDuration,
+  playlistId,
 }) {
-  const token = localStorage.getItem("userToken") || null;
+  // const [open, setOpen] = React.useState(true);
+  // const [openError, setOpenError] = React.useState(true);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
@@ -56,51 +58,25 @@ function Songs({
   //   );
   // });
 
-  const addSuggestSong = async (e, songId) => {
-    e.preventDefault();
-    const id = lastPlaylist?._id;
-    const options = {
-      url: `http://localhost:4000/playlist/add-song/${id}`,
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        auth_token: token,
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-      data: songId,
-    };
-
-    try {
-      const result = await axios(options);
-      console.log(result);
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response.data.msg);
-      }
-    }
-  };
-
   return (
     <div className="container-song">
       <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
+        <PlayPause
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+          className="playpause"
+        />
       </div>
-      <PlayPause
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        song={song}
-        handlePause={handlePauseClick}
-        handlePlay={handlePlayClick}
-      />
       <div className="info-container">
         <span>{song.title}</span>
         <div className="contributors">
           <p className="track-artist">{song.artist}</p>
         </div>
       </div>
-      <button>
-        <FavoriteIcon />
-      </button>
+      <LikedSongs song={song} />
       <Box sx={{ display: "flex" }}>
         <div>
           <Typography sx={{ p: 1 }}>
@@ -125,7 +101,7 @@ function Songs({
               horizontal: "left",
             }}
           >
-            <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+            <Typography sx={{ p: 2 }}>Insert playlist name</Typography>
           </Popover>
         </div>
       </Box>

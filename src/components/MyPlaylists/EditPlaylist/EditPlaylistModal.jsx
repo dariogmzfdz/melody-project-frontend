@@ -33,7 +33,7 @@ export default function PlaylistModal({
   const [errorMsg, setErrorMsg] = React.useState("");
   const navigate = useNavigate();
 
-  console.log(name, description, thumbnail, publicAccessible);
+  // console.log(name, description, thumbnail, publicAccessible);
 
   const [playlist, setPlaylist] = React.useState({
     name: name,
@@ -83,11 +83,9 @@ export default function PlaylistModal({
       };
 
       fetchData().catch(console.error);
-      // navigate("/playlistViewSongs");
     } catch (error) {
       if (error.response) {
         setErrorMsg(error.response.data.msg);
-        console.log(error.response.data.msg);
       }
     }
   };

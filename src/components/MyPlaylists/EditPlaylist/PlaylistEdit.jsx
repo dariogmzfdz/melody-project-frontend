@@ -5,27 +5,37 @@ import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
 import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
 import SuggestSong from "./SuggestSong";
-import {
-  useGetAllSongsQuery,
-  useGetSongQuery,
-} from "../../../redux/services/melodyApi";
+import { useGetAllSongsQuery } from "../../../redux/services/melodyApi";
 import "../../Favorites/Favorites";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
+import Songs from "./Songs";
 
 function PlaylistViewSongs() {
   const token = localStorage.getItem("userToken") || null;
+
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
-  const [songId, setSongId] = useState("");
+
+  const [serverMsg, setServerMsg] = React.useState("");
+  const [isSongAdd, setIsSongAdd] = React.useState(false);
+
+  const [ErrorMsg, setErrorMsg] = React.useState("");
+  const [serverError, setSeverError] = React.useState(false);
+
+  const [isTrackDefined, setIsTrackDefined] = React.useState();
+  const [track, setTrack] = React.useState([
+    {
+      title: "",
+      artist: "",
+      duration: "",
+      ur: "",
+    },
+  ]);
+
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
-  const {
-    data: songsData,
-    isFetching: isFetchingSongs,
-    error: songsError,
-  } = useGetSongQuery({ songId });
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -46,17 +56,39 @@ function PlaylistViewSongs() {
         const lastPlaylistCreated = Object.values(data.data).pop();
         setUserPlaylists(data.data);
         setLastPlaylistCreated(lastPlaylistCreated);
-        /* setSongId(lastPlaylistCreated.tracks); */
-        lastPlaylistCreated.tracks.map((song) => {});
+        // console.log(lastPlaylistCreated._id);
+        getPlaylistById(lastPlaylistCreated._id);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchPlaylist().catch(console.error);
+
+    const getPlaylistById = async (id) => {
+      const response = await fetch(
+        //https://melodystream.herokuapp.com/playlist/${playlistID}
+        `http://localhost:4000/playlist/${id}`,
+        {
+          headers: {
+            auth_token: token,
+          },
+        }
+      );
+
+      try {
+        const data = await response.json();
+        console.log(data);
+        setTrack(data.songs);
+        setIsTrackDefined(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }, []);
 
-  console.log(songId);
+  if (isFetching) return <div>Loading...</div>;
+  if (error) return <div>Error</div>;
 
   function randomIndex(count) {
     return Math.floor(Math.random() * count);
@@ -76,9 +108,34 @@ function PlaylistViewSongs() {
     setRandomSongs(randomSongs);
   }
 
-  if (isFetching) return <div>Loading...</div>;
+  const playlistSongs = track.map((song, i) => (
+    <Songs
+      key={song._id}
+      song={song}
+      lastPlaylist={lastPlaylist}
+      userPlaylists={userPlaylists}
+      isPlaying={isPlaying}
+      activeSong={activeSong}
+      data={data}
+      i={i}
+      convertDuration={convertDuration}
+    />
+  ));
+  console.log(playlistSongs);
 
-  if (error) return <div>Error</div>;
+  const suggestionSongs = randomSongs.map((song, i) => (
+    <SuggestSong
+      key={song._id}
+      song={song}
+      lastPlaylist={lastPlaylist}
+      userPlaylists={userPlaylists}
+      isPlaying={isPlaying}
+      activeSong={activeSong}
+      data={data}
+      i={i}
+      convertDuration={convertDuration}
+    />
+  ));
 
   return (
     <>
@@ -103,32 +160,20 @@ function PlaylistViewSongs() {
         <div>
           <EditPlaylistModal playlist={lastPlaylist} />
         </div>
+        <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
+          Songs
+        </Typography>
+        <Box sx={{ mb: 5 }}>{playlistSongs}</Box>
+        <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
+          Suggestions
+        </Typography>
         <div>
           {lastPlaylist?.tracks?.length === 0 ? (
             <Typography sx={{ color: "#f3f3f3", mt: 2, fontSize: 22 }}>
               Your playlist is empty, we can suggest you some songs!
             </Typography>
-          ) : (
-            <div>{/* <Songs /> */}</div>
-          )}
-          {/* {tracks} */}
-          {randomSongs.length > 0 ? (
-            randomSongs.map((song, i) => (
-              <SuggestSong
-                key={song._id}
-                song={song}
-                lastPlaylist={lastPlaylist}
-                userPlaylists={userPlaylists}
-                isPlaying={isPlaying}
-                activeSong={activeSong}
-                data={data}
-                i={i}
-                convertDuration={convertDuration}
-              />
-            ))
-          ) : (
-            <div></div>
-          )}
+          ) : null}
+          {randomSongs.length > 0 ? <div>{suggestionSongs}</div> : null}
         </div>
         {randomSongs.length > 0 ? (
           <Button
