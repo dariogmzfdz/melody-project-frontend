@@ -13,6 +13,7 @@ import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Collapse from "@mui/material/Collapse";
+import { useEffect } from "react";
 
 function SuggestSong({
   song,
@@ -89,27 +90,42 @@ function SuggestSong({
       }
     }
   };
+  useEffect(() => {
+    const songId = lastPlaylist._id;
+    const getPlaylistById = async (songId) => {
+      const response = await fetch(
+        //https://melodystream.herokuapp.com/playlist/${playlistID}
+        `http://localhost:4000/playlist/${songId}`,
+        {
+          headers: {
+            auth_token: token,
+          },
+        }
+      );
 
-  const getPlaylistById = async () => {
-    const response = await fetch(
-      //https://melodystream.herokuapp.com/playlist/${playlistID}
-      `http://localhost:4000/playlist/${lastPlaylist._id}`,
-      {
-        headers: {
-          auth_token: token,
-        },
+      try {
+        const data = await response.json();
+        setTrackDetails(data);
+      } catch (error) {
+        console.log(error);
       }
+    };
+    getPlaylistById(songId);
+  }, []);
+
+  const { msg, playlistInfo, songs } = trackDetails;
+
+  for (let music of songs) {
+    console.log(
+      music.title +
+        " - " +
+        music.artist +
+        " - " +
+        music.duration +
+        " - " +
+        music.url
     );
-
-    try {
-      const data = await response.json();
-      setTrackDetails(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  console.log(trackDetails);
+  }
 
   return (
     <>
@@ -143,7 +159,7 @@ function SuggestSong({
             <button
               onClick={(e) => {
                 addSuggestSong(e, song._id);
-                getPlaylistById();
+                // getPlaylistById();
               }}
             >
               <PlaylistAddIcon onClick={() => setOpenError(true)} />
@@ -230,7 +246,7 @@ function SuggestSong({
             <button
               onClick={(e) => {
                 addSuggestSong(e, song._id);
-                getPlaylistById();
+                // getPlaylistById();
               }}
             >
               <PlaylistAddIcon onClick={() => setOpenError(true)} />
