@@ -39,7 +39,7 @@ function SideMenu() {
       <Toolbar />
       <Divider />
       <List>
-        {["Home", "Albums", "Playlists", "Favorites"].map((text, index) => (
+        {["Home", "Playlists", "Favorites"].map((text, index) => (
           <Link
             key={index + 1}
             to={
@@ -59,9 +59,6 @@ function SideMenu() {
           >
             <ListItem key={text} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
-                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
@@ -70,12 +67,9 @@ function SideMenu() {
       </List>
       <Divider />
       <List>
-        {["Help", "Feedback", "Logout"].map((text, index) => (
+        {["Logout"].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>

@@ -1,3 +1,9 @@
+.top-songs-container {
+  position: absolute;
+  top: 700px;
+}
+
+
 .container-song {
   display: flex;
   align-items: center;
