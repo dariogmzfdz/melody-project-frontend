@@ -54,15 +54,7 @@ export default function RouterApp() {
                   </>
                 }
               />
-              <Route
-                path="/admin"
-                element={
-                  <>
-                    <SideMenu />
-                    <AdminView />
-                  </>
-                }
-              />
+              <Route path="/admin" element={<AdminView />} />
               <Route path="/resetpassword/:token" element={<ResetPassword />} />
               <Route path="/forgot" element={<ForgotPassword />} />
               <Route
