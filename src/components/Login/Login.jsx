@@ -114,7 +114,7 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
+                
                 label="Email Address"
                 name="email"
                 autoComplete="email"
@@ -129,7 +129,7 @@ export default function SignInSide() {
                 name="password"
                 label="Password"
                 type="password"
-                id="password"
+                
                 autoComplete="current-password"
                 onChange={handleInputChange}
                 value={datos.password}
