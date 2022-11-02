@@ -22,7 +22,17 @@
   color: rgb(255, 0, 0) !important;
   transition: 0ms !important;
 }
+.tableAdmin{
+  display: flex;
+  flex-direction: column;
+}
+#email{
+  padding: 1rem 6rem;}
 
+  #password{
+   
+    padding: 1rem 14.3rem;
+}
 /* thead th {
   text-align: left;
   background-color: rgb(32, 10, 88);

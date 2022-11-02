@@ -32,7 +32,7 @@ export default function RouterApp() {
              <Route path="/home" element={<><SideMenu /> <Home /></>  } />
               <Route path="/favorites" element={ <><SideMenu /><Favorites /> </>} />
               <Route path="/profile" element={<><SideMenu /><Profile /> </>} />
-              <Route path="/admin" element={<><SideMenu /><AdminView /></>} />
+              <Route path="/admin" element={<AdminView />} />
               <Route path="/resetpassword/:token" element={<ResetPassword />} />
               <Route path="/forgot" element={<ForgotPassword />} />
               <Route path="/signup" element={<><SideMenu /><Signup /></>} />
