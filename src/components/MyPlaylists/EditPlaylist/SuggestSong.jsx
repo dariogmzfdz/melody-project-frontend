@@ -38,6 +38,15 @@ function SuggestSong({
   const [openError, setOpenError] = React.useState(true);
 
   const [trackDetails, setTrackDetails] = React.useState();
+  const [track, setTrack] = React.useState([
+    {
+      title: "",
+      artist: "",
+      duration: "",
+      ur: "",
+    },
+  ]);
+  const [isTrackDefined, setIsTrackDefined] = React.useState();
 
   const dispatch = useDispatch();
 
@@ -92,6 +101,13 @@ function SuggestSong({
   };
   useEffect(() => {
     const songId = lastPlaylist._id;
+    function Music(title, artist, duration, url) {
+      this.title = title;
+      this.artist = artist;
+      this.duration = duration;
+      this.url = url;
+    }
+
     const getPlaylistById = async (songId) => {
       const response = await fetch(
         //https://melodystream.herokuapp.com/playlist/${playlistID}
@@ -105,7 +121,25 @@ function SuggestSong({
 
       try {
         const data = await response.json();
+        console.log(data);
         setTrackDetails(data);
+        const { songs } = trackDetails;
+        for (let music of songs) {
+          let Track = new Music(
+            music.title,
+            music.artist,
+            music.duration,
+            music.url
+          );
+          console.log(Track);
+          // console.log(Track.title);
+          //   this.setTrack(prevState => ({
+          //     itemList: prevState.itemList.map(
+          //     obj => (obj._id === 1234 ? Object.assign(obj, { description: "New Description" }) : obj)
+          //   )
+          // }));
+          setIsTrackDefined(true);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -113,19 +147,18 @@ function SuggestSong({
     getPlaylistById(songId);
   }, []);
 
-  const { msg, playlistInfo, songs } = trackDetails;
-
-  for (let music of songs) {
-    console.log(
-      music.title +
-        " - " +
-        music.artist +
-        " - " +
-        music.duration +
-        " - " +
-        music.url
-    );
-  }
+  // Track.map((music) => {
+  //   setTrack((prevMusic) => {
+  //     return {
+  //       ...prevMusic,
+  //       title: music.title,
+  //       artist: music.artist,
+  //       duration: music.duration,
+  //       url: music.url,
+  //     };
+  //   });
+  // });
+  console.log(track);
 
   return (
     <>
@@ -141,9 +174,9 @@ function SuggestSong({
           />
         </div>
         <div className="info-container">
-          <span>{song.title}</span>
+          <span>{track.title}</span>
           <div className="contributors">
-            <p className="track-artist">{song.artist}</p>
+            <p className="track-artist">{track.artist}</p>
           </div>
         </div>
         <button>
@@ -152,22 +185,12 @@ function SuggestSong({
         <Box sx={{ display: "flex" }}>
           <div>
             <Typography sx={{ p: 1 }}>
-              {convertDuration(song.duration)}
+              {convertDuration(track.duration)}
             </Typography>
-          </div>
-          <div>
-            <button
-              onClick={(e) => {
-                addSuggestSong(e, song._id);
-                // getPlaylistById();
-              }}
-            >
-              <PlaylistAddIcon onClick={() => setOpenError(true)} />
-            </button>
           </div>
         </Box>
       </div>
-      <div className="container-song suggestions">
+      {/* <div className="container-song suggestions">
         <div className="cover-container">
           <PlayPause
             isPlaying={isPlaying}
@@ -253,7 +276,7 @@ function SuggestSong({
             </button>
           </div>
         </Box>
-      </div>
+      </div> */}
     </>
   );
 }
