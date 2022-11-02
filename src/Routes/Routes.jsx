@@ -23,25 +23,95 @@ export default function RouterApp() {
   return (
     <div>
       <Router>
-     
         <AuthProvider>
           <div className="flex-1 h-fit pb-28">
             <Routes>
               <Route path="/" element={<SignInSide />} />
-          
-             <Route path="/home" element={<><SideMenu /> <Home /></>  } />
-              <Route path="/favorites" element={ <><SideMenu /><Favorites /> </>} />
-              <Route path="/profile" element={<><SideMenu /><Profile /> </>} />
-              <Route path="/admin" element={<><SideMenu /><AdminView /></>} />
+
+              <Route
+                path="/home"
+                element={
+                  <>
+                    <SideMenu /> <Home />
+                  </>
+                }
+              />
+              <Route
+                path="/favorites"
+                element={
+                  <>
+                    <SideMenu />
+                    <Favorites />{" "}
+                  </>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <>
+                    <SideMenu />
+                    <Profile />{" "}
+                  </>
+                }
+              />
+              <Route
+                path="/admin"
+                element={
+                  <>
+                    <SideMenu />
+                    <AdminView />
+                  </>
+                }
+              />
               <Route path="/resetpassword/:token" element={<ResetPassword />} />
               <Route path="/forgot" element={<ForgotPassword />} />
-              <Route path="/signup" element={<><SideMenu /><Signup /></>} />
-              <Route path="/logout" element={<><SideMenu /><Logout /></>} />
+              <Route
+                path="/signup"
+                element={
+                  <>
+                    <SideMenu />
+                    <Signup />
+                  </>
+                }
+              />
+              <Route
+                path="/logout"
+                element={
+                  <>
+                    <SideMenu />
+                    <Logout />
+                  </>
+                }
+              />
               <Route path="/edit" element={<EditUser />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/songs" element={<><SideMenu /><Songs /></>} />
-              <Route path="/playlists" element={<Playlists />} />
-              <Route path="/playlist-edit" element={<PlaylistEdit />} />
+              <Route
+                path="/songs"
+                element={
+                  <>
+                    <SideMenu />
+                    <Songs />
+                  </>
+                }
+              />
+              <Route
+                path="/playlists"
+                element={
+                  <>
+                    <SideMenu />
+                    <Playlists />
+                  </>
+                }
+              />
+              <Route
+                path="/playlist-edit"
+                element={
+                  <>
+                    <SideMenu />
+                    <PlaylistEdit />
+                  </>
+                }
+              />
             </Routes>
           </div>
         </AuthProvider>

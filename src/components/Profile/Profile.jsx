@@ -11,11 +11,9 @@ import {
   TableRow,
   Typography,
   Table,
-  
-  
 } from "@mui/material";
 import AppBar from "../AppBar/AppBar";
-import './Profile.css';
+import "./Profile.css";
 import axios from "axios";
 //import AvatarUpload from "../AppBar/Avatar";
 
@@ -23,17 +21,13 @@ function Profile() {
   const [data, setData] = useState([]);
   const token = localStorage.getItem("userToken");
 
-
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(
-        "https://melodystream.herokuapp.com/user",
-        {
-          headers: {
-            auth_token: token,
-          },
-        }
-      );
+      const response = await fetch("https://melodystream.herokuapp.com/user", {
+        headers: {
+          auth_token: token,
+        },
+      });
       const data = await response.json();
       const user = data.user;
 
@@ -46,41 +40,35 @@ function Profile() {
   const deleteUser = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios.delete("https://melodystream.herokuapp.com/user",
-      {
-        headers: {
-          auth_token: token,
-        },
-      }
-    ); const response = await data.json();
-
-  } 
-
-  catch (error){ 
-    (console.log (error))
-   }
-
-
- 
-
+      const data = await axios.delete(
+        "https://melodystream.herokuapp.com/user",
+        {
+          headers: {
+            auth_token: token,
+          },
+        }
+      );
+      const response = await data.json();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
-    <div>
-      <AppBar />
+    <div className="flex items-center justify-center h-fit ml-[18%] text-white">
       {/* List with the user information */}
       <Container className="user-info">
-         <div className="user-img-container">
+        <div className="user-img-container">
           {/* INSERT USER PHOTO HERE! */}
           <img className="user-img" src={""} alt="" />
-        </div> 
+        </div>
         <TableContainer className="user-data">
           <Table>
-            <Typography color="common.white" component="h1" variant="h5">
+            <h1 className="not-italic text-6xl font-black whitespace-nowrap text-ellipsis leading-80 font-mon">
               User Information
-            </Typography>
-           
-            <TableBody> 
-            <TableRow className="user-name">
+            </h1>
+
+            <TableBody className="text-white">
+              <TableRow className="user-name">
                 <TableCell>Image: </TableCell>
                 <TableCell>{data.image}</TableCell>
               </TableRow>
@@ -104,16 +92,17 @@ function Profile() {
                 <TableCell>Date: </TableCell>
                 <TableCell>{data.birthday}</TableCell>
               </TableRow>
-             <Grid className="buttonProfile">
-              <Link to={"/edit"}>
-                <Button variant="contained">
-                  Edit User Data
-                </Button>
+              <Grid className="buttonProfile">
+                <Link to={"/edit"}>
+                  <Button variant="contained">Edit User Data</Button>
                 </Link>
-                <Button variant="outlined" onClick={deleteUser} className="buttonDelete">
+                <Button
+                  variant="outlined"
+                  onClick={deleteUser}
+                  className="buttonDelete"
+                >
                   Delete account
                 </Button>
-              
               </Grid>
             </TableBody>
           </Table>
