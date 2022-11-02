@@ -80,7 +80,9 @@
   border: none;
   background-color: white;
 }
-
+.iPtRTz, .favoriteIcon{
+  opacity: 100%;
+}
 @media (min-width: 1200px) {
   .top-songs-container {
     width: 25%;
