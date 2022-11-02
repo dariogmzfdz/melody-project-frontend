@@ -27,11 +27,11 @@ const EditUser = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [birthday, setDate] = useState("");
   const [gender, setGender] = useState("");
-
+ const [image, setImage] = useState('');
+  const [loading,setLoading] = useState(false)
   const token = localStorage.getItem("userToken");
   const navigate = useNavigate();
-  const [image, setImage] = useState('');
-  const [loading,setLoading] = useState(false)
+ 
 
 
   const submitImg = async (e) => {
@@ -71,7 +71,7 @@ const EditUser = () => {
           name: name,
           lastName: lastName,
           email: email,
-          newPassword: newPassword,
+          password: newPassword,
           oldPassword: oldPassword,
           birthday: birthday,
           gender: gender,
@@ -82,6 +82,7 @@ const EditUser = () => {
           "Access-Control-Allow-Origin": "*",
         }
       );
+  
       console.log(birthday);
       console.log(data);
       navigate("/");

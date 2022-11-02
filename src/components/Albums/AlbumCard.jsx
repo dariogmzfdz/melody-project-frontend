@@ -1,13 +1,12 @@
 import React from "react";
 import "./AlbumCard.css";
-import AlbumImg from "../../assets/album-img.jpg";
 
-function CardAlbum() {
+function CardAlbum({ title, imgSrc }) {
   return (
-    <div className="album">
-      <img src={AlbumImg} alt="album-img" className="card-album" />
-      <p className="Album-Title">Album Title</p>
-    </div>
+    <>
+      <img src={imgSrc} alt="album-img" className="card-album" />
+      <p className="album-title">{title}</p>
+    </>
   );
 }
 

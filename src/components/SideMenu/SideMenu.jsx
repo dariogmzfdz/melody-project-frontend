@@ -19,7 +19,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useMediaQuery } from "react-responsive";
 
 const drawerWidth = 240;
-const drawerHeight = 600;
 
 function SideMenu() {
   const [value, setValue] = React.useState(0);
@@ -37,30 +36,46 @@ function SideMenu() {
       <Toolbar />
       <Divider />
       <List>
-        {["Home", "Albums", "Playlists", "Labels"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {["Home", "Playlists", "Favorites", "Upload song"].map((text, index) => (
+          <Link
+            key={index + 1}
+            to={
+              text === "Home"
+                ? "/home"
+                : text === "Favorites"
+                ? "/favorites"
+                : text === "Favorites"
+                ? "/favorites"
+                : text === "Playlists"
+                ? "/playlists"
+                : text === "Albums"
+                ? "/albums"
+                
+                : text === "Upload song"
+                ? "/songs"
+                : ""
+                
+            }
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
-      <List>
-        {["Help", "Feedback", "Logout"].map((text, index) => (
+      <Link to="/"> <List>
+        {["Logout"].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </List></Link>
     </div>
   );
 
@@ -89,31 +104,13 @@ function SideMenu() {
       {isDesktop && (
         <>
           <Drawer
-            variant="temporary"
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            sx={{
-              display: { xs: "block", sm: "none" },
-              "& .MuiDrawer-paper": {
-                boxSizing: "border-box",
-                width: drawerWidth,
-                height: drawerHeight,
-                top: 80,
-              },
-            }}
-          >
-            {drawer}
-          </Drawer>
-          <Drawer
             variant="permanent"
             sx={{
               display: { xs: "none", sm: "block" },
               "& .MuiDrawer-paper": {
                 boxSizing: "border-box",
                 width: drawerWidth,
-                height: drawerHeight,
-                top: 80,
+                zIndex: 1,
               },
             }}
             open

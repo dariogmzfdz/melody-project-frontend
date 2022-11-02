@@ -1,23 +1,24 @@
 import React from "react";
-import "./MobileTop.css";
+import "./MobileHeader.css";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
-function MobileTop() {
+function MobileHeader() {
   const isHome = window.location.pathname === "/home";
   const isFavorites = window.location.pathname === "/favorites";
 
   return (
     <>
       <div className="top-bg"></div>
-      <div className="top-info">
+      <div className="flex items-center h-16 top-info ml-[5%] mb-[15%] z-[1]">
         {isHome && (
-          <h1>
-            Hello User!
-            <EmojiPeopleIcon />
-          </h1>
+          <>
+            <h1 className="bg-mbl bg-clip-text text-transparent text-5xl">
+              <strong>Hello</strong> User!
+            </h1>
+          </>
         )}
         {isFavorites && (
           <div className="top-favorites">
@@ -38,4 +39,4 @@ function MobileTop() {
   );
 }
 
-export default MobileTop;
+export default MobileHeader;

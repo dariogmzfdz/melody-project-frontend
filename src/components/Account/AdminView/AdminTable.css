@@ -7,21 +7,33 @@
 }
 
 
-.butDel{
+.butDel {
   border: 0;
   background-color: #fff;
 }
-.butDelete{
-  color:rgb(0, 0, 0) !important;
+
+.butDelete {
+  color: rgb(0, 0, 0) !important;
   transition: 0ms !important;
 
 }
-.butDelete
-:hover {
-  color:rgb(255, 0, 0) !important;
+
+.butDelete:hover {
+  color: rgb(255, 0, 0) !important;
   transition: 0ms !important;
 }
-thead th {
+.tableAdmin{
+  display: flex;
+  flex-direction: column;
+}
+#email{
+  padding: 1rem 6rem;}
+
+  #password{
+   
+    padding: 1rem 14.3rem;
+}
+/* thead th {
   text-align: left;
   background-color: rgb(32, 10, 88);
 color: #fff !important;
@@ -38,4 +50,4 @@ tbody tr:hover {
 
 tbody td {
   padding: 0.5em;
-}
+} */

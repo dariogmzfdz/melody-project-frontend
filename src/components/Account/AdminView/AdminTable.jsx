@@ -42,7 +42,7 @@ console.log(id)
     <>
     <AppBar/>
     <TableContainer component={Paper}>
-      <Table >
+      <Table className="tableAdmin">
         <TableHead>
           <TableRow>
               <TableCell
@@ -64,6 +64,7 @@ console.log(id)
                 type="button"
                 onClick={() => requestSort("email")}
                 className={getClassNamesFor("email")}
+                id="email"
               >
                 Email
               </TableCell>
@@ -76,14 +77,14 @@ console.log(id)
                 Birthday
               </TableCell>
            
-              <TableCell type="button" className={getClassNamesFor("password")}>
+              <TableCell id='password' type="button" className={getClassNamesFor("password")}>
                 Password
               </TableCell>
           
-              <TableCell type="button" className={getClassNamesFor("password")}>
+              {/* <TableCell type="button" className={getClassNamesFor("password")}>
                 Last update
-              </TableCell>
-       
+              </TableCell> */}
+       <TableCell>Action</TableCell>
         </TableRow>
         </TableHead>
 
@@ -96,12 +97,12 @@ console.log(id)
               <TableCell >{item.gender}</TableCell>
               <TableCell >{item.birthday}</TableCell>
               <TableCell >{item.password}</TableCell>
-              <TableCell >{item.updateAt}</TableCell>
+              {/* <TableCell >{item.updateAt}</TableCell> */}
               <TableCell className="butDel"><DeleteIcon className='butDelete' onClick={ () => adminUserDelete(item._id)}/></TableCell>
 
             
             </TableRow>
-          ))};
+          ))}
         </TableBody>
         </Table>
     </TableContainer>

@@ -1,0 +1,66 @@
+.container {
+  margin: 2rem;
+}
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 2.5rem;
+}
+.head h1 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 2.4rem;
+  text-transform: capitalize;
+}
+.head svg {
+  width: 3rem;
+  height: 3rem;
+  margin-left: 0.5rem;
+}
+.inputs{
+   color: transparent;
+}
+.buttonFile{
+    padding: 0.5rem 4rem !important ;
+}
+.butDiv{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+align-items: center;
+   
+}
+.inputDiv{
+display: flex;
+justify-content: center;
+align-items: center;
+    margin: 1rem;
+}
+.inputText{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0 0 0;
+}
+.inputArtist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputSubmit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0rem;
+}
+.inputImg{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0rem;
+  justify-content: center;
+
+}

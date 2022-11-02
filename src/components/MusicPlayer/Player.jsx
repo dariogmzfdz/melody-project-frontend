@@ -1,46 +1,43 @@
-import React, { useEffect, useRef } from "react";
-import { songsdata } from "./audios";
-import { useState } from "react";
-import MusicPlayer from "./MusicPlayer";
+/* eslint-disable jsx-a11y/media-has-caption */
+import React, { useRef, useEffect } from "react";
 
-const Player = () => {
-  const [songs, setSongs] = useState(songsdata);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(songsdata[0]);
-
-  const audioElem = useRef();
-  useEffect(() => {
+const Player = ({
+  activeSong,
+  isPlaying,
+  volume,
+  seekTime,
+  onEnded,
+  onTimeUpdate,
+  onLoadedData,
+  repeat,
+}) => {
+  const ref = useRef(null);
+  // eslint-disable-next-line no-unused-expressions
+  if (ref.current) {
     if (isPlaying) {
-      audioElem.current.play();
+      ref.current.play();
     } else {
-      audioElem.current.pause();
+      ref.current.pause();
     }
-  }, [isPlaying]);
+  }
 
-  const onPlaying = () => {
-    const duration = audioElem.current.duration;
-    const ct = audioElem.current.currentTime;
-
-    setCurrentSong({
-      ...currentSong,
-      progress: (ct / duration) * 100,
-      length: duration,
-    });
-  };
+  useEffect(() => {
+    ref.current.volume = volume;
+  }, [volume]);
+  // updates audio element only on seekTime change (and not on each rerender):
+  useEffect(() => {
+    ref.current.currentTime = seekTime;
+  }, [seekTime]);
 
   return (
-    <div>
-      <audio src={currentSong.url} ref={audioElem} onTimeUpdate={onPlaying} />
-      <MusicPlayer
-        songs={songs}
-        setSongs={setSongs}
-        isPlaying={isPlaying}
-        setIsPlaying={setIsPlaying}
-        audioElem={audioElem}
-        currentSong={currentSong}
-        setCurrentSong={setCurrentSong}
-      />
-    </div>
+    <audio
+      src={activeSong?.url}
+      ref={ref}
+      loop={repeat}
+      onEnded={onEnded}
+      onTimeUpdate={onTimeUpdate}
+      onLoadedData={onLoadedData}
+    />
   );
 };
 

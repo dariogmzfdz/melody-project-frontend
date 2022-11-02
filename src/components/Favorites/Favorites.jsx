@@ -1,19 +1,33 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import "./Favorites.css";
-import { styled, alpha } from "@mui/material/styles";
+import {  useSelector } from "react-redux";
+import { useState} from "react";
 import { useMediaQuery } from "react-responsive";
+<<<<<<< HEAD
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
 import SongImg from "../../assets/album-img.jpg";
 import HeartButton from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
+=======
+import "./Favorites.css";
+import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
+>>>>>>> develop
 import convertDuration from "../../functions/ConvertDuration";
+import MobileHeader from "../MobileHeader/MobileHeader";
+import HeartButton from "@mui/icons-material/Favorite";
+import { IconButton } from "@mui/material";
+import { Clear, SearchRounded } from "@mui/icons-material";
+import SongCard from "../SongCard/SongCard";
+import { useGetLikedSongsQuery } from "../../redux/services/melodyApi";
+import Loader from "../Loader/Loader";
+import Error from "../Error/Error";
 
 function Favorites() {
-  const [data, setData] = useState([]);
-  /*   const token = localStorage.getItem("userToken"); */
+  const { data, isFetching, error } = useGetLikedSongsQuery();
+  const { activeSong, isPlaying } = useSelector((state) => state.player);
+
+  
 
   const isDesktop = useMediaQuery({
     query: "(min-width: 1200px)",
@@ -23,112 +37,174 @@ function Favorites() {
     query: "(max-width: 450px)",
   });
 
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(1),
-      width: "auto",
-    },
-  }));
+  const songHandler = (
+    songId,
+    songUrl,
+    songTitle,
+    songArtist,
+    songDuration,
+    songGenre
+  ) => {
+    //  new Track = (songUrl,songTitle,songArtist,songDuration,songGenre)
+    const Track = [
+      { songId, songUrl, songTitle, songArtist, songDuration, songGenre },
+    ];
+    localStorage.setItem("Track", JSON.stringify(Track));
+    console.log(Track);
+  };
 
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
+  //---- SEARCH BAR ---> START
 
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("sm")]: {
-        width: "12ch",
-        "&:focus": {
-          width: "20ch",
-        },
-      },
-    },
-  }));
+  const [track, setTrack] = useState();
+  const [randomSongs, setRandomSongs] = useState([]);
+  const [inputTrack, setInputTrack] = useState("");
+  // const {songTitle} = searchTrack
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        "https://melodystream.herokuapp.com/song/all-songs"
-      );
-      const result = await response.json();
-      const data = result.songs;
-      setData(data);
-    };
+  function getTrack() {
+    // Find track information in data using track
+    let music = Object.values(data).find((song) => {
+      return song.title.toLowerCase().includes(inputTrack.toLowerCase());
+    });
+    setTrack(music);
+    // display the track
+  }
 
-    fetchData().catch(console.error);
-  }, []);
+  const handleSearch = (event) => {
+    setInputTrack(event.target.value);
+  };
 
-  console.log(data);
+  //Create function to clear state search
+  function handleSearchClear(e) {
+    setInputTrack("");
+  }
 
-  /*   const song = (
-    <div className="container-song-favorites">
-      <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
-      </div>
-      <div className="info-container">
-        <span>{data.name}</span>
-        <div className="contributors">
-          <p className="track-artist">{data.artist}</p>
-        </div>
-      </div>
-      <div className="song-details">
-        <p className="duration">{data.duration}</p>
-        <HeartButton />
-      </div>
-    </div>
-  ); */
+  //---- SEARCH BAR  ---> END
 
-  const searchBar = (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search in your favorites songs…"
-        inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
-  );
+  // const putLikedSong = async (favorite) => {
+
+  // try {
+  //   const data = await axios.put(
+  //     `https://melodystream.herokuapp.com/song/like/${favorite}`,
+
+  //     {
+  //       headers: {
+  //         auth_token: token,
+  //       }
+  //     }
+  //     )
+  //        const response = await data.json();
+
+  //     }
+  //     catch (data) {
+  //       const { msg } = data.response.data;
+  //       console.log(msg);
+
+  //     }    }
+  /* const putLikedSong = {
+    method: "PUT",
+    headers: { auth_token: token },
+  };
+  const fetchLikedSong = async () =>
+    await fetch(
+      `https://cors-anywhere.herokuapp.com/https://melodystream.herokuapp.com/song/like/${favorite}`,
+      putLikedSong
+    );
+
+  const changeFavorite = (id) => {
+    setFavorite([id]);
+    data.songs.map((song) => {
+      const { _id } = song;
+      if (_id === id) {
+        song.favorite = !song.favorite;
+      }
+    });
+    console.log(favorite);
+    // putLikedSong(favorite);
+    fetchLikedSong();
+  }; */
+
+  if (isFetching) return <Loader title="Loading Top Charts" />;
+
+  if (error) return <Error />;
+
+  const totalDuration = data.songs.map((song) => song.duration);
 
   return (
     <>
       {isDesktop && (
         <>
-          <SideMenu />
+          <div className="container-right">
+            <header>
+              <section className="info">
+                <h6>Your songs</h6>
+                <h1>Favorites</h1>
+                <div className="details">
+                  <p>{data.songs.length} Songs</p>
+                  <p id="dot">&bull;</p>
+                  <p>{convertDurationPlaylist(totalDuration)}</p>
+                </div>
+              </section>
+              <div className="container">
+                <div className="search_input_container">
+                  <IconButton onClick={getTrack}>
+                    <SearchRounded />
+                  </IconButton>
+                  <input
+                    type="text"
+                    placeholder="Search for songs and playlists"
+                    name="songTitle"
+                    onChange={handleSearch}
+                    value={inputTrack}
+                  />
+                  <IconButton onClick={handleSearchClear}>
+                    <Clear />
+                  </IconButton>
+                </div>
+              </div>
+            </header>
+            <table className="favorites-table animate-slideup">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th>Genre</th>
+                  <th id="duration-header">Duration</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.songs.map((song, i) => (
+                  <SongCard
+                    key={song._id}
+                    song={song}
+                    isPlaying={isPlaying}
+                    activeSong={activeSong}
+                    data={data}
+                    i={i}
+                    convertDuration={convertDuration}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
 
       {isPhone && (
         <>
-          <MobileTop />
-          {searchBar}
+          <MobileHeader />
           {data.map((song) => (
             <div key={song._id} className="container-song-favorites">
               <div className="cover-container">
-                <img src={SongImg} alt="song-img" />
+                <img
+                  src="	https://mussica.info/wp-content/uploads/2021/08/nirvana-640-logo-1200x675-cover.jpeg"
+                  alt="song-img"
+                />
               </div>
               <div className="info-container">
-                <span>{song.name}</span>
+                <span>{song.title}</span>
                 <div className="contributors">
                   <p className="track-artist">{song.artist}</p>
                 </div>
@@ -139,7 +215,6 @@ function Favorites() {
               </div>
             </div>
           ))}
-          <SideMenu />
         </>
       )}
     </>

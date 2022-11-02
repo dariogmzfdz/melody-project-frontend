@@ -1,79 +1,69 @@
-import React, { Component } from "react";
+import React from "react";
 import "./AlbumCarrousel.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-
 import AlbumCard from "./AlbumCard";
+import Coverflow from "react-coverflow";
 
-const albums = [
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-  <AlbumCard />,
-];
-
-class AlbumCarrousel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { index: 0 };
-    this.handleLeft = this.handleLeft.bind(this);
-    this.handleRight = this.handleRight.bind(this);
-  }
-
-  handleRight(total) {
-    let limit = Math.floor(total / 2) - 1;
-    if (this.state.index < limit) {
-      let n = this.state.index + 1;
-      this.setState({ index: n });
-      document.getElementById(
-        "carousel-top-albums"
-      ).style.transform = `translateX(-${n * (170 + 40)}px)`;
-    }
-  }
-  handleLeft() {
-    if (this.state.index > 0) {
-      let n = this.state.index - 1;
-      this.setState({ index: n });
-      document.getElementById(
-        "carousel-top-albums"
-      ).style.transform = `translateX(-${n * (170 + 40)}px)`;
-    }
-  }
-
-  render() {
-    return (
-      <>
-        <div>
-          <div className="header-carrousel">
-            <h1>Trending Albums</h1>
-            <div>
-              <FontAwesomeIcon
-                icon={faChevronLeft}
-                className="arrow"
-                onClick={this.handleLeft}
-              />
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                className="arrow"
-                onClick={this.handleRight.bind(this, albums.length)}
-              />
-            </div>
-          </div>
-          <section>
-            <div className="slider">
-              <div className="items-slider" id="carousel-top-albums">
-                {albums}
-              </div>
-            </div>
-          </section>
+function AlbumCarrousel({ data, random }) {
+  return (
+    <div className="flex flex-wrap w-[800px] h-full mb-28 ml-[18%]">
+      <div className="flex flex-col  mb-10">
+        <h1 className="mb-3 not-italic font-bold font-mons text-xl text-white">
+          Your Playlists
+        </h1>
+        <div className="wrapper">
+          <Coverflow
+            displayQuantityOfSide={2}
+            height={300}
+            width={800}
+            infiniteScroll
+            enableHeading={false}
+            currentFigureScale={1}
+            otherFigureScale={1}
+          >
+            {data.map((card) => {
+              return (
+                <div className="wrapper">
+                  <AlbumCard
+                    key={card._id}
+                    title={card.name}
+                    imgSrc={card.thumbnail}
+                  />
+                </div>
+              );
+            })}
+          </Coverflow>
         </div>
-      </>
-    );
-  }
+      </div>
+      <div className="flex flex-col">
+        <h1 className="mb-3 not-italic font-bold font-mons text-xl text-white">
+          Recommended
+        </h1>
+        <div className="wrapper">
+          <Coverflow
+            displayQuantityOfSide={2}
+            height={300}
+            width={800}
+            infiniteScroll
+            enableHeading={false}
+            currentFigureScale={1}
+            otherFigureScale={1}
+          >
+            {random.map((card) => {
+              return (
+                <div className="wrapper">
+                  <AlbumCard
+                    key={card._id}
+                    title={card.name}
+                    imgSrc={card.thumbnail}
+                  />
+                </div>
+              );
+            })}
+          </Coverflow>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default AlbumCarrousel;

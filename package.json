@@ -8,8 +8,8 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/material": "^5.10.8",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
     "@mui/styled-engine-sc": "^5.10.6",
     "@mui/x-date-pickers": "^5.0.4",
     "@reduxjs/toolkit": "^1.8.5",
@@ -24,9 +24,12 @@
     "react": "^18.2.0",
     "react-avatar-edit": "^1.2.0",
     "react-bootstrap": "^2.5.0",
+    "react-coverflow": "^0.2.20",
     "react-dom": "^18.2.0",
     "react-fontawesome": "^1.7.1",
+    "react-h5-audio-player": "^3.8.6",
     "react-icons": "^4.6.0",
+    "react-material-music-player": "^1.1.9",
     "react-modal": "^3.15.1",
     "react-redux": "^8.0.4",
     "react-responsive": "^9.0.0",
@@ -66,7 +69,10 @@
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/preset-env": "^7.19.3",
+    "autoprefixer": "^10.4.13",
     "babel-loader": "^8.2.5",
+    "postcss": "^8.4.18",
+    "tailwindcss": "^3.2.1",
     "webpack": "^5.74.0"
   }
 }
