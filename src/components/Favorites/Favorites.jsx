@@ -2,20 +2,17 @@ import React from "react";
 import {  useSelector } from "react-redux";
 import { useState} from "react";
 import { useMediaQuery } from "react-responsive";
-<<<<<<< HEAD
 import MobileTop from "../MobileTop/MobileTop";
 import SideMenu from "../SideMenu/SideMenu";
 import SongImg from "../../assets/album-img.jpg";
 import HeartButton from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-=======
 import "./Favorites.css";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
->>>>>>> develop
 import convertDuration from "../../functions/ConvertDuration";
 import MobileHeader from "../MobileHeader/MobileHeader";
-import HeartButton from "@mui/icons-material/Favorite";
+
 import { IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
 import SongCard from "../SongCard/SongCard";
