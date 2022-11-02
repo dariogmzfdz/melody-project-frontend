@@ -8,17 +8,12 @@ import convertDuration from "../../../functions/ConvertDuration";
 import SuggestSong from "./SuggestSong";
 import {
   useGetAllSongsQuery,
-  useGetSongQuery,
+  useGetPlaylistSongsQuery,
 } from "../../../redux/services/melodyApi";
 import "../../Favorites/Favorites";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Songs from "./Songs";
-import axios from "axios";
-import {
-  isEditable,
-  isEditableInput,
-} from "@testing-library/user-event/dist/utils";
 
 function PlaylistViewSongs() {
   const token = localStorage.getItem("userToken") || null;
@@ -26,20 +21,11 @@ function PlaylistViewSongs() {
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
-  const [trackDetails, setTrackDetails] = useState();
-  // const [tracksId, setTracksId] = useState([]);
+  // const [trackDetails, setTrackDetails] = useState();
+
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
-
-  // console.log("Playlists", userPlaylists);
-  console.log("lastPlaylist: ", lastPlaylist._id);
-
-  //REDUX
-  // const {
-  //   data: songsData,
-  //   isFetching: isFetchingSongs,
-  //   error: songsError,
-  // } = useGetSongQuery({ songId });
+  // const { songData } = useGetPlaylistSongsQuery(lastPlaylist._id);
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -60,7 +46,6 @@ function PlaylistViewSongs() {
         const lastPlaylistCreated = Object.values(data.data).pop();
         setUserPlaylists(data.data);
         setLastPlaylistCreated(lastPlaylistCreated);
-        // setTracksId(lastPlaylist.tracks);
       } catch (error) {
         console.log(error);
       }
@@ -69,43 +54,25 @@ function PlaylistViewSongs() {
     fetchPlaylist().catch(console.error);
   }, []);
 
-  // const [idDetails, setIdDetails] = useState();
+  // const getPlaylistById = async () => {
+  //   const response = await fetch(
+  //     //https://melodystream.herokuapp.com/playlist/${playlistID}
+  //     `http://localhost:4000/playlist/${lastPlaylist._id}`,
+  //     {
+  //       headers: {
+  //         auth_token: token,
+  //       },
+  //     }
+  //   );
 
-  // console.log(tracksId);
-  // const getDetails = async () => {
-  //   Object.keys(tracksId)?.forEach((key) => {
-  //     fetch(`http://localhost:4000/song/select/${tracksId[key]._id}`)
-  //       .then((res) => res.json())
-  //       .then((data) =>
-  //         setIdDetails((prevData) => {
-  //           return {
-  //             ...prevData,
-  //             id: data,
-  //           };
-  //         })
-  //       );
-  //   });
+  //   try {
+  //     const data = await response.json();
+  //     setTrackDetails(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
   // };
-
-  const getPlaylistBId = async () => {
-    const response = await fetch(
-      //https://melodystream.herokuapp.com/playlist/${playlistID}
-      `http://localhost:4000/playlist/${lastPlaylist._id}`,
-      {
-        headers: {
-          auth_token: token,
-        },
-      }
-    );
-
-    try {
-      const data = await response.json();
-      setTrackDetails(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  console.log(trackDetails);
+  // console.log(trackDetails);
 
   if (isFetching) return <div>Loading...</div>;
   if (error) return <div>Error</div>;
@@ -127,23 +94,9 @@ function PlaylistViewSongs() {
     }
     setRandomSongs(randomSongs);
   }
+  // console.log(trackDetails);
 
-  //Component with song info add
-  // const userSong = userSongs.songs.map((song, i) => (
-  //   <Songs
-  //     key={song._id}
-  //     song={song}
-  //     lastPlaylist={lastPlaylist}
-  //     userPlaylists={userPlaylists}
-  //     isPlaying={isPlaying}
-  //     activeSong={activeSong}
-  //     data={data}
-  //     i={i}
-  //     convertDuration={convertDuration}
-  //   />
-  // ));
-
-  // console.log(userSong);
+  // ©
 
   const suggestionSongs = randomSongs.map((song, i) => (
     <SuggestSong
@@ -192,7 +145,7 @@ function PlaylistViewSongs() {
           {/*render server msg*/}
           {randomSongs.length > 0 ? (
             <div>
-              {/* userSong */}
+              {/* {songsList} */}
               {suggestionSongs}
             </div>
           ) : null}
@@ -224,7 +177,6 @@ function PlaylistViewSongs() {
             }}
             variant="outlined"
             onClick={getRandomSongs}
-            // onClick={getPlaylistBId}
           >
             SUGGEST SONGS
           </Button>
