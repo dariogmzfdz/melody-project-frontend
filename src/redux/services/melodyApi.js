@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const melodyApi = createApi({
   reducerPath: "melodyApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000",
+    baseUrl: "https://melodystream.herokuapp.com",
     // baseUrl: "https://melodystream.herokuapp.com",
     prepareHeaders: (headers) => {
       headers.set(

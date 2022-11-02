@@ -55,7 +55,7 @@ const Songs =  () => {
 		const formData = new FormData();
 		formData.append("song", audio);
 
-		await fetch("http://localhost:4000/cloud/uploadsong", {
+		await fetch("https://melodystream.herokuapp.com/cloud/uploadsong", {
 			method: "POST",
 			body: formData,
 
