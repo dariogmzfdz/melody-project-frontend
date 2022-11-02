@@ -7,30 +7,25 @@ import { useNavigate } from "react-router-dom";
 
 function Playlists() {
   const { data, isFetching, error } = useGetPlaylistQuery();
+  const navigate = useNavigate();
   const playlists = data?.data;
   const token = localStorage.getItem("userToken");
 
+  function getId(id) {
+    const playlistId = id;
 
-  function getId(id){
-    const playlistId = id
-    
     const fetchPlaylist = async (id) =>
-    await fetch(
-      `https://melodystream.herokuapp.com/playlist/${playlistId}`,
-      {
-        method: 'GET',
-        headers: {auth_token: token},
-        mode: 'no-cors',
+      await fetch(`https://melodystream.herokuapp.com/playlist/${playlistId}`, {
+        method: "GET",
+        headers: { auth_token: token },
         id: playlistId,
-      }
-      )
-      fetchPlaylist();
+      });
+    fetchPlaylist();
+    navigate(`/playlist/${playlistId}`);
   }
   if (isFetching) return <div>Loading...</div>;
 
   if (error) return <div>Error</div>;
-
-
 
   return (
     <div className="flex flex-col ml-80 font-mons text-white h-full">
@@ -60,7 +55,7 @@ function Playlists() {
                   alt="song_img"
                   src={playlist.thumbnail}
                   className="w-full h-full rounded-lg"
-                  onClick={()=>getId(playlist._id)}
+                  onClick={() => getId(playlist._id)}
                 />
               </div>
 
@@ -78,26 +73,3 @@ function Playlists() {
 }
 
 export default Playlists;
-
-{
-  /* <div>
-          <Typography variant="h4" color="white" mb="20px">
-            Playlists
-          </Typography>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 4, sm: 8, md: 12 }}
-            >
-              {Array.from(Array(6)).map((_, index) => (
-                <Grid item xs={2} sm={4} md={4} key={index}>
-                  <Item>
-                    <PlaylistItem />
-                  </Item>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </div> */
-}

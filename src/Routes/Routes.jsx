@@ -1,5 +1,10 @@
 import { useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 import { AuthProvider } from "../hooks/useFirebase";
 import SignInSide from "../components/Login/Login";
 import Logout from "../components/Logout.jsx";
@@ -17,6 +22,7 @@ import Songs from "../components/CreateSong/SongTable";
 import Playlists from "../components/MyPlaylists/Playlists";
 import PlaylistEdit from "../components/MyPlaylists/EditPlaylist/PlaylistEdit";
 import SideMenu from "../components/SideMenu/SideMenu";
+import UserPlaylist from "../components/MyPlaylists/EditPlaylist/UserPlaylist";
 
 export default function RouterApp() {
   const { activeSong } = useSelector((state) => state.player);
@@ -101,6 +107,15 @@ export default function RouterApp() {
                   <>
                     <SideMenu />
                     <PlaylistEdit />
+                  </>
+                }
+              />
+              <Route
+                path="/playlist/:id"
+                element={
+                  <>
+                    <SideMenu />
+                    <UserPlaylist />
                   </>
                 }
               />

@@ -1,4 +1,4 @@
-@import url('http://fonts.cdnfonts.com/css/montserrat');
+@import url("http://fonts.cdnfonts.com/css/montserrat");
 
 /********************* Desktop view *********************/
 
@@ -6,7 +6,7 @@
   grid-area: main;
   padding: 0 40px;
   margin-left: 16%;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
 }
 
 header {
@@ -58,7 +58,11 @@ header .info p {
 .favorites-table {
   width: 100%;
   border-collapse: collapse;
-  background: linear-gradient(153.34deg, rgba(0, 0, 0, 0.3) -52.04%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(
+    153.34deg,
+    rgba(0, 0, 0, 0.3) -52.04%,
+    rgba(0, 0, 0, 0) 100%
+  );
   backdrop-filter: blur(21px);
   color: #fff;
 }
@@ -134,7 +138,4 @@ header .info p {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-}
-.sc-bcXHqe{
-  opacity: 100%;
 }

@@ -86,7 +86,7 @@ function Songs({
         <div>
           <Button
             aria-describedby={id}
-            variant="contained"
+            style={{ color: "black" }}
             onClick={handleClick}
           >
             <PlaylistAddIcon />
