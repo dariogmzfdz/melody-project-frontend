@@ -7,7 +7,7 @@ import { playPause, setActiveSong } from "../../../redux/features/playerSlice";
 import SongImg from "../../../assets/album-img.jpg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
@@ -150,6 +150,7 @@ function SuggestSong({
       })} */}
       <div className="container-song suggestions">
         <div className="cover-container">
+
           <PlayPause
             isPlaying={isPlaying}
             activeSong={activeSong}
@@ -224,14 +225,15 @@ function SuggestSong({
             </Typography>
           </div>
           <div>
-            <button
+            <Button
+                        style={{color:'#000'}}
               onClick={(e) => {
                 addSuggestSong(e, song._id);
                 // getPlaylistById();
               }}
             >
               <PlaylistAddIcon onClick={() => setOpenError(true)} />
-            </button>
+            </Button>
           </div>
         </Box>
       </div>

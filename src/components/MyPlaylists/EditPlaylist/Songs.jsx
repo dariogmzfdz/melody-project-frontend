@@ -68,8 +68,7 @@ function Songs({
   return (
     <div className="container-song">
       <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
-      </div>
+      
       <PlayPause
         isPlaying={isPlaying}
         activeSong={activeSong}
@@ -77,7 +76,7 @@ function Songs({
         handlePause={handlePauseClick}
         handlePlay={handlePlayClick}
         className="playpause"
-      />
+      /></div>
       <div className="info-container">
         <span>{song.title}</span>
         <div className="contributors">
@@ -96,8 +95,8 @@ function Songs({
         <div>
           <Button
             aria-describedby={id}
-            variant="contained"
             onClick={handleClick}
+            style={{color:'#000'}}
           >
             <PlaylistAddIcon />
           </Button>
