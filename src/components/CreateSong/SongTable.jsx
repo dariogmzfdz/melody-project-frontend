@@ -1,16 +1,18 @@
-
 import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import "./createSong.css";
 import { Box, Button, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { MusicNoteOutlined } from "@mui/icons-material";
 import axios from "axios";
+import { useGetUserSongsQuery } from "../../redux/services/melodyApi";
 
 
-const Songs = () => {
+
+
+const Songs =  () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => {
 		setOpen(true);
@@ -36,41 +38,45 @@ const Songs = () => {
 
 	const [name, setName] = useState("");
 	const [artist, setArtist] = useState("");
-		const [audio, setAudio ] = useState("");
-		const [ url, setUrl ] = useState("");
-		const [hasSong, setHasSong] = useState(false);
-		const [song, setSong] = useState("");
-		const changeHandler = (event) => {
-			setAudio(event.target.files[0]);
-			setUrl(true);
-		  };
-		
-		  const handleSubmission = () => {
-			const formData = new FormData();
-			formData.append("song", audio);
-		
-			fetch("https://melodystream.herokuapp.com/cloud/uploadsong", {
-			  method: "POST",
-			  body: formData,
-		 
-			},
-			  )
-			  .then((response) => response.json())
-			  .then((result) => {
+	const [audio, setAudio] = useState("");
+	const [url, setUrl] = useState("");
+	const [hasSong, setHasSong] = useState(false);
+	const [song, setSong] = useState("");
+	const [success, setSuccess] = useState("");
+	const { data, isFetching, error } =  useGetUserSongsQuery();
+	const [submitMsg, setsubmitMsg] = useState("");
+	const token = localStorage.getItem("userToken");
+
+	const changeHandler = (event) => {
+		setAudio(event.target.files[0]);
+		setUrl(true);
+	};
+
+	const handleSubmission = async() => {
+		const formData = new FormData();
+		formData.append("song", audio);
+
+		await fetch("http://localhost:4000/cloud/uploadsong", {
+			method: "POST",
+			body: formData,
+
+		},
+		)
+			.then((response) => response.json())
+			.then((result) => {
 				console.log("Success:", result);
 				setSong(result);
 				setHasSong(true);
-			  })
-			  .catch((error) => {
+				setSuccess("File successfully upload");
+			})
+			.catch((error) => {
 				console.error("Error:", error);
-			  });
-		  };
-		
-		  const token = localStorage.getItem("userToken");
-	
-	
-		  const handleSubmit = async (e) => {
-		e.preventDefault();
+			});
+	};
+
+	const handleSubmit = async(e) => {
+			
+			e.preventDefault();
 		try {
 			const data = await axios.post("https://melodystream.herokuapp.com/song",
 				{
@@ -78,40 +84,52 @@ const Songs = () => {
 					artist: artist,
 					genre: "Pop",
 					url: song.url,
-					duration:song.duration,
-				}, 
-				{	
+					duration: song.duration,
+				},
+				{
 					headers: {
-					auth_token: token,
-		  }  
-		},)
+						auth_token: token,
+					}
+				},)
 			
+
+			handleClose();
+			setsubmitMsg("Song successfully upload");
 			console.log(data);
+			window.location.reload()
 		} catch (error) {
 			console.log(error);
 		}
 	};
-const [dataSong, setDataSong] = useState("")
-	const getSongs = async (e) => {
-		e.preventDefault();
+
+
+	const deleteSong = async(id) => {
+		
 		try {
-			const dataSong = await axios.get("https://melodystream.herokuapp.com/all-users-songs",
-			
-				{	
+			const response = await axios.delete(`https://melodystream.herokuapp.com/song/${id}`,
+				{
 					headers: {
-					auth_token: token,
-		  }  
-		  	
-			},)
-	setDataSong();
-			console.log(dataSong);
-		} catch (error) {
-			console.log(error);
+						auth_token: token,
+					},
+				}
+			)
+			const result = await response.json;
+			window.location.reload()
 		}
-	};
+		catch (error) {
+			(console.log(error))
+		}
+	}
 
-	console.log(dataSong);
+const editSong = (id) => {
+	console.log(id)
+if(id) return (
+setOpen(true))
+}
 
+	if (isFetching) return <div>Loading...</div>;
+
+	if (error) return <div>Error</div>;
 
 	return (
 		<div className='container'>
@@ -119,7 +137,7 @@ const [dataSong, setDataSong] = useState("")
 				<h1 style={{ color: "white" }}>
 					Songs <MusicNoteIcon />
 				</h1>
-
+				<h3>{submitMsg}</h3>
 				<Button onClick={handleOpen} startIcon={<AddIcon style={{ color: "white" }} />} label="Add New Song" />
 				<Modal
 					open={open}
@@ -131,58 +149,60 @@ const [dataSong, setDataSong] = useState("")
 
 						<Paper >
 
-							<form style={{ width: '100%' }} onSubmit={handleSubmit}>
+							<form style={{ width: '100%' }}  onSubmit={ handleSubmit}>
 								<div className="inputText">
 									<TextField
 										name="name"
 										onChange={(e) => setName(e.target.value)}
 										label="Enter song name"
-									// required={true}
+										required={true}
 									/>
 								</div>
 								<div className="inputArtist">
 									<TextField
 										name="artist"
 										label="Artist name"
-										// required={true}
+										required={true}
 										onChange={(e) => setArtist(e.target.value)}
 
 									/>
 								</div>
 								<div>
-									
-<div className="inputDiv">
-									<Button
-										variant="contained"
-										component="label"
-										className="buttonFile"
-									> {<MusicNoteOutlined />}
-<input 
-											className="inputs"
-											label="Choose song"
-											type="file"
-											accept="audio/*"
-											name="song" onChange={changeHandler}>
-	</input>
-	</Button>
 
-</div>
-<div>
+									<div className="inputDiv">
+										<Button
+											variant="contained"
+											component="label"
+											className="buttonFile"
+										> {<MusicNoteOutlined />}
+											<input
+												className="inputs"
+												label="Choose song"
+												type="file"
+												accept="audio/*"
+												name="song" onChange={changeHandler}>
+											</input>
+										</Button>
 
-						{url ? (
-                  <div className='inputDiv'>
-                    <Button
-                     variant= "outlined"
-                    
-                      onClick={handleSubmission}
-                    >
-                      Add song                    </Button>
-                  </div>
-                ) : (
-                  <div></div>
-               )}	</div>
-             <h3 style={{textAlign:"center"}}>  {audio.name}</h3>
-</div>
+									</div>
+									<div>
+
+										{url ? (
+											<div className="butDiv">
+												<Button
+													variant="outlined"
+
+													onClick={handleSubmission}
+												>
+													Add song                    </Button>  <h4 style={{ textAlign: "center" }}>  {audio.name}</h4>
+											</div>
+										) : (
+											<div></div>
+										)}	</div>
+
+								</div>
+
+								<h3 style={{ textAlign: "center", color: "#25dc8b" }} >{success}</h3>
 
 
 
@@ -200,12 +220,11 @@ const [dataSong, setDataSong] = useState("")
 					</Box>
 				</Modal>
 			</div>
-			
+
 			<TableContainer component={Paper} >
 				<Table>
 					<TableHead>
 						<TableRow>
-
 							<TableCell align="center">Song Name</TableCell>
 							<TableCell align="center">Artist</TableCell>
 							<TableCell align="center">Actions</TableCell>
@@ -214,21 +233,27 @@ const [dataSong, setDataSong] = useState("")
 
 					<TableBody>
 
-						<TableRow >
 
-							<TableCell align="center">{dataSong.name}</TableCell>
-							<TableCell align="center">{dataSong.artist}</TableCell>
-							<TableCell align="center">
-								<Link to=''>
-									<IconButton >
-										<Edit />
+
+						{data.songs.map((song) => (
+							<TableRow key={song._id}>
+
+								<TableCell align="center">
+									{song.title}
+								</TableCell>
+								<TableCell align="center">
+									{song.artist}
+								</TableCell>
+								<TableCell align="center">
+									
+									<IconButton onClick={() => deleteSong(song._id)}>
+										<Delete />
 									</IconButton>
-								</Link>
-								<IconButton>
-									<Delete />
-								</IconButton>
-							</TableCell>
-						</TableRow>
+								</TableCell>
+							</TableRow>
+						))}
+
+
 
 
 						<TableRow>
@@ -242,7 +267,7 @@ const [dataSong, setDataSong] = useState("")
 
 				</Table>
 			</TableContainer>
-			
+
 		</div>
 	);
 };
