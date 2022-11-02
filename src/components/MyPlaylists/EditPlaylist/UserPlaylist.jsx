@@ -36,7 +36,7 @@ function PlaylistViewSongs() {
       ur: "",
     },
   ]);
-
+ 
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
 
