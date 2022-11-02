@@ -57,7 +57,7 @@ export default function PlaylistModal({
   const editPlaylist = async (e) => {
     e.preventDefault();
     const options = {
-      url: `http://localhost:4000/playlist/edit`,
+      url: `https://melodystream.herokuapp.com/playlist/edit`,
       method: "PUT",
       headers: {
         Accept: "application/json",

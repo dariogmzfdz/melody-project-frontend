@@ -39,7 +39,7 @@ function SideMenu() {
       <Toolbar />
       <Divider />
       <List>
-        {["Home", "Playlists", "Favorites"].map((text, index) => (
+        {["Home", "Playlists", "Favorites", "Upload song"].map((text, index) => (
           <Link
             key={index + 1}
             to={
@@ -53,7 +53,11 @@ function SideMenu() {
                 ? "/playlists"
                 : text === "Albums"
                 ? "/albums"
+                
+                : text === "Upload song"
+                ? "/songs"
                 : ""
+                
             }
             style={{ textDecoration: "none", color: "black" }}
           >
@@ -66,7 +70,7 @@ function SideMenu() {
         ))}
       </List>
       <Divider />
-      <List>
+      <Link to="/"> <List>
         {["Logout"].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -74,7 +78,7 @@ function SideMenu() {
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </List></Link>
     </div>
   );
 

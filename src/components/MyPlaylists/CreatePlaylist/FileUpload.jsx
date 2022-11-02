@@ -20,7 +20,7 @@ export default function FileUpload(image) {
     const formData = new FormData();
     formData.append("thumbnail", selectedFile);
 
-    fetch("http://localhost:4000/cloud/uploadthumbnail", {
+    fetch("https://melodystream.herokuapp.com/cloud/uploadthumbnail", {
       method: "POST",
       body: formData,
     })

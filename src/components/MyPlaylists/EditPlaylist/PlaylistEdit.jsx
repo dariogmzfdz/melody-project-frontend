@@ -68,7 +68,7 @@ function PlaylistViewSongs() {
     const getPlaylistById = async (id) => {
       const response = await fetch(
         //https://melodystream.herokuapp.com/playlist/${playlistID}
-        `http://localhost:4000/playlist/${id}`,
+        `https://melodystream.herokuapp.com/playlist/${id}`,
         {
           headers: {
             auth_token: token,
