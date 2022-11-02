@@ -5,7 +5,10 @@ import EditPlaylistModal from "../EditPlaylist/EditPlaylistModal";
 import { Box } from "@mui/system";
 import convertDuration from "../../../functions/ConvertDuration";
 import SuggestSong from "./SuggestSong";
-import { useGetAllSongsQuery } from "../../../redux/services/melodyApi";
+import {
+  useGetAllSongsQuery,
+  useGetSongQuery,
+} from "../../../redux/services/melodyApi";
 import "../../Favorites/Favorites";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
@@ -15,8 +18,14 @@ function PlaylistViewSongs() {
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
+  const [songId, setSongId] = useState("");
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetAllSongsQuery();
+  const {
+    data: songsData,
+    isFetching: isFetchingSongs,
+    error: songsError,
+  } = useGetSongQuery({ songId });
 
   useEffect(() => {
     const token = localStorage.getItem("userToken") || null;
@@ -37,6 +46,8 @@ function PlaylistViewSongs() {
         const lastPlaylistCreated = Object.values(data.data).pop();
         setUserPlaylists(data.data);
         setLastPlaylistCreated(lastPlaylistCreated);
+        /* setSongId(lastPlaylistCreated.tracks); */
+        lastPlaylistCreated.tracks.map((song) => {});
       } catch (error) {
         console.log(error);
       }
@@ -44,6 +55,8 @@ function PlaylistViewSongs() {
 
     fetchPlaylist().catch(console.error);
   }, []);
+
+  console.log(songId);
 
   function randomIndex(count) {
     return Math.floor(Math.random() * count);

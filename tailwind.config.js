@@ -12,6 +12,12 @@ module.exports = {
       colors: {
         black: "#191624",
       },
+      backgroundImage: {
+        mbl: "linear-gradient(180deg, #2B2C55 0%, #6667AE 100%)",
+      },
+      backgroundClip: {
+        text: "-webkit-background-clip text",
+      },
       animation: {
         slideup: "slideup 1s ease-in-out",
         slidedown: "slidedown 1s ease-in-out",

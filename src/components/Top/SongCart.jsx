@@ -1,31 +1,52 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import "./Top.css";
-
-import SongImg from "../../assets/album-img.jpg";
-import PlayButton from "@mui/icons-material/PlayArrow";
-import HeartButton from "@mui/icons-material/Favorite";
-
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import PlayPause from "../SongCard/PlayPause";
+import { playPause, setActiveSong } from "../../redux/features/playerSlice";
 import convertDuration from "../../functions/ConvertDuration";
+import { Box, Typography } from "@mui/material";
 
-function SongCart({ title, artist, duration }) {
+function SongCart({ song, isPlaying, activeSong, data, i }) {
+  const dispatch = useDispatch();
+
+  const handlePauseClick = () => {
+    dispatch(playPause(false));
+  };
+
+  const handlePlayClick = () => {
+    dispatch(setActiveSong({ song, data, i }));
+    dispatch(playPause(true));
+  };
+
   return (
     <div className="container-song">
       <div className="cover-container">
-        <img src={SongImg} alt="song-img" />
+        <PlayPause
+          className="playpause"
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+        />
       </div>
       <div className="info-container">
-        <span>{title}</span>
+        <span>{song.title}</span>
         <div className="contributors">
-          <p className="track-artist">{artist}</p>
+          <p className="track-artist">{song.artist}</p>
         </div>
       </div>
-      <p className="duration">{convertDuration(duration)}</p>
-      <button className="playBtn">
-        <PlayButton />
+      <button>
+        <FavoriteIcon className="favoriteIcon" />
       </button>
-      <button className="heartBtn">
-        <HeartButton />
-      </button>
+      <Box sx={{ display: "flex" }}>
+        <div>
+          <Typography sx={{ p: 1 }}>
+            {convertDuration(song.duration)}
+          </Typography>
+        </div>
+      </Box>
     </div>
   );
 }

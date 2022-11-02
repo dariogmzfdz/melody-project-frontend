@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import "./Favorites.css";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
 import convertDuration from "../../functions/ConvertDuration";
-import MobileTop from "../MobileTop/MobileTop";
+import MobileHeader from "../MobileHeader/MobileHeader";
 import HeartButton from "@mui/icons-material/Favorite";
 import { IconButton } from "@mui/material";
 import { Clear, SearchRounded } from "@mui/icons-material";
@@ -185,7 +185,7 @@ function Favorites() {
 
       {isPhone && (
         <>
-          <MobileTop />
+          <MobileHeader />
           {data.map((song) => (
             <div key={song._id} className="container-song-favorites">
               <div className="cover-container">

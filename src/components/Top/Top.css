@@ -1,9 +1,4 @@
-.top-songs-container h1 {
-  color: #fff;
-}
-
 .container-song {
-  position: relative;
   display: flex;
   align-items: center;
   width: 90%;
@@ -13,37 +8,38 @@
   background: #fff;
 }
 
-.container-song .cover-container {
+.cover-container {
   width: 40px;
   height: 40px;
   margin: 0 20px;
   border-radius: 5px;
-background-image: url('../../assets/album-img.jpg');
-background-size: contain;
 }
-.iPtRTz{
+
+.iPtRTz {
   opacity: 0%;
   cursor: pointer;
   margin: 0 2px;
 }
-.favoriteIcon{
+
+.favoriteIcon {
   opacity: 0;
 }
-.favoriteIcon:active{
+
+.favoriteIcon:active {
   opacity: 100%;
 }
+
 .container-song:hover .iPtRTz {
 
   opacity: 100%;
   cursor: pointer;
   margin: 2px 2px;
 }
-.container-song:hover .favoriteIcon{
+
+.container-song:hover .favoriteIcon {
   opacity: 100%;
   margin-right: 10px;
 }
-
-
 
 .container-song .cover-container img {
   width: 100%;
@@ -65,16 +61,9 @@ background-size: contain;
   font-size: 0.8rem;
   margin: 0;
 }
-.info-container{
+
+.info-container {
   width: 70%;
-}
-.container-song .duration {
-  position: absolute;
-  right: 125px;
-  min-width: 45px;
-  margin: 0;
-  font-size: 0.8rem;
-  color: #444444;
 }
 
 .playBtn .heartBtn {

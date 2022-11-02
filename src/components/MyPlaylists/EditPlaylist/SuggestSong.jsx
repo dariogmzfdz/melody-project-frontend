@@ -71,16 +71,14 @@ function SuggestSong({
   return (
     <div className="container-song">
       <div className="cover-container">
-        
-      
-      <PlayPause
-        isPlaying={isPlaying}
-        activeSong={activeSong}
-        song={song}
-        handlePause={handlePauseClick}
-        handlePlay={handlePlayClick}
-        className="playpause"
-      />
+        <PlayPause
+          isPlaying={isPlaying}
+          activeSong={activeSong}
+          song={song}
+          handlePause={handlePauseClick}
+          handlePlay={handlePlayClick}
+          className="playpause"
+        />
       </div>
       <div className="info-container">
         <span>{song.title}</span>
@@ -89,7 +87,7 @@ function SuggestSong({
         </div>
       </div>
       <button>
-        <FavoriteIcon className="favoriteIcon"/>
+        <FavoriteIcon className="favoriteIcon" />
       </button>
       <Box sx={{ display: "flex" }}>
         <div>
