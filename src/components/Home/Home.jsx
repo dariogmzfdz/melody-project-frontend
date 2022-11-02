@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-<<<<<<< HEAD
-import Features from "../Features/Features";
-import MyPlaylists from "../MyPlaylists/MyPlaylists";
-import Recommended from "../Recommended/Recommended";
-import ResponsiveAppBar from "../AppBar/AppBar";
-=======
->>>>>>> develop
 import SideMenu from "../SideMenu/SideMenu";
 import Top from "../Top/Top";
 import AlbumCarrousel from "../Albums/AlbumCarrousel";

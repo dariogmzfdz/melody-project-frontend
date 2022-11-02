@@ -30,20 +30,6 @@ export default function RouterApp() {
     <div>
       <Router>
         <AuthProvider>
-<<<<<<< HEAD
-          <Routes>
-            <Route path="/" element={<SignInSide />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<AdminView />} />
-            <Route path="/forgot" element={<ForgotPassword />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/edit" element={<EditUser />} />
-            <Route path="/resetpassword/:token" element={<ResetPassword />} />
-          </Routes>
-=======
           <div className="flex-1 h-fit pb-28">
             <Routes>
               <Route path="/" element={<SignInSide />} />
@@ -135,7 +121,6 @@ export default function RouterApp() {
               />
             </Routes>
           </div>
->>>>>>> develop
         </AuthProvider>
       </Router>
       {activeSong?.title && (
