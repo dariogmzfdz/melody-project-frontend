@@ -2,12 +2,7 @@ import React from "react";
 import {  useSelector } from "react-redux";
 import { useState} from "react";
 import { useMediaQuery } from "react-responsive";
-import MobileTop from "../MobileTop/MobileTop";
-import SideMenu from "../SideMenu/SideMenu";
-import SongImg from "../../assets/album-img.jpg";
 import HeartButton from "@mui/icons-material/Favorite";
-import SearchIcon from "@mui/icons-material/Search";
-import InputBase from "@mui/material/InputBase";
 import "./Favorites.css";
 import convertDurationPlaylist from "../../functions/ConvertDurationPlaylist";
 import convertDuration from "../../functions/ConvertDuration";
@@ -53,7 +48,6 @@ function Favorites() {
   //---- SEARCH BAR ---> START
 
   const [track, setTrack] = useState();
-  const [randomSongs, setRandomSongs] = useState([]);
   const [inputTrack, setInputTrack] = useState("");
   // const {songTitle} = searchTrack
 

@@ -1,7 +1,6 @@
 import React from "react";
 import ImageIcon from "@mui/icons-material/Image";
 import "../playlists.css";
-import CreatePlaylistModal from "./CreatePlaylistModal";
 
 export default function FileUpload(image) {
   const [selectedFile, setSelectedFile] = React.useState();

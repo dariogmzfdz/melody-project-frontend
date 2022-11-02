@@ -1,7 +1,6 @@
 import { Clear, SearchRounded } from '@mui/icons-material';
 import { CircularProgress, IconButton } from '@mui/material';
-import axios from 'axios';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import  './SearchBar.css'
 
 const Search = () => {

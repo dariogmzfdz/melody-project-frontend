@@ -3,7 +3,7 @@ import "./HomeHeader.css";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import InputBase from "@mui/material/InputBase";
-import { IconButton, Badge, Box } from "@mui/material";
+import { IconButton, Badge } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import UserAvatar from "../../AppBar/UserAvatar";

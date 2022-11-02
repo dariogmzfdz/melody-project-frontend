@@ -12,17 +12,12 @@ import Button from "@mui/material/Button";
 import Songs from "./Songs";
 
 function PlaylistViewSongs() {
-  const token = localStorage.getItem("userToken") || null;
 
   const [userPlaylists, setUserPlaylists] = useState();
   const [lastPlaylist, setLastPlaylistCreated] = useState({});
   const [randomSongs, setRandomSongs] = useState([]);
 
-  const [serverMsg, setServerMsg] = React.useState("");
-  const [isSongAdd, setIsSongAdd] = React.useState(false);
 
-  const [ErrorMsg, setErrorMsg] = React.useState("");
-  const [serverError, setSeverError] = React.useState(false);
 
   const [isTrackDefined, setIsTrackDefined] = React.useState();
   const [track, setTrack] = React.useState([

@@ -11,7 +11,6 @@ import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 
 import "../playlists.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -31,7 +30,6 @@ export default function PlaylistModal({
   const token = localStorage.getItem("userToken") || null;
   const [open, setOpen] = React.useState(false);
   const [errorMsg, setErrorMsg] = React.useState("");
-  const navigate = useNavigate();
 
   // console.log(name, description, thumbnail, publicAccessible);
 

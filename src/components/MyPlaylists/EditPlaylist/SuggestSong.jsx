@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import PlayPause from "../../SongCard/PlayPause";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import { playPause, setActiveSong } from "../../../redux/features/playerSlice";
-import SongImg from "../../../assets/album-img.jpg";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
@@ -13,7 +12,6 @@ import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Collapse from "@mui/material/Collapse";
-import { useEffect } from "react";
 
 function SuggestSong({
   song,

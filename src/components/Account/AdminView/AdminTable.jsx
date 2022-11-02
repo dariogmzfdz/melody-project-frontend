@@ -5,7 +5,6 @@ import useSortableData from "./useSortableData";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AppBar from '../../AppBar/AppBar'
 import axios from "axios";
-import {useState} from 'react'
 
 
 export const UsersTable = (props) => {
@@ -18,7 +17,6 @@ export const UsersTable = (props) => {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
-  const [data, setData] = useState([]);
   const token = localStorage.getItem("userToken");
 
   const adminUserDelete = async (id) => {

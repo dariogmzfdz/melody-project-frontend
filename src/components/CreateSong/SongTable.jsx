@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import "./createSong.css";
-import { Box, Button, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
-import { Delete, Edit } from "@mui/icons-material";
+import { Box, Button, IconButton, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 import { useState } from "react";
 import { MusicNoteOutlined } from "@mui/icons-material";
 import axios from "axios";
@@ -121,11 +120,7 @@ const Songs =  () => {
 		}
 	}
 
-const editSong = (id) => {
-	console.log(id)
-if(id) return (
-setOpen(true))
-}
+
 
 	if (isFetching) return <div>Loading...</div>;
 

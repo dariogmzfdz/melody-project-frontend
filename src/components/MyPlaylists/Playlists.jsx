@@ -1,6 +1,5 @@
 import React from "react";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
-import PlaylistImg from "../../assets/album-img.jpg";
 import { useGetPlaylistQuery } from "../../redux/services/melodyApi";
 import CreatePlaylistModal from "./CreatePlaylist/CreatePlaylistModal";
 import { useNavigate } from "react-router-dom";

@@ -1,6 +1,5 @@
 import React from "react";
 import "./MobileHeader.css";
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import PlayArrow from "@mui/icons-material/PlayArrow";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
